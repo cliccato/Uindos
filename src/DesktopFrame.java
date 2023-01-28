@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Vector;
-
 import javax.imageio.ImageIO;
 
-public class Desktop {
+public class DesktopFrame {
     static int HEIGHT, WIDTH, APP_HEIGHT, APP_WIDTH, APPS_NUMBER; {
         HEIGHT = 1280;
         WIDTH = 720;
@@ -19,16 +19,17 @@ public class Desktop {
     JFrame frame;
     JPanel imagePanel, appBarPanel;
     JPopupMenu appMenu;
-    Vector<JMenuItem> appMenuItems;
+    JMenuItem terminalItem;
     JButton homeButton;
     BufferedImage img;
 
-    public Desktop() {
+    public DesktopFrame() {
         createElements();
 
         frame.setSize(frameDimension);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
+        frame.setIconImage(new ImageIcon("images\\win-logo.png").getImage());
 
         appBarPanel.setLayout(new FlowLayout());
         appBarPanel.setSize(appBarDimension);
@@ -37,11 +38,14 @@ public class Desktop {
         homeButton.setOpaque(false);
         homeButton.setContentAreaFilled(false);
         homeButton.setBorderPainted(false);
-        homeButton.setComponentPopupMenu(appMenu);
-
-        for (JMenuItem jMenuItem : appMenuItems) { appMenu.add(jMenuItem); }
+        homeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                appMenu.show(homeButton, 0, 0 - homeButton.getBounds().height);
+            }
+        });
 
         appBarPanel.add(homeButton);
+        appBarPanel.add(new JButton("Test"));
 
         frame.add(imagePanel, BorderLayout.CENTER);
         frame.add(appBarPanel, BorderLayout.SOUTH);
@@ -56,10 +60,13 @@ public class Desktop {
         frameDimension = new Dimension(HEIGHT, WIDTH);
         appBarDimension = new Dimension(APP_HEIGHT, APP_WIDTH);
         appMenu = new JPopupMenu();
-        appMenuItems = new Vector<JMenuItem>();
-        for (int i = 0; i < APPS_NUMBER; i++) {
-            appMenuItems.add(new JMenuItem());
-        }
+
+        appMenu.add(new JMenuItem(new AbstractAction("Terminal") {
+            public void actionPerformed(ActionEvent e) {
+                new TerminalFrame();
+            }
+        }));
+        
 
         try {
             img = ImageIO.read(new File("images\\background.jpg"));
