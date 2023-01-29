@@ -8,18 +8,17 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class DesktopFrame {
-    static int HEIGHT, WIDTH, APP_HEIGHT, APP_WIDTH, APPS_NUMBER; {
+    static int HEIGHT, WIDTH, APP_HEIGHT, APP_WIDTH; {
         HEIGHT = 1280;
         WIDTH = 720;
         APP_HEIGHT = APP_WIDTH = 16;
-        APPS_NUMBER = 0;
     }
 
     Dimension frameDimension, appBarDimension;
     JFrame frame;
     JPanel imagePanel, appBarPanel;
     JPopupMenu appMenu;
-    JMenuItem terminalItem;
+    JMenuItem terminalItem, notepadItem;
     JButton homeButton;
     BufferedImage img;
 
@@ -31,6 +30,9 @@ public class DesktopFrame {
         frame.setLayout(new BorderLayout());
         frame.setIconImage(new ImageIcon("images\\win-logo.png").getImage());
 
+        appMenu.setOpaque(true);
+        appMenu.setBackground(Color.BLACK);
+
         appBarPanel.setLayout(new FlowLayout());
         appBarPanel.setSize(appBarDimension);
         appBarPanel.setBackground(new Color(0, 0, 0));
@@ -40,7 +42,7 @@ public class DesktopFrame {
         homeButton.setBorderPainted(false);
         homeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                appMenu.show(homeButton, 0, 0 - homeButton.getBounds().height);
+                appMenu.show(homeButton, 0, 0 - (homeButton.getBounds().height * appMenu.getComponentCount()));
             }
         });
 
@@ -55,7 +57,7 @@ public class DesktopFrame {
 
     private void createElements() {
         frame = new JFrame("Uindos");
-        homeButton = new JButton("APPS", new ImageIcon("images\\win-logo.png"));
+        homeButton = new JButton(new ImageIcon("images\\win-logo.png"));
         appBarPanel = new JPanel();
         frameDimension = new Dimension(HEIGHT, WIDTH);
         appBarDimension = new Dimension(APP_HEIGHT, APP_WIDTH);
@@ -66,7 +68,11 @@ public class DesktopFrame {
                 new TerminalFrame();
             }
         }));
-        
+        appMenu.add(new JMenuItem(new AbstractAction("Notepad") {
+            public void actionPerformed(ActionEvent e) {
+                new NotepadFrame();
+            }
+        }));
 
         try {
             img = ImageIO.read(new File("images\\background.jpg"));
