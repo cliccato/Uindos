@@ -1,19 +1,20 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.*;
 
 public class NotepadFrame {
     static int HEIGHT, WIDTH; {
         HEIGHT = 1200;
         WIDTH = 600;
     }
-    private JFrame frame;
-    private JTextArea textArea;
-    private JMenuBar menuBar;
-    private JMenu fileMenu;
-    private JMenuItem openMenuItem, saveMenuItem, newMenuItem;
-    private JFileChooser fileChooser;
+
+    JFrame frame;
+    JTextArea textArea;
+    JMenuBar menuBar;
+    JMenu fileMenu;
+    JMenuItem openMenuItem, saveMenuItem, newMenuItem, exitMenuItem, infoMenutItem;
+    JLabel lblSalvataggio;
+    JFileChooser fileChooser;
 
     public NotepadFrame() {
         createElements();
@@ -21,51 +22,33 @@ public class NotepadFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(HEIGHT, WIDTH);
         frame.setIconImage(new ImageIcon("images\\notepad-logo.png").getImage());
+        frame.setLayout(new BorderLayout());
 
-        textArea.setFont(new Font("Arial", Font.PLAIN, 16));
+        textArea.setFont(new Font("Verdana", Font.PLAIN, 20));
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
 
         fileMenu.add(newMenuItem);
         fileMenu.add(openMenuItem);
         fileMenu.add(saveMenuItem);
+        fileMenu.addSeparator();
+        fileMenu.add(exitMenuItem);
         menuBar.add(fileMenu);
+        menuBar.add(infoMenutItem);
 
-        newMenuItem.addActionListener(new ActionListener() {
+        newMenuItem.addActionListener(new NotepadListener(this));
+        openMenuItem.addActionListener(new NotepadListener(this));
+        saveMenuItem.addActionListener(new NotepadListener(this));
+        exitMenuItem.addActionListener(new NotepadListener(this));
+        infoMenutItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textArea.setText("");
+                JOptionPane.showMessageDialog(frame, "Non ci sono info");
             }
         });
-        openMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int returnVal = fileChooser.showOpenDialog(frame);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fileChooser.getSelectedFile();
-                    try {
-                        textArea.read(new FileReader(file), null);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        });
-        saveMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int returnVal = fileChooser.showSaveDialog(frame);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fileChooser.getSelectedFile();
-                    try {
-                        textArea.write(new FileWriter(file));
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        });
-
 
         frame.setJMenuBar(menuBar);
-        frame.getContentPane().add(new JScrollPane(textArea));
+        frame.getContentPane().add(lblSalvataggio, BorderLayout.SOUTH);
+        frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         frame.setVisible(true);
     }
@@ -78,6 +61,9 @@ public class NotepadFrame {
         openMenuItem = new JMenuItem("Open");
         saveMenuItem = new JMenuItem("Save");
         newMenuItem = new JMenuItem("New");
+        exitMenuItem = new JMenuItem("Exit");
+        lblSalvataggio = new JLabel("File nuovo");
         fileChooser = new JFileChooser();
+        infoMenutItem = new JMenuItem("Info");
     }
 }

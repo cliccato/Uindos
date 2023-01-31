@@ -18,6 +18,7 @@ public class DesktopFrame {
     JFrame frame;
     JPanel imagePanel, appBarPanel;
     JPopupMenu appMenu;
+    JMenu systemMenu, utilsMenu;
     JMenuItem terminalItem, notepadItem;
     JButton homeButton;
     BufferedImage img;
@@ -31,7 +32,7 @@ public class DesktopFrame {
         frame.setIconImage(new ImageIcon("images\\win-logo.png").getImage());
 
         appMenu.setOpaque(true);
-        appMenu.setBackground(Color.BLACK);
+        appMenu.setBackground(Color.WHITE);
 
         appBarPanel.setLayout(new FlowLayout());
         appBarPanel.setSize(appBarDimension);
@@ -62,17 +63,24 @@ public class DesktopFrame {
         frameDimension = new Dimension(HEIGHT, WIDTH);
         appBarDimension = new Dimension(APP_HEIGHT, APP_WIDTH);
         appMenu = new JPopupMenu();
+        systemMenu = new JMenu("System");
+        utilsMenu = new JMenu("Utils");
 
-        appMenu.add(new JMenuItem(new AbstractAction("Terminal") {
+        systemMenu.add(new JMenuItem(new AbstractAction("Terminal") {
             public void actionPerformed(ActionEvent e) {
                 new TerminalFrame();
             }
         }));
-        appMenu.add(new JMenuItem(new AbstractAction("Notepad") {
+
+        
+        utilsMenu.add(new JMenuItem(new AbstractAction("Notepad") {
             public void actionPerformed(ActionEvent e) {
                 new NotepadFrame();
             }
         }));
+        
+        appMenu.add(systemMenu);
+        appMenu.add(utilsMenu);
 
         try {
             img = ImageIO.read(new File("images\\background.jpg"));
