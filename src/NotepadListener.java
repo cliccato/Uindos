@@ -44,7 +44,7 @@ public class NotepadListener implements ActionListener{
                 }
                 break;
             case "Exit":
-                System.exit(0);
+                NF.frame.dispose();
                 break;
             default:
                 break;
