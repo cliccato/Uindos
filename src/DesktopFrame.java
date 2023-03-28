@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
+import java.util.Vector;
+
 import javax.imageio.ImageIO;
 
 public class DesktopFrame {
@@ -28,6 +32,7 @@ public class DesktopFrame {
     public DesktopFrame() {
         createElements();
         createApp();
+        setAppBar();
         clock = new ClockThread(this);
 
         frame.setSize(frameDimension);
@@ -77,10 +82,11 @@ public class DesktopFrame {
         clockLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         clockLabel.setForeground(Color.WHITE);
         
+        /*
         appBarPanel.add(new JButton("Test"));
         appBarPanel.add(new JButton("Test"));
         appBarPanel.add(new JButton("Test"));
-        appBarPanel.add(new JButton("Test"));
+        appBarPanel.add(new JButton("Test"));*/
 
 
         southPanel.add(homeButton, BorderLayout.WEST);
@@ -134,8 +140,48 @@ public class DesktopFrame {
                 new NotepadFrame();
             }
         }));
+
+        utilsMenu.add(new JMenuItem(new AbstractAction("Calculator") {
+            public void actionPerformed(ActionEvent e) {
+                new CalculatorFrame();
+            }
+        }));
+
+        utilsMenu.add(new JMenuItem(new AbstractAction("Cronometer") {
+            public void actionPerformed(ActionEvent e) {
+                new CronometerFrame();
+            }
+        }));
         
         appMenu.add(systemMenu);
         appMenu.add(utilsMenu);
+    }
+
+    public void setAppBar() {
+        File file = new File("src\\applist.csv");
+        Scanner scanner;
+
+        try {
+            Vector<String> v = new Vector<>();
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                v.add(scanner.nextLine());
+            }
+            scanner.close();
+
+            for (String s : v) {
+                String name = s.split(";")[0];
+                String logoPath = s.split(";")[1];
+                JButton b = new JButton(new ImageIcon(logoPath));
+                System.out.println(logoPath);
+                b.setText(name);
+                b.setOpaque(false);
+                b.setContentAreaFilled(false);
+                b.setBorderPainted(false);
+                appBarPanel.add(b);
+            }
+        } catch (FileNotFoundException e) {
+            //TMCH
+        }
     }
 }
