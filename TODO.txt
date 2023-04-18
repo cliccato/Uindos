@@ -1,0 +1,17 @@
+- aggiustare organizzazione file
+- aggiustare notepad
+
+Applicazioni da fare
+	- tris
+	- impiccato
+	- gioco immagini
+	- macchina virtuale
+	- carta sasso forbice con gui
+	- mezzatok
+	- video player
+	- galleria
+
+	
+- loghi applicazione
+
+- login e salvataggio configurazione
