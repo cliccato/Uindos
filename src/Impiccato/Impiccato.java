@@ -8,53 +8,38 @@ OGGETTO: CLASSE IMPICCATO
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.nio.channels.ClosedSelectorException;
 import java.util.Vector;
 
 public class Impiccato {
 
-    // path
     private static final String PATH_PAROLE_SEMPLICI = "file/paroleSemplici.txt";
     private static final String PATH_PAROLE_NORMALI = "file/paroleNormali.txt";
     private static final String PATH_PAROLE_DIFFICILI = "file/paroleDifficili.txt";
-    //finestra per impiccato
-    JFrame frmImpiccato;
-    //menu bar
-    JMenuBar menuImpiccato;
-    //menu
-    JMenu menuPartita;
-    JMenuItem voceParoleSemplici;
-    JMenuItem voceParoleNormali;
-    JMenuItem voceParoleDifficili;
-    JMenuItem menuItemNuovaPartita;
-    //etichette
-    JLabel lblInformazioniParolaNascosta;
-    JLabel lblParolaNascosta;
-    JLabel lblParolaUtente;
-    JLabel lblIndovinato;
-    JLabel lblImmagine;
-    //pannelli
-    JPanel pnlParole;
-    JLabel pnlIndovinato;
-    //casella di testo per indovinare la parola
-    JTextField cslParolaUtente;
-    //array d'immagini per impiccato
-    ImageIcon[] images;
-    //bottone per confermare
-    JButton btnConferma;
-    //font
-    Font fnt;
-    //file
-    File file;
-    //parola estratta
+    private JFrame frmImpiccato;
+    private JMenuBar menuImpiccato;
+    private JMenu menuPartita;
+    private JMenuItem voceParoleSemplici;
+    private JMenuItem voceParoleNormali;
+    private JMenuItem voceParoleDifficili;
+    private JMenuItem menuItemNuovaPartita;
+    private JLabel lblInformazioniParolaNascosta;
+    private JLabel lblParolaNascosta;
+    private JLabel lblParolaUtente;
+    private JLabel lblIndovinato;
+    private JLabel lblImmagine;
+    private JPanel pnlParole;
+    private JLabel pnlIndovinato;
+    private JTextField cslParolaUtente; 
+    private ImageIcon[] images;
+    private JButton btnConferma;
+    private Font fnt;
+    private File file;
     private String parolaEstratta;
-    //tentativi
     private int tentativi = 7;
-    //vettore lettere
     private Vector<Character> lettereGiaDette;
-    //vettore parole
     private Vector<String> paroleGiaDette;
-    //variabile booleana
-    boolean giocoFinito = false;
+    private boolean isGiocoFinito = false;
 
     //metodo costruttore della classe Impiccato
     public Impiccato(){
@@ -176,5 +161,53 @@ public class Impiccato {
 
     public String getParolaEstratta() {
         return parolaEstratta;
+    }
+
+    public JLabel getLblImmagine() {
+        return lblImmagine;
+    }
+
+    public ImageIcon[] getImages() {
+        return images;
+    }
+
+    public JTextField getCslParolaUtente() {
+        return cslParolaUtente;
+    }
+
+    public JLabel getLblParolaNascosta() {
+        return lblParolaNascosta;
+    }
+
+    public JLabel getLblIndovinato() {
+        return lblIndovinato;
+    }
+
+    public void finisciGioco() {
+        isGiocoFinito = true;
+    }
+
+    public void iniziaGioco() {
+        isGiocoFinito = false;
+    }
+
+    public boolean getIsGiocoFinito() {
+        return isGiocoFinito;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public JLabel getLblInformazioniParolaNascosta() {
+        return lblInformazioniParolaNascosta;
+    }
+
+    public JLabel getLblParolaUtente() {
+        return lblParolaUtente;
+    }
+
+    public JButton getBtnConferma() {
+        return btnConferma;
     }
 }

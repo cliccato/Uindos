@@ -17,7 +17,7 @@ import java.util.Vector;
 public class ListenerSceltaDifficolta implements ActionListener {
 
     //impiccato
-    Impiccato impiccato;
+    private Impiccato impiccato;
 
     //metodo costruttore della classe ListenerSceltaFile
     public ListenerSceltaDifficolta(Impiccato impiccato){
@@ -29,7 +29,7 @@ public class ListenerSceltaDifficolta implements ActionListener {
         Vector<String> paroleDaFile = new Vector<>();
         String line;
         try {
-            FileReader fileReader = new FileReader(impiccato.file);
+            FileReader fileReader = new FileReader(impiccato.getFile());
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             line = bufferedReader.readLine();
             while (line != null){
@@ -52,25 +52,25 @@ public class ListenerSceltaDifficolta implements ActionListener {
         for(int i=1; i < impiccato.getParolaEstratta().length() - 1; i++){
             parolaNascosta[i] = '_';
         }
-        impiccato.lblInformazioniParolaNascosta.setText("Parola da " + impiccato.getParolaEstratta().length() + " lettere ->");
-        impiccato.lblParolaNascosta.setText(String.copyValueOf(parolaNascosta));
+        impiccato.getLblInformazioniParolaNascosta().setText("Parola da " + impiccato.getParolaEstratta().length() + " lettere ->");
+        impiccato.getLblParolaNascosta().setText(String.copyValueOf(parolaNascosta));
     }
 
     //metodo actionPerformed
     public void actionPerformed(ActionEvent e){
-        impiccato.setTentativi(7);
+        impiccato.setTentativi(7); // TODO parametrizzare
         impiccato.setParoleGiaDette(new Vector<String>());
         impiccato.setLettereGiaDette(new Vector<Character>());
-        impiccato.giocoFinito = false;
-        impiccato.lblInformazioniParolaNascosta.setVisible(true);
-        impiccato.lblImmagine.setIcon(new ImageIcon("images/inizio.png"));
-        impiccato.lblIndovinato.setText("");
-        impiccato.cslParolaUtente.setText("");
-        impiccato.lblParolaUtente.setVisible(true);
-        impiccato.cslParolaUtente.setEditable(true);
-        impiccato.cslParolaUtente.setVisible(true);
-        impiccato.lblImmagine.setVisible(true);
-        impiccato.btnConferma.setVisible(true);
+        impiccato.getIsGiocoFinito();
+        impiccato.getLblInformazioniParolaNascosta().setVisible(true);
+        impiccato.getLblImmagine().setIcon(new ImageIcon("images/inizio.png"));
+        impiccato.getLblIndovinato().setText("");
+        impiccato.getCslParolaUtente().setText("");
+        impiccato.getLblParolaUtente().setVisible(true);
+        impiccato.getCslParolaUtente().setEditable(true);
+        impiccato.getCslParolaUtente().setVisible(true);
+        impiccato.getLblImmagine().setVisible(true);
+        impiccato.getBtnConferma().setVisible(true);
         impiccato.setFile(new File("file/" + e.getActionCommand() + ".txt"));
         estraiParola();
     }
