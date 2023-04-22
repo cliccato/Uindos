@@ -1,4 +1,12 @@
+package System.Desktop;
 import javax.swing.*;
+
+import System.app.Clock.ClockThread;
+import app.Calculator.CalculatorFrame;
+import app.Cronometer.CronometerFrame;
+import app.Notepad.NotepadFrame;
+import app.Terminal.TerminalFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.*;
@@ -18,16 +26,21 @@ public class DesktopFrame {
         APP_HEIGHT = APP_WIDTH = 16;
     }
 
-    ClockThread clock;
-    Dimension frameDimension, appBarDimension;
-    JFrame frame;
-    JPanel imagePanel, southPanel, appBarPanel;
-    JPopupMenu appMenu;
-    JMenu systemMenu, utilsMenu;
-    JMenuItem terminalItem, notepadItem;
-    JButton homeButton;
-    JLabel clockLabel;
-    BufferedImage img;
+    private static final String WINDOWS_LOGO_PATH = "images/logo/logo-win-logo.png";
+    private static final String FILE_ICON_PATH = "images/icon/file-icon.png";
+    private static final String DEFAULT_BACKGROUND_PATH = "images/background/background.jpg";
+    private static final String APP_LIST_PATH = "src/applist.csv";
+
+    private ClockThread clock;
+    private Dimension frameDimension, appBarDimension;
+    private JFrame frame;
+    private JPanel imagePanel, southPanel, appBarPanel;
+    private JPopupMenu appMenu;
+    private JMenu systemMenu, utilsMenu;
+    private JMenuItem terminalItem, notepadItem;
+    private JButton homeButton;
+    private JLabel lblClock;
+    private BufferedImage img;
 
     public DesktopFrame() {
         createElements();
@@ -39,12 +52,12 @@ public class DesktopFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setIconImage(new ImageIcon("images\\win-logo.png").getImage());
+        frame.setIconImage(new ImageIcon(WINDOWS_LOGO_PATH).getImage());
 
         imagePanel.setLayout(new GridLayout(3, 5, 1, 1));
 
         for(int i=0;i<15;i++) {
-            JButton b = new JButton(new ImageIcon("images\\file-icon.png"));
+            JButton b = new JButton(new ImageIcon(FILE_ICON_PATH));
             b.setText(""+i);
             b.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
@@ -79,8 +92,8 @@ public class DesktopFrame {
             }
         });
 
-        clockLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        clockLabel.setForeground(Color.WHITE);
+        lblClock.setFont(new Font("Arial", Font.PLAIN, 20));
+        lblClock.setForeground(Color.WHITE);
         
         /*
         appBarPanel.add(new JButton("Test"));
@@ -91,7 +104,7 @@ public class DesktopFrame {
 
         southPanel.add(homeButton, BorderLayout.WEST);
         southPanel.add(appBarPanel, BorderLayout.CENTER);
-        southPanel.add(clockLabel, BorderLayout.EAST);
+        southPanel.add(lblClock, BorderLayout.EAST);
 
         frame.add(imagePanel, BorderLayout.CENTER);
         frame.add(southPanel, BorderLayout.SOUTH);
@@ -101,20 +114,18 @@ public class DesktopFrame {
 
     private void createElements() {
         frame = new JFrame("Uindos");
-        homeButton = new JButton(new ImageIcon("images\\win-logo.png"));
+        homeButton = new JButton(new ImageIcon(WINDOWS_LOGO_PATH));
         appBarPanel = new JPanel();
         southPanel = new JPanel();
         frameDimension = new Dimension(HEIGHT, WIDTH);
         appBarDimension = new Dimension(APP_HEIGHT, WIDTH - APP_WIDTH);
-        clockLabel = new JLabel("");
+        lblClock = new JLabel("");
         appMenu = new JPopupMenu();
         systemMenu = new JMenu("System");
         utilsMenu = new JMenu("Utils");
 
-        
-
         try {
-            img = ImageIO.read(new File("images\\background.jpg"));
+            img = ImageIO.read(new File(DEFAULT_BACKGROUND_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -127,6 +138,7 @@ public class DesktopFrame {
         };
     }
 
+    // TODO rimpiazzarlo con un ciclo for e un array di stringhe contenente il nome dell'app
     public void createApp() {
         systemMenu.add(new JMenuItem(new AbstractAction("Terminal") {
             public void actionPerformed(ActionEvent e) {
@@ -158,7 +170,7 @@ public class DesktopFrame {
     }
 
     public void setAppBar() {
-        File file = new File("src\\applist.csv");
+        File file = new File(APP_LIST_PATH);
         Scanner scanner;
 
         try {
@@ -182,6 +194,11 @@ public class DesktopFrame {
             }
         } catch (FileNotFoundException e) {
             //TMCH
+            ;
         }
+    }
+
+    public JLabel getLblClock() {
+        return lblClock;
     }
 }

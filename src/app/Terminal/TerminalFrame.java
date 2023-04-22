@@ -1,4 +1,6 @@
+package app.Terminal;
 import javax.swing.*;
+
 import java.awt.*;
 import java.nio.file.Paths;
 

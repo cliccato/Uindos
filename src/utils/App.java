@@ -1,3 +1,4 @@
+package utils;
 public class App {
     public String name;
     public String logoPath;
