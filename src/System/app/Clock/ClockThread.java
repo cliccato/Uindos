@@ -19,7 +19,7 @@ public class ClockThread extends Thread {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                //e.printStackTrace();
+                ; //TMCH
             }
         }
     }

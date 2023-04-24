@@ -32,6 +32,7 @@ public class DesktopFrame {
     private static final String APP_LIST_PATH = "src/applist.csv";
 
     private ClockThread clock;
+    private String username;
     private Dimension frameDimension, appBarDimension;
     private JFrame frame;
     private JPanel imagePanel, southPanel, appBarPanel;
@@ -42,7 +43,8 @@ public class DesktopFrame {
     private JLabel lblClock;
     private BufferedImage img;
 
-    public DesktopFrame() {
+    public DesktopFrame(String username) {//implementare desktop con aree di file distinte per ogni utente
+        this.username = username;
         createElements();
         createApp();
         setAppBar();
@@ -165,6 +167,7 @@ public class DesktopFrame {
             }
         }));
         
+        appMenu.add(new JMenuItem(this.getUsername()));
         appMenu.add(systemMenu);
         appMenu.add(utilsMenu);
     }
@@ -196,6 +199,10 @@ public class DesktopFrame {
             //TMCH
             ;
         }
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public JLabel getLblClock() {

@@ -1,7 +1,7 @@
 package utils;
 public class App {
-    public String name;
-    public String logoPath;
+    private String name;
+    private String logoPath;
 
     public App(String name, String logoPath) {
         this.name = name;
