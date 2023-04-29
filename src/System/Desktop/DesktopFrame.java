@@ -20,16 +20,16 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 
 public class DesktopFrame {
-    static int HEIGHT, WIDTH, APP_HEIGHT, APP_WIDTH; {
-        HEIGHT = 1280;
-        WIDTH = 720;
-        APP_HEIGHT = APP_WIDTH = 16;
-    }
+    //cambiare
+    public static final int HEIGHT = 720;
+    public static final int WIDTH = 1280;
+    public static final int APP_HEIGHT = 16;
+    public static final int APP_WIDTH = 16;
 
-    private static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
-    private static final String FILE_ICON_PATH = "images/icon/file-icon.png";
-    private static final String DEFAULT_BACKGROUND_PATH = "images/background/background.jpg";
-    private static final String APP_LIST_PATH = "src/applist.csv";
+    public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
+    public static final String FILE_ICON_PATH = "images/icon/file-icon.png";
+    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background.jpg";
+    public static final String APP_LIST_PATH = "src/applist.csv";
 
     private ClockThread clock;
     private String username;
@@ -119,7 +119,7 @@ public class DesktopFrame {
         homeButton = new JButton(new ImageIcon(WINDOWS_LOGO_PATH));
         appBarPanel = new JPanel();
         southPanel = new JPanel();
-        frameDimension = new Dimension(HEIGHT, WIDTH);
+        frameDimension = new Dimension(WIDTH, HEIGHT);
         appBarDimension = new Dimension(APP_HEIGHT, WIDTH - APP_WIDTH);
         lblClock = new JLabel("");
         appMenu = new JPopupMenu();
