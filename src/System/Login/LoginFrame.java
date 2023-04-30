@@ -113,8 +113,9 @@ public class LoginFrame {
     }
 
     private void setFrame() {
-        frame.setVisible(true);
+        frame.setFocusTraversalKeysEnabled(false); 
         frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
     }
 
    private void setBackground() {
