@@ -21,7 +21,8 @@ import System.Desktop.DesktopFrame;
 public class ListenerLogin implements ActionListener{
 
     private LoginFrame loginFrame;
-    private final String USERS_FILE_PATH = "users/users.csv";
+    private final String USERS_FILE_PATH = "system69/config/SAM_IL_POMPIERE.conf";
+    private final String FIELD_DELIMITATOR = "|"; //da spostare
     public ListenerLogin(LoginFrame loginFrame) {
         this.loginFrame = loginFrame;
     }
@@ -31,20 +32,21 @@ public class ListenerLogin implements ActionListener{
         String passwordInsert = loginFrame.getPassword();
         String username;
         String password;
+
         boolean isUserFound = false;
         StringTokenizer stringTokenizer;
         try  {
             FileReader f = new FileReader(new File(USERS_FILE_PATH));
             BufferedReader fIN = new BufferedReader(f);
 
-            stringTokenizer = new StringTokenizer(fIN.readLine(), ";");
+            stringTokenizer = new StringTokenizer(fIN.readLine(), FIELD_DELIMITATOR);
             while (stringTokenizer.hasMoreTokens() && !isUserFound) {
                 username = stringTokenizer.nextToken();
                 password = stringTokenizer.nextToken();
                 if (usernameInsert.equals(username) && passwordInsert.equals(password)) {
                     isUserFound = true;
                 }
-                stringTokenizer = new StringTokenizer(fIN.readLine(), ";");
+                stringTokenizer = new StringTokenizer(fIN.readLine(), FIELD_DELIMITATOR);
             }
             fIN.close();
         } catch(Exception e) {
