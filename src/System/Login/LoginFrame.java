@@ -23,7 +23,6 @@ public class LoginFrame {
     private JTextField txtUsername;
     private JTextField txtPassword;
     private JButton btnLogin;
-    private JLabel lblMessageLogin;
 
     public LoginFrame() {
         createComponents();
@@ -67,7 +66,6 @@ public class LoginFrame {
         btnLogin.addActionListener(new ListenerLogin(this));
         pnlFormInput.add(btnLogin, constraints);
 
-        lblMessageLogin = new JLabel();
     }
 
     private void addPlaceHolder() {
@@ -111,6 +109,7 @@ public class LoginFrame {
 
     private void setFrame() {
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
    private void setBackground() {
@@ -136,7 +135,6 @@ public class LoginFrame {
         // Aggiungi il pannello di input dei dati di accesso al centro del pannello contenuto nella finestra
         frame.getContentPane().add(pnlFormInput, BorderLayout.NORTH);
 
-        frame.getContentPane().add(lblMessageLogin, BorderLayout.SOUTH);
     }
 
     public void setFrameNotVisible() {
@@ -152,6 +150,6 @@ public class LoginFrame {
     }
 
     public void alertUserNotFound() {
-        lblMessageLogin.setText("Credential failde");
+        JOptionPane.showMessageDialog(null, "Credenziali sbagliate", "Errore", JOptionPane.ERROR_MESSAGE);
     }
 }
