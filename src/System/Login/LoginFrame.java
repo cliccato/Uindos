@@ -21,8 +21,9 @@ public class LoginFrame {
     private JPanel pnlImage;
     private JPanel pnlFormInput;
     private JTextField txtUsername;
-    private JTextField txtPassword;
+    private JPasswordField txtPassword;
     private JButton btnLogin;
+    private JButton btnShowPassword;
 
     public LoginFrame() {
         createComponents();
@@ -56,11 +57,15 @@ public class LoginFrame {
         txtUsername.setHorizontalAlignment(JTextField.CENTER);
         pnlFormInput.add(txtUsername, constraints);
 
-        txtPassword = new JTextField();
+        txtPassword = new JPasswordField();
         txtPassword.setPreferredSize(new Dimension(150, 25));
         txtPassword.setHorizontalAlignment(JTextField.CENTER);
         addPlaceHolder();
         pnlFormInput.add(txtPassword, constraints);
+
+        btnShowPassword = new JButton("Show");
+        btnShowPassword.addActionListener(new ListenerShowPassword(btnShowPassword, txtPassword));
+        pnlFormInput.add(btnShowPassword, constraints);
 
         btnLogin = new JButton("Accedi");
         btnLogin.addActionListener(new ListenerLogin(this));
@@ -92,14 +97,14 @@ public class LoginFrame {
         txtPassword.addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (txtPassword.getText().equals("password")) {
+                if (new String(txtPassword.getPassword()).equals("password")) {
                     txtPassword.setText("");
                     txtPassword.setForeground(Color.BLACK);
                 }
             }
             @Override
             public void focusLost(FocusEvent e) {
-                if (txtPassword.getText().isEmpty()) {
+                if (new String(txtPassword.getPassword()).isEmpty()) {
                     txtPassword.setForeground(Color.GRAY);
                     txtPassword.setText("password");
                 }
@@ -146,7 +151,12 @@ public class LoginFrame {
     }
 
     public String getPassword() {
-        return txtPassword.getText();
+        return new String(txtPassword.getPassword());
+    }
+
+    public void clearInput() {
+        txtUsername.setText("username");
+        txtPassword.setText("password");
     }
 
     public void alertUserNotFound() {

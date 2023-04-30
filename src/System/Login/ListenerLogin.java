@@ -62,6 +62,7 @@ public class ListenerLogin implements ActionListener{
             new DesktopFrame(loginFrame.getUsername());
         } else {
             loginFrame.alertUserNotFound();
+            loginFrame.clearInput();
         }
     }
 }
