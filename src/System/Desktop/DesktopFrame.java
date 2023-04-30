@@ -111,6 +111,7 @@ public class DesktopFrame {
         frame.add(imagePanel, BorderLayout.CENTER);
         frame.add(southPanel, BorderLayout.SOUTH);
 
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
