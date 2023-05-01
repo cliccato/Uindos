@@ -1,6 +1,7 @@
 package System.Desktop;
 import javax.swing.*;
 
+import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import app.Calculator.CalculatorFrame;
 import app.Cronometer.CronometerFrame;
@@ -38,10 +39,11 @@ public class DesktopFrame {
     private JPanel imagePanel, southPanel, appBarPanel;
     private JPopupMenu appMenu;
     private JMenu systemMenu, utilsMenu;
-    private JMenuItem terminalItem, notepadItem;
+    private JMenuItem terminalItem, notepadItem, itmLogOut;
     private JButton homeButton;
     private JLabel lblClock;
     private BufferedImage img;
+    private JMenu user;
 
     public DesktopFrame(String username) {//implementare desktop con aree di file distinte per ogni utente
         this.username = username;
@@ -168,7 +170,18 @@ public class DesktopFrame {
             }
         }));
         
-        appMenu.add(new JMenuItem(this.getUsername()));
+        // appMenu.add(new JMenuItem(this.getUsername()));
+
+        itmLogOut = new JMenuItem(new AbstractAction("Logout") {
+            public void actionPerformed(ActionEvent e)  {
+                disableVisibility(); 
+                new LoginFrame();
+            }
+        });
+        user = new JMenu(this.getUsername());
+        user.add(itmLogOut);
+
+        appMenu.add(user);
         appMenu.add(systemMenu);
         appMenu.add(utilsMenu);
     }
@@ -208,5 +221,9 @@ public class DesktopFrame {
 
     public JLabel getLblClock() {
         return lblClock;
+    }
+
+    public void disableVisibility() {
+        frame.setVisible(false);
     }
 }
