@@ -5,8 +5,11 @@ import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import app.Calculator.CalculatorFrame;
 import app.Cronometer.CronometerFrame;
+import app.Hanged.Hanged;
 import app.Notepad.NotepadFrame;
 import app.Terminal.TerminalFrame;
+import app.Tris.TrisFrame;
+import app.indovina_immagini.source.GestioneIndovinaImmagineGUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -50,7 +53,6 @@ public class DesktopFrame {
         createElements();
         createApp();
         setAppBar();
-        clock = new ClockThread(this);
 
         frame.setSize(frameDimension);
         frame.setResizable(false);
@@ -129,6 +131,8 @@ public class DesktopFrame {
         systemMenu = new JMenu("System");
         utilsMenu = new JMenu("Utils");
 
+        clock = new ClockThread(this);
+
         try {
             img = ImageIO.read(new File(DEFAULT_BACKGROUND_PATH));
         } catch (IOException e) {
@@ -169,7 +173,25 @@ public class DesktopFrame {
                 new CronometerFrame();
             }
         }));
-        
+
+        utilsMenu.add(new JMenuItem(new AbstractAction("Tris") {
+            public void actionPerformed(ActionEvent e) {
+                new TrisFrame();
+            }
+        }));
+
+        utilsMenu.add(new JMenuItem(new AbstractAction("Guess the image") {
+            public void actionPerformed(ActionEvent e) {
+                new GestioneIndovinaImmagineGUI();
+            }
+        }));
+
+        utilsMenu.add(new JMenuItem(new AbstractAction("Hanged") {
+            public void actionPerformed(ActionEvent e) {
+                new Hanged();
+            }
+        }));
+
         // appMenu.add(new JMenuItem(this.getUsername()));
 
         itmLogOut = new JMenuItem(new AbstractAction("Logout") {
