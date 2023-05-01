@@ -171,7 +171,7 @@ public class GestioneIndovinaImmagineGUI {
             frame.add(btnIndietro, BorderLayout.WEST);
             frame.add(scrollPane, BorderLayout.CENTER);
             frame.setSize(600, 600);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setVisible(true);
             frmPrincipale.setVisible(false);
         });
@@ -198,7 +198,7 @@ public class GestioneIndovinaImmagineGUI {
         //creazione dimension per il frame
         Dimension dimension = new Dimension(800, 600);
         frmPrincipale.setSize(dimension);
-        frmPrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmPrincipale.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmPrincipale.setVisible(true);
     }
 

@@ -64,7 +64,7 @@ public class TrisFrame{
 
         frmTris.add(pnlPunteggio, BorderLayout.NORTH);
         frmTris.add(pnlBtnTris, BorderLayout.CENTER);
-        frmTris.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmTris.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmTris.setSize(new Dimension(600,600));
         frmTris.setVisible(true);
     }

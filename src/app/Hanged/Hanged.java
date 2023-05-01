@@ -114,7 +114,7 @@ public class Hanged {
         //creazione dimension per frame
         Dimension dimension = new Dimension(900, 500);
         frmImpiccato.setSize(dimension);
-        frmImpiccato.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmImpiccato.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmImpiccato.setVisible(true);
     }
 

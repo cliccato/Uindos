@@ -68,7 +68,7 @@ public class AccediUtenteGUI {
         //creazione dimension per il frame
         Dimension dimension = new Dimension(600, 600);
         frmAccediUtente.setSize(dimension);
-        frmAccediUtente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmAccediUtente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmAccediUtente.setVisible(true);
     }
 

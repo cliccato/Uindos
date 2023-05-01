@@ -41,7 +41,7 @@ public class ClassificaCategoriaImmaginiGUI {
         frmClassificaCategoriaImmagini.add(btnIndietro, BorderLayout.WEST);
         frmClassificaCategoriaImmagini.add(scrollPane, BorderLayout.CENTER);
         frmClassificaCategoriaImmagini.setSize(600, 600);
-        frmClassificaCategoriaImmagini.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmClassificaCategoriaImmagini.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmClassificaCategoriaImmagini.setVisible(true);
         frmPrincipale.setVisible(false);
     }

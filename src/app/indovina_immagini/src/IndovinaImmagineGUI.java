@@ -242,7 +242,7 @@ public class IndovinaImmagineGUI {
         c.add(pnlNord, BorderLayout.NORTH);
         c.add(pnlSud, BorderLayout.SOUTH);
 
-        frmIndovinaImmagine.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmIndovinaImmagine.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmIndovinaImmagine.setSize(new Dimension(WIDTH,HEIGHT));
         frmIndovinaImmagine.setVisible(true);
 

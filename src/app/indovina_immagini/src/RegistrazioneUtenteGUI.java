@@ -128,7 +128,7 @@ public class RegistrazioneUtenteGUI {
         //creazione dimension per il frame
         Dimension dimension = new Dimension(850, 500);
         frmRegistrazioneUtente.setSize(dimension);
-        frmRegistrazioneUtente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frmRegistrazioneUtente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmRegistrazioneUtente.setVisible(true);
     }
 
