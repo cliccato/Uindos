@@ -7,7 +7,7 @@ import java.util.Vector;
 public class GestioneIndovinaImmagineGUI {
 
     private JFrame frmPrincipale;                   // frame principale
-    private static final String INDOVINA_IMMAGINE_LOGO_PATH = "images/schermata_iniziale.jpg";
+    private static final String INDOVINA_IMMAGINE_LOGO_PATH = "images/logo/indovina-immagine.png";
     private JLabel lblUtente;                       // label utente
     private JLabel lblStato;                        // label stato
     private JMenuBar menuBar;                       // menu bar
@@ -51,7 +51,7 @@ public class GestioneIndovinaImmagineGUI {
         classifica = new Vector<>();
 
         // creazione label
-        lblImgIniziale = new JLabel(new ImageIcon("images/schermata_iniziale.jpg"));
+        lblImgIniziale = new JLabel(new ImageIcon("src/app/indovina_immagini/images/schermata_iniziale.jpg"));
         lblStato = new JLabel("");
         lblUtente = new JLabel("Nessun account registrato");
         lblStato.setForeground(Color.WHITE);

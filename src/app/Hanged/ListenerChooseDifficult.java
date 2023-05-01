@@ -51,7 +51,7 @@ public class ListenerChooseDifficult implements ActionListener {
         hanged.setParoleGiaDette(new Vector<String>());
         hanged.setLettereGiaDette(new Vector<Character>());
         hanged.getLblInformazioniParolaNascosta().setVisible(true);
-        hanged.getLblImmagine().setIcon(new ImageIcon("images/inizio.png"));
+        hanged.getLblImmagine().setIcon(new ImageIcon("src/app/Hanged/images/inizio.png"));
         hanged.getLblIndovinato().setText("");
         hanged.getCslParolaUtente().setText("");
         hanged.iniziaGioco();
@@ -60,7 +60,7 @@ public class ListenerChooseDifficult implements ActionListener {
         hanged.getCslParolaUtente().setVisible(true);
         hanged.getLblImmagine().setVisible(true);
         hanged.getBtnConferma().setVisible(true);
-        hanged.setFile(new File("file/" + e.getActionCommand() + ".txt"));
+        hanged.setFile(new File("src/app/Hanged/file/" + e.getActionCommand() + ".txt"));
         estraiParola();
     }
 }

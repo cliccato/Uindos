@@ -21,7 +21,7 @@ public class TrisFrame{
     private static final String[] LETTERE_TRIS = {"X","O"};
     public static final int NUM_BOTTONI_TRIS = 9;
     private static final int NUM_BOTTONI_TRIS_RIGA_COLONNA = 3;
-    private static final String TRIS_LOGO_PATH = "tris-logo.png";
+    private static final String TRIS_LOGO_PATH = "images/logo/tris-logo.png";
     private final Font fntBtn;
 
     public TrisFrame(){

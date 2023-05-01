@@ -6,7 +6,7 @@ import java.util.Vector;
 
 public class Hanged {
 
-    private static final String HANGED_LOGO_PATH = "images/hanged-logo.png";
+    private static final String HANGED_LOGO_PATH = "images/logo/hanged-logo.png";
     public static final int NUM_TENTATIVI = 7;
     private JFrame frmImpiccato;
     private JMenuBar menuImpiccato;
@@ -58,13 +58,13 @@ public class Hanged {
         menuPartita.add(voceParoleDifficili);
         //creazione delle immagini per l'impiccato
         images = new ImageIcon[tentativi];
-        images[0] = new ImageIcon("images/1 tentativo sbagliato.png");
-        images[1] = new ImageIcon("images/2 tentativo sbagliato.png");
-        images[2] = new ImageIcon("images/3 tentativo sbagliato.png");
-        images[3] = new ImageIcon("images/4 tentativo sbagliato.png");
-        images[4] = new ImageIcon("images/5 tentativo sbagliato.png");
-        images[5] = new ImageIcon("images/6 tentativo sbagliato.png");
-        images[6] = new ImageIcon("images/7 tentativo sbagliato.png");
+        images[0] = new ImageIcon("src/app/Hanged/images/1 tentativo sbagliato.png");
+        images[1] = new ImageIcon("src/app/Hanged/images/2 tentativo sbagliato.png");
+        images[2] = new ImageIcon("src/app/Hanged/images/3 tentativo sbagliato.png");
+        images[3] = new ImageIcon("src/app/Hanged/images/4 tentativo sbagliato.png");
+        images[4] = new ImageIcon("src/app/Hanged/images/5 tentativo sbagliato.png");
+        images[5] = new ImageIcon("src/app/Hanged/images/6 tentativo sbagliato.png");
+        images[6] = new ImageIcon("src/app/Hanged/images/7 tentativo sbagliato.png");
         //creazione del font
         fnt = new Font("Serif", Font.BOLD, 22);
         //creazione dei pannelli
@@ -78,7 +78,7 @@ public class Hanged {
         lblInformazioniParolaNascosta = new JLabel();
         lblParolaUtente = new JLabel("Parola utente: ");
         lblIndovinato = new JLabel();
-        lblImmagine = new JLabel(new ImageIcon("images/inizio.png"));
+        lblImmagine = new JLabel(new ImageIcon("src/app/Hanged/images/inizio.png"));
         cslParolaUtente = new JTextField("");
         //creazione del bottone conferma
         btnConferma = new JButton("CONFERMA");

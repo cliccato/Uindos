@@ -175,7 +175,7 @@ public class IndovinaImmagineGUI {
             } else {
                 c.remove(lblImg);
                 nomeImmagineUscita = nomi_immagini.get(indice);
-                lblImg = new JLabel(new ImageIcon("images/" + file.getName().substring(0, file.getName().lastIndexOf('.')) + "/" + nomeImmagineUscita + ".jpg"));
+                lblImg = new JLabel(new ImageIcon("src/app/indovina_immagini/images/" + file.getName().substring(0, file.getName().lastIndexOf('.')) + "/" + nomeImmagineUscita + ".jpg"));
                 c.add(lblImg, BorderLayout.CENTER);
                 lblStato.setText("Stato: in corso");
                 lblStato.setForeground(Color.WHITE);
@@ -234,7 +234,7 @@ public class IndovinaImmagineGUI {
         // generazione casuale della prima immagine
         int indice = indiciImg.estrai();
         nomeImmagineUscita = nomi_immagini.get(indice);
-        lblImg = new JLabel(new ImageIcon("images/" + file.getName().substring(0, file.getName().lastIndexOf('.')) + "/" + nomeImmagineUscita + ".jpg"));
+        lblImg = new JLabel(new ImageIcon("src/app/indovina_immagini/images/" + file.getName().substring(0, file.getName().lastIndexOf('.')) + "/" + nomeImmagineUscita + ".jpg"));
         cambioPosizioneRadioButton();
 
         //aggiunta componenti al container

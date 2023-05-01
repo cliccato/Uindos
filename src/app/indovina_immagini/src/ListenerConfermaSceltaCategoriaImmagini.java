@@ -21,7 +21,7 @@ public class ListenerConfermaSceltaCategoriaImmagini implements ActionListener {
         } else {
             gestioneIndovinaImmagineGUI.getFrmPrincipale().setVisible(false);
             gestioneIndovinaImmagineGUI.setCategoriaScelta(e.getActionCommand());
-            new IndovinaImmagineGUI(gestioneIndovinaImmagineGUI, "nomi_immagini/" + gestioneIndovinaImmagineGUI.getCategoriaScelta() + ".txt");
+            new IndovinaImmagineGUI(gestioneIndovinaImmagineGUI, "src/app/indovina_immagini/nomi_immagini/" + gestioneIndovinaImmagineGUI.getCategoriaScelta() + ".txt");
         }
     }
 }
