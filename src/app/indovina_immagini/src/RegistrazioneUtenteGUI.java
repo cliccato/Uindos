@@ -1,4 +1,4 @@
-package app.indovina_immagini.source;
+package app.indovina_immagini.src;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

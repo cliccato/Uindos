@@ -9,7 +9,7 @@ import app.Hanged.Hanged;
 import app.Notepad.NotepadFrame;
 import app.Terminal.TerminalFrame;
 import app.Tris.TrisFrame;
-import app.indovina_immagini.source.GestioneIndovinaImmagineGUI;
+import app.indovina_immagini.src.GestioneIndovinaImmagineGUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

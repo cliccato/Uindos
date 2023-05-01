@@ -1,4 +1,4 @@
-package app.indovina_immagini.source;
+package app.indovina_immagini.src;
 public class Persona{
 
     protected String nome;          // nome

@@ -1,4 +1,4 @@
-package app.indovina_immagini.source;
+package app.indovina_immagini.src;
 public class Utente extends Persona {
 
     private String nomeUtente;      // nome utente

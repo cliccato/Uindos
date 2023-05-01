@@ -1,4 +1,4 @@
-package app.indovina_immagini.source;
+package app.indovina_immagini.src;
 import java.awt.*;
 
 public class ThreadTempoRimanente extends Thread {
