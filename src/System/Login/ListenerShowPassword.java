@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
-import javax.swing.JTextField;
 
 public class ListenerShowPassword implements ActionListener{
     private JButton btnShow;

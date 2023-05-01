@@ -8,9 +8,6 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.ConvolveOp;
-import java.awt.image.Kernel;
-import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
 
