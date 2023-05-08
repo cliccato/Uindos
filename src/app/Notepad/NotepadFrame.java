@@ -22,7 +22,7 @@ public class NotepadFrame {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(HEIGHT, WIDTH);
-        frame.setIconImage(new ImageIcon("images\\notepad-logo.png").getImage());
+        frame.setIconImage(new ImageIcon("images\\logo\\notepad-logo.png").getImage());
         frame.setLayout(new BorderLayout());
 
         textArea.setFont(new Font("Verdana", Font.PLAIN, 20));

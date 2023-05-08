@@ -37,7 +37,7 @@ public class TrisFrame{
         punteggioX = 0;
         punteggioO = 0;
         mosse = 0;
-        turno = LETTERE_TRIS[new Random().nextInt(0,2)];
+        turno = LETTERE_TRIS[new Random().nextInt(2)];
 
         lblTurnoGiocatore = new JLabel("Turno del giocatore: " + turno);
         lblPunteggioX = new JLabel("Punteggio X: 0");

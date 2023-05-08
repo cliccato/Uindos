@@ -46,7 +46,7 @@ public class TrisListener implements ActionListener {
             }
         }
         trisFrame.setMosse(0);
-        trisFrame.setTurno(trisFrame.getLettereTris()[new Random().nextInt(0,2)]);
+        trisFrame.setTurno(trisFrame.getLettereTris()[new Random().nextInt(2)]);
         trisFrame.getLblTurnoGiocatore().setText("Turno del giocatore: " + trisFrame.getTurno());
         trisFrame.setVittoriaX(false);
         trisFrame.setVittoriaO(false);

@@ -1,0 +1,32 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "TrisFrame",
+            "request": "launch",
+            "mainClass": "app.Tris.TrisFrame",
+            "projectName": "Uindos_90feea74"
+        },
+        {
+            "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "Main",
+            "projectName": "Uindos_90feea74"
+        },
+        {
+            "name": "Launch Chrome",
+            "request": "launch",
+            "type": "chrome",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
+            "name": "Chrome",
+            "port": 9222,
+            "request": "launch",
+            "type": "msedge",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
