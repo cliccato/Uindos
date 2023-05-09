@@ -1,7 +1,6 @@
 package System.Login;
 
 import System.Desktop.DesktopFrame;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -40,7 +39,6 @@ public class LoginFrame {
         frame.setIconImage(new ImageIcon(DesktopFrame.WINDOWS_LOGO_PATH).getImage());
 
         pnlFormInput = new JPanel(new GridBagLayout());
-        pnlFormInput.setOpaque(false);
 
         // Creazione dei constraints per l'allineamento dei componenti
         GridBagConstraints constraints = new GridBagConstraints();
@@ -62,10 +60,12 @@ public class LoginFrame {
         pnlFormInput.add(txtPassword, constraints);
 
         btnShowPassword = new JButton("Show");
+        btnShowPassword.addKeyListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.addActionListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         pnlFormInput.add(btnShowPassword, constraints);
 
         btnLogin = new JButton("Accedi");
+        btnLogin.addKeyListener(new ListenerLogin(this));
         btnLogin.addActionListener(new ListenerLogin(this));
         pnlFormInput.add(btnLogin, constraints);
 
@@ -143,8 +143,8 @@ public class LoginFrame {
 
     }
 
-    public void setFrameNotVisible() {
-        frame.setVisible(false);
+    public void closeFrame() {
+        frame.dispose();
     }
 
     public String getUsername() {

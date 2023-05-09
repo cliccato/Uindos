@@ -1,15 +1,12 @@
 package System.Desktop;
-import javax.swing.*;
 
+import javax.swing.*;
 import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import app.Calculator.CalculatorFrame;
 import app.Cronometer.CronometerFrame;
-import app.Hanged.Hanged;
 import app.Notepad.NotepadFrame;
 import app.Terminal.TerminalFrame;
-import app.Tris.TrisFrame;
-import app.indovina_immagini.src.GestioneIndovinaImmagineGUI;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -24,7 +21,7 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 
 public class DesktopFrame {
-    //cambiare
+    // cambiare
     public static final int HEIGHT = 720;
     public static final int WIDTH = 1280;
     public static final int APP_HEIGHT = 16;
@@ -32,8 +29,8 @@ public class DesktopFrame {
 
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
     public static final String FILE_ICON_PATH = "images/icon/file-icon.png";
-    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background.jpg";
     public static final String APP_LIST_PATH = "src/applist.csv";
+    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.jpg";
 
     private ClockThread clock;
     private String username;
@@ -42,13 +39,13 @@ public class DesktopFrame {
     private JPanel imagePanel, southPanel, appBarPanel;
     private JPopupMenu appMenu;
     private JMenu systemMenu, utilsMenu;
-    private JMenuItem terminalItem, notepadItem, itmLogOut;
+    private JMenuItem itemLogOut, itemExit;
     private JButton homeButton;
     private JLabel lblClock;
     private BufferedImage img;
     private JMenu user;
 
-    public DesktopFrame(String username) {//implementare desktop con aree di file distinte per ogni utente
+    public DesktopFrame(String username) {// implementare desktop con aree di file distinte per ogni utente
         this.username = username;
         createElements();
         createApp();
@@ -62,16 +59,15 @@ public class DesktopFrame {
 
         imagePanel.setLayout(new GridLayout(3, 5, 1, 1));
 
-        for(int i=0;i<15;i++) {
+        for (int i = 0; i < 15; i++) {
             JButton b = new JButton(new ImageIcon(FILE_ICON_PATH));
-            b.setText(""+i);
+            b.setText("" + i);
             b.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     new NotepadFrame();
                 }
             });
-            
-    
+
             b.setOpaque(false);
             b.setContentAreaFilled(false);
             b.setBorderPainted(false);
@@ -100,13 +96,13 @@ public class DesktopFrame {
 
         lblClock.setFont(new Font("Arial", Font.PLAIN, 20));
         lblClock.setForeground(Color.WHITE);
-        
-        /*
-        appBarPanel.add(new JButton("Test"));
-        appBarPanel.add(new JButton("Test"));
-        appBarPanel.add(new JButton("Test"));
-        appBarPanel.add(new JButton("Test"));*/
 
+        /*
+         * appBarPanel.add(new JButton("Test"));
+         * appBarPanel.add(new JButton("Test"));
+         * appBarPanel.add(new JButton("Test"));
+         * appBarPanel.add(new JButton("Test"));
+         */
 
         southPanel.add(homeButton, BorderLayout.WEST);
         southPanel.add(appBarPanel, BorderLayout.CENTER);
@@ -147,7 +143,8 @@ public class DesktopFrame {
         };
     }
 
-    // TODO rimpiazzarlo con un ciclo for e un array di stringhe contenente il nome dell'app
+    // TODO rimpiazzarlo con un ciclo for e un array di stringhe contenente il nome
+    // dell'app
     public void createApp() {
         systemMenu.add(new JMenuItem(new AbstractAction("Terminal") {
             public void actionPerformed(ActionEvent e) {
@@ -155,7 +152,6 @@ public class DesktopFrame {
             }
         }));
 
-        
         utilsMenu.add(new JMenuItem(new AbstractAction("Notepad") {
             public void actionPerformed(ActionEvent e) {
                 new NotepadFrame();
@@ -174,34 +170,24 @@ public class DesktopFrame {
             }
         }));
 
-        utilsMenu.add(new JMenuItem(new AbstractAction("Tris") {
-            public void actionPerformed(ActionEvent e) {
-                new TrisFrame();
-            }
-        }));
-
-        utilsMenu.add(new JMenuItem(new AbstractAction("Guess the image") {
-            public void actionPerformed(ActionEvent e) {
-                new GestioneIndovinaImmagineGUI();
-            }
-        }));
-
-        utilsMenu.add(new JMenuItem(new AbstractAction("Hanged") {
-            public void actionPerformed(ActionEvent e) {
-                new Hanged();
-            }
-        }));
-
         // appMenu.add(new JMenuItem(this.getUsername()));
 
-        itmLogOut = new JMenuItem(new AbstractAction("Logout") {
-            public void actionPerformed(ActionEvent e)  {
-                disableVisibility(); 
+        itemLogOut = new JMenuItem(new AbstractAction("Logout") {
+            public void actionPerformed(ActionEvent e) {
+                disableVisibility();
                 new LoginFrame();
             }
         });
+
+        itemExit = new JMenuItem(new AbstractAction("Exit") {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(1);
+            }
+        });
+
         user = new JMenu(this.getUsername());
-        user.add(itmLogOut);
+        user.add(itemLogOut);
+        user.add(itemExit);
 
         appMenu.add(user);
         appMenu.add(systemMenu);
@@ -232,7 +218,7 @@ public class DesktopFrame {
                 appBarPanel.add(b);
             }
         } catch (FileNotFoundException e) {
-            //TMCH
+            // TMCH
             ;
         }
     }
