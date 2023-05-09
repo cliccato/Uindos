@@ -7,7 +7,7 @@ import app.Calculator.CalculatorFrame;
 import app.Cronometer.CronometerFrame;
 import app.Notepad.NotepadFrame;
 import app.Terminal.TerminalFrame;
-
+import System.app.AppBar.AppBarListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.*;
@@ -210,16 +210,14 @@ public class DesktopFrame {
                 String name = s.split(";")[0];
                 String logoPath = s.split(";")[1];
                 JButton b = new JButton(new ImageIcon(logoPath));
-                System.out.println(logoPath);
-                b.setText(name);
                 b.setOpaque(false);
                 b.setContentAreaFilled(false);
                 b.setBorderPainted(false);
+                b.addActionListener(new AppBarListener(name));
                 appBarPanel.add(b);
             }
         } catch (FileNotFoundException e) {
-            // TMCH
-            ;
+            ; //TMCH
         }
     }
 
