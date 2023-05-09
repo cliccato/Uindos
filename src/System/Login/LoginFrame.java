@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class LoginFrame {
-    
+
     private JFrame frame;
     private BufferedImage img;
     private JPanel pnlImage;
@@ -24,8 +24,8 @@ public class LoginFrame {
 
     public LoginFrame() {
         createComponents();
-        //implementare interfaccia per inserimento password
-        //se password corretta avviare un nuovo desktop
+        // implementare interfaccia per inserimento password
+        // se password corretta avviare un nuovo desktop
         setBackground();
         setFrame();
 
@@ -40,6 +40,7 @@ public class LoginFrame {
         frame.setIconImage(new ImageIcon(DesktopFrame.WINDOWS_LOGO_PATH).getImage());
 
         pnlFormInput = new JPanel(new GridBagLayout());
+        pnlFormInput.setOpaque(false);
 
         // Creazione dei constraints per l'allineamento dei componenti
         GridBagConstraints constraints = new GridBagConstraints();
@@ -80,7 +81,7 @@ public class LoginFrame {
                     txtUsername.setText("");
                 }
             }
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 if (txtUsername.getText().isEmpty()) {
@@ -99,6 +100,7 @@ public class LoginFrame {
                     txtPassword.setForeground(Color.BLACK);
                 }
             }
+
             @Override
             public void focusLost(FocusEvent e) {
                 if (new String(txtPassword.getPassword()).isEmpty()) {
@@ -110,18 +112,18 @@ public class LoginFrame {
     }
 
     private void setFrame() {
-        frame.setFocusTraversalKeysEnabled(false); 
+        frame.setFocusTraversalKeysEnabled(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
-   private void setBackground() {
+    private void setBackground() {
         try {
             img = ImageIO.read(new File(DesktopFrame.DEFAULT_BACKGROUND_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         // crea un nuovo pannello con l'immagine come sfondo
         pnlImage = new JPanel() {
             @Override
@@ -135,7 +137,8 @@ public class LoginFrame {
         frame.setContentPane(pnlImage);
         frame.getContentPane().setLayout(new BorderLayout());
 
-        // Aggiungi il pannello di input dei dati di accesso al centro del pannello contenuto nella finestra
+        // Aggiungi il pannello di input dei dati di accesso al centro del pannello
+        // contenuto nella finestra
         frame.getContentPane().add(pnlFormInput, BorderLayout.NORTH);
 
     }
