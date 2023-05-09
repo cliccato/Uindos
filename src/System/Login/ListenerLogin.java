@@ -13,34 +13,25 @@ package System.Login;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
-
 import System.Desktop.DesktopFrame;
 
-public class ListenerLogin implements ActionListener{
+public class ListenerLogin implements ActionListener, KeyListener {
     private LoginFrame loginFrame;
     private final String USERS_FILE_PATH = "system69/config/SAM_IL_POMPIERE.conf";
-    private final String FIELD_DELIMITATOR = "|"; //da spostare
+    private final String FIELD_DELIMITATOR = "|"; // da spostare
 
-    /**
-     * Constructs a new ListenerLogin object with the given LoginFrame.
-     * 
-     * @param loginFrame the LoginFrame to use
-     */
     public ListenerLogin(LoginFrame loginFrame) {
         this.loginFrame = loginFrame;
     }
 
-    /**
-     * Authenticates the user by checking if their credentials are valid.
-     *
-     * @return true if the user is authenticated, false otherwise.
-     */
     private boolean authenticateUser() {
         String usernameInsert = loginFrame.getUsername();
         String passwordInsert = loginFrame.getPassword();
@@ -65,20 +56,34 @@ public class ListenerLogin implements ActionListener{
         return false;
     }
 
-    /**
-     * Called when the user clicks the "Login" button.
-     * Authenticates the user and opens the DesktopFrame if successful,
-     * otherwise alerts the user and clears the input fields.
-     * 
-     * @param e the ActionEvent that occurred
-     */
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (authenticateUser()) {
-            loginFrame.setFrameNotVisible();
+            loginFrame.closeFrame();
             new DesktopFrame(loginFrame.getUsername());
         } else {
             loginFrame.alertUserNotFound();
             loginFrame.clearInput();
         }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ENTER && authenticateUser()) {
+            new DesktopFrame(loginFrame.getUsername());
+        } else {
+            loginFrame.alertUserNotFound();
+            loginFrame.clearInput();
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        // TODO Auto-generated method stub
     }
 }

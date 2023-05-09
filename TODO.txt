@@ -6,11 +6,13 @@ Applicazioni da fare
 	- tris (completato)
 	- impiccato (completato) 
 	- gioco immagini (completato)
-	- macchina virtuale (fattibile in 2 secondi)
+	- macchina virtuale (completato)
 	- carta sasso forbice con gui (in lavorazione)
 	- mezzatok
 	
-- loghi applicazione
-
+- loghi applicazione (completato)
 - login (completato) 
-- salvataggio configurazione
+- fare configurazione utenti
+- creare spazi di lavoro separati per gli utenti
+- fare appbar automatica
+- browser
