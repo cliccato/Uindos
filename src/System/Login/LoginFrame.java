@@ -34,7 +34,7 @@ public class LoginFrame {
         frame = new JFrame("Login");
         frame.setSize(new Dimension(DesktopFrame.WIDTH, DesktopFrame.HEIGHT));
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
         frame.setIconImage(new ImageIcon(DesktopFrame.WINDOWS_LOGO_PATH).getImage());
 
