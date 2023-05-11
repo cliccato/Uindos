@@ -9,6 +9,15 @@ Applicazioni da fare
 	- macchina virtuale (completato)
 	- carta sasso forbice con gui (in lavorazione)
 	- mezzatok
+	- timer, cronometro e orari delle varie parti del mondo
+	- selezionatore di sfondo immagine
+	-drag and drop desktop
+	-modifica password utente
+	-creazione utente e controlli
+	- snake
+	- forse cestino
+	sistemare barra sotto
+	
 	
 - loghi applicazione (completato)
 - login (completato) 
