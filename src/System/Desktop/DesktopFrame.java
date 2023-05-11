@@ -43,6 +43,7 @@ public class DesktopFrame {
     private JButton homeButton;
     private JLabel lblClock;
     private BufferedImage img;
+    private Point initialLocation;
     private JMenu user;
 
     public DesktopFrame(String username) {// implementare desktop con aree di file distinte per ogni utente
@@ -62,12 +63,46 @@ public class DesktopFrame {
         for (int i = 0; i < 15; i++) {
             JButton b = new JButton(new ImageIcon(FILE_ICON_PATH));
             b.setText("" + i);
-            b.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    new NotepadFrame();
+
+            b.addMouseListener(new MouseAdapter() {
+                public void mousePressed(MouseEvent e) {
+                    initialLocation = e.getPoint();
                 }
             });
-
+            b.addMouseMotionListener(new MouseAdapter() {
+                public void mouseDragged(MouseEvent e) {
+                    int dx = e.getX() - initialLocation.x;
+                    int dy = e.getY() - initialLocation.y;
+                    int newX = b.getX() + dx;
+                    int newY = b.getY() + dy;
+                    
+                    // Verifica se la nuova posizione del pulsante è all'interno del frame
+                    if (newX < 0) {
+                        newX = 0;
+                    }
+                    if (newY < 0) {
+                        newY = 0;
+                    }
+                    if (newX + b.getWidth() > frame.getWidth()) {
+                        newX = frame.getWidth() - b.getWidth();
+                    }
+                    if (newY + b.getHeight() > frame.getHeight()) {
+                        newY = frame.getHeight() - b.getHeight();
+                    }
+                    
+                    // Imposta la nuova posizione del pulsante
+                    b.setLocation(newX, newY);
+                }
+            });
+            b.addMouseListener(new MouseAdapter(){
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    if(e.getClickCount()==2){
+                        new NotepadFrame();
+                    }
+                }
+            });
+            
             b.setOpaque(false);
             b.setContentAreaFilled(false);
             b.setBorderPainted(false);
