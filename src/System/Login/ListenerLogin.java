@@ -60,7 +60,7 @@ public class ListenerLogin implements ActionListener, KeyListener {
     public void actionPerformed(ActionEvent e) {
         if (authenticateUser()) {
             loginFrame.closeFrame();
-            new DesktopFrame(loginFrame.getUsername());
+            new DesktopFrame(loginFrame.getUsername(), loginFrame.getPassword());
         } else {
             loginFrame.alertUserNotFound();
             loginFrame.clearInput();
@@ -70,7 +70,7 @@ public class ListenerLogin implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER && authenticateUser()) {
-            new DesktopFrame(loginFrame.getUsername());
+            new DesktopFrame(loginFrame.getUsername(), loginFrame.getPassword());
         } else {
             loginFrame.alertUserNotFound();
             loginFrame.clearInput();
