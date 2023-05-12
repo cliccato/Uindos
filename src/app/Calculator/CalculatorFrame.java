@@ -22,7 +22,7 @@ public class CalculatorFrame {
 
     frame.setSize(400, 400);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
+    frame.setIconImage(new ImageIcon("images/logo/calculator-logo.png").getImage());
     frame.add(display, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
     frame.setVisible(true);
