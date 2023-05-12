@@ -77,7 +77,7 @@ public class TrisListener implements ActionListener {
                 trisFrame.getLblTurnoGiocatore().setText("Turno del giocatore: " + trisFrame.getTurno());
                 trisFrame.setMosse(trisFrame.getMosse()+1);
 
-                if (trisFrame.getMosse() == trisFrame.NUM_BOTTONI_TRIS && !trisFrame.isVittoriaX() && !trisFrame.isVittoriaO()) {
+                if (trisFrame.getMosse() == TrisFrame.NUM_BOTTONI_TRIS && !trisFrame.isVittoriaX() && !trisFrame.isVittoriaO()) {
                     JOptionPane.showMessageDialog(null, "Pareggio!", "Tris", JOptionPane.INFORMATION_MESSAGE);
                     clearAll();
                 }
