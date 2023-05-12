@@ -1,9 +1,20 @@
+/**
+ * CustomStopWatch è una classe che estende JPanel e rappresenta un cronometro personalizzato.
+ * 
+ * Fornisce funzionalità per avviare, mettere in pausa, ripristinare e registrare parziali durante la misurazione del tempo.
+ * Il tempo viene visualizzato su un'etichetta e i parziali vengono mostrati in una JTextArea.
+ * 
+ * @author Giorgio Justin Fasullo
+ * @version 1.0
+ * @since 2023-05-12
+ */
+
 package app.UserClock;
-import java.awt.*;
+
 import javax.swing.*;
+import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
 public class CustomStopWatch extends JPanel {
 
     private JLabel lblTempo;
@@ -16,8 +27,11 @@ public class CustomStopWatch extends JPanel {
     private long startTime;
     private long pausedTime;
     private Timer updateTimer;
-    private ArrayList<Double> parziali;
+    private ArrayList < Double > parziali;
 
+    /**
+     * Crea un'istanza di CustomStopWatch.
+     */
     public CustomStopWatch() {
         isRunning = false;
         lblTempo = new JLabel("Tempo: 0.0 sec");
@@ -52,9 +66,12 @@ public class CustomStopWatch extends JPanel {
         Dimension frameDimension = new Dimension(300, 400);
         setPreferredSize(frameDimension);
 
-        parziali = new ArrayList<>();
+        parziali = new ArrayList < > ();
     }
 
+    /**
+     * Avvia il cronometro.
+     */
     private void avviaTempo() {
         if (!isRunning) {
             isRunning = true;
@@ -72,18 +89,24 @@ public class CustomStopWatch extends JPanel {
         }
     }
 
+    /**
+     * Aggiorna il tempo visualizzato sull'etichetta del cronometro.
+     */
     public void updateTempo() {
         long elapsedTime = System.currentTimeMillis() - startTime - pausedTime;
         double seconds = elapsedTime / 1000.0;
-        int hours = (int) (seconds / 3600);
-        int minutes = (int) ((seconds % 3600) / 60);
+        int hours = (int)(seconds / 3600);
+        int minutes = (int)((seconds % 3600) / 60);
         seconds %= 60;
 
         DecimalFormat decimalFormat = new DecimalFormat("00");
         lblTempo.setText("Tempo: " + decimalFormat.format(hours) + " hr " +
-                decimalFormat.format(minutes) + " min " + new DecimalFormat("0.0").format(seconds) + " sec");
+            decimalFormat.format(minutes) + " min " + new DecimalFormat("0.0").format(seconds) + " sec");
     }
 
+    /**
+     * Mette in pausa il cronometro.
+     */
     private void pausaTempo() {
         if (isRunning) {
             isRunning = false;
@@ -95,6 +118,9 @@ public class CustomStopWatch extends JPanel {
         }
     }
 
+    /**
+     * Resettta il cronometro e cancella i parziali registrati.
+     */
     private void resetTempo() {
         isRunning = false;
         if (updateTimer != null)
@@ -108,6 +134,9 @@ public class CustomStopWatch extends JPanel {
         txtParziali.setText("");
     }
 
+    /**
+     * Registra un parziale nel cronometro.
+     */
     private void registraParziale() {
         if (isRunning) {
             long currentTime = System.currentTimeMillis();
@@ -117,31 +146,58 @@ public class CustomStopWatch extends JPanel {
         }
     }
 
+    /**
+     * Formatta il tempo nel formato hh:mm:ss.
+     *
+     * @param tempo il tempo da formattare in secondi
+     * @return il tempo formattato come stringa
+     */
     private String formatTempo(double tempo) {
-        int hours = (int) (tempo / 3600);
-        int minutes = (int) ((tempo % 3600) / 60);
+        int hours = (int)(tempo / 3600);
+        int minutes = (int)((tempo % 3600) / 60);
         double seconds = tempo % 60;
 
         DecimalFormat decimalFormat = new DecimalFormat("00.0");
         return decimalFormat.format(hours) + ":" + decimalFormat.format(minutes) + ":" + decimalFormat.format(seconds);
     }
 
+    /**
+     * Restituisce lo stato di esecuzione del cronometro.
+     *
+     * @return true se il cronometro è in esecuzione, false altrimenti
+     */
     public boolean getIsRunning() {
         return isRunning;
     }
 
+    /**
+     * Avvia il cronometro.
+     */
     public void run() {
         isRunning = true;
     }
 
+    /**
+     * Ferma il cronometro.
+     */
     public void stop() {
         isRunning = false;
     }
 
+    /**
+     * Restituisce l'etichetta del tempo del cronometro.
+     *
+     * @return l'etichetta del tempo
+     */
     public JLabel getLblTempo() {
         return lblTempo;
     }
 
+    /**
+     * Restituisce il tempo iniziale del cronometro.
+     *
+     * @return il tempo iniziale del cronometro
+     */
     public long getSecondi() {
         return startTime;
     }

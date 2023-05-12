@@ -1,9 +1,15 @@
-package app.UserClock;
+/**
+ * Questa classe rappresenta un timer personalizzato.
+ * Mostra il tempo rimanente e fornisce funzionalità per avviare, mettere in pausa e ripristinare il timer.
+ * @author Giorgio Justin Fasullo
+ * @version 1.0
+ * @since 2023-05-12
+ */
 
+package app.UserClock;
 import java.awt.*;
 import javax.swing.*;
 import java.text.DecimalFormat;
-
 public class CustomTimer extends JPanel {
 
     private JLabel lblTempo;
@@ -14,6 +20,10 @@ public class CustomTimer extends JPanel {
     private long startTime;
     private Timer updateTimer;
 
+    /**
+     * Crea un'istanza di CustomTimer.
+     * Inizializza i componenti grafici e imposta il layout.
+     */
     public CustomTimer() {
         isRunning = false;
         lblTempo = new JLabel("Tempo: 0.0 sec");
@@ -39,34 +49,42 @@ public class CustomTimer extends JPanel {
         setPreferredSize(frameDimension);
     }
 
+    /**
+     * Avvia il timer.
+     * Se il timer non è in esecuzione, imposta il tempo di inizio e avvia il timer.
+     * Se il tempo di inizio non è stato impostato, richiede all'utente di inserirlo.
+     */
     private void avviaTempo() {
-    if (!isRunning) {
-        isRunning = true;
-        if (startTime == 0) {
-            String input = JOptionPane.showInputDialog("Inserisci il tempo di inizio (secondi):");
-            try {
-                long tempoInizio = Long.parseLong(input) * 1000;
-                if (tempoInizio >= 0) {
-                    startTime = System.currentTimeMillis() + tempoInizio;
-                } else {
-                    JOptionPane.showMessageDialog(this, "Il tempo di inizio deve essere un numero positivo.");
+        if (!isRunning) {
+            isRunning = true;
+            if (startTime == 0) {
+                String input = JOptionPane.showInputDialog("Inserisci il tempo di inizio (secondi):");
+                try {
+                    long tempoInizio = Long.parseLong(input) * 1000;
+                    if (tempoInizio >= 0) {
+                        startTime = System.currentTimeMillis() + tempoInizio;
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Il tempo di inizio deve essere un numero positivo.");
+                        isRunning = false;
+                        return;
+                    }
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(this, "Inserisci un valore numerico valido per il tempo di inizio.");
                     isRunning = false;
                     return;
                 }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this, "Inserisci un valore numerico valido per il tempo di inizio.");
-                isRunning = false;
-                return;
             }
+            updateTimer = new Timer(100, e -> updateTempo());
+            updateTimer.start();
+            btnAvvia.setEnabled(false);
+            btnPausa.setEnabled(true);
         }
-        updateTimer = new Timer(100, e -> updateTempo());
-        updateTimer.start();
-        btnAvvia.setEnabled(false);
-        btnPausa.setEnabled(true);
     }
-}
 
-
+    /**
+     * Aggiorna il tempo rimanente del timer.
+     * Se il tempo rimanente è scaduto, ferma il timer e mostra un messaggio di avviso.
+     */
     public void updateTempo() {
         long remainingTime = startTime - System.currentTimeMillis();
         if (remainingTime <= 0) {
@@ -79,16 +97,19 @@ public class CustomTimer extends JPanel {
             JOptionPane.showMessageDialog(this, "Tempo scaduto!"); // Mostra l'alert
         } else {
             double seconds = remainingTime / 1000.0;
-            int hours = (int) (seconds / 3600);
-            int minutes = (int) ((seconds % 3600) / 60);
+            int hours = (int)(seconds / 3600);
+            int minutes = (int)((seconds % 3600) / 60);
             seconds %= 60;
-
             DecimalFormat decimalFormat = new DecimalFormat("00");
             lblTempo.setText("Tempo: " + decimalFormat.format(hours) + " hr " +
-                    decimalFormat.format(minutes) + " min " + new DecimalFormat("0.0").format(seconds) + " sec");
+                decimalFormat.format(minutes) + " min " + new DecimalFormat("0.0").format(seconds) + " sec");
         }
     }
 
+    /**
+     * Mette in pausa il timer.
+     * Se il timer è in esecuzione, lo mette in pausa e disabilita il pulsante di pausa.
+     */
     private void pausaTempo() {
         if (isRunning) {
             isRunning = false;
@@ -98,6 +119,10 @@ public class CustomTimer extends JPanel {
         }
     }
 
+    /**
+     * Resetta il timer.
+     * Ferma il timer, reimposta il tempo iniziale e resetta l'etichetta del tempo.
+     */
     private void resetTempo() {
         isRunning = false;
         if (updateTimer != null)
@@ -107,25 +132,42 @@ public class CustomTimer extends JPanel {
         btnPausa.setEnabled(false);
     }
 
+    /**
+     * Restituisce lo stato di esecuzione del timer.
+     * @return true se il timer è in esecuzione, false altrimenti
+     */
     public boolean getIsRunning() {
-return isRunning;
-}
-public void run() {
-    isRunning = true;
-}
+        return isRunning;
+    }
 
-public void stop() {
-    isRunning = false;
-    if (updateTimer != null)
-        updateTimer.stop();
-    
-    updateTimer = new Timer(100, e -> updateTempo());
-    lblTempo.setText("Tempo: 0.0 sec");
-    btnAvvia.setEnabled(true);
-    btnPausa.setEnabled(false);
-}
+    /**
+     * Avvia il timer.
+     * Imposta lo stato di esecuzione a true.
+     */
+    public void run() {
+        isRunning = true;
+    }
 
-public JLabel getLblTempo() {
-    return lblTempo;
-}
+    /**
+     * Ferma il timer.
+     * Imposta lo stato di esecuzione a false e ferma il timer.
+     */
+    public void stop() {
+        isRunning = false;
+        if (updateTimer != null)
+            updateTimer.stop();
+
+        updateTimer = new Timer(100, e -> updateTempo());
+        lblTempo.setText("Tempo: 0.0 sec");
+        btnAvvia.setEnabled(true);
+        btnPausa.setEnabled(false);
+    }
+
+    /**
+     * Restituisce l'etichetta del tempo del timer.
+     * @return l'etichetta del tempo
+     */
+    public JLabel getLblTempo() {
+        return lblTempo;
+    }
 }
