@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
+import System.app.Windows_settings.ImpostazioniWindowsFrame;
 import app.Calculator.CalculatorFrame;
 import app.Cronometer.CronometerFrame;
 import app.Notepad.NotepadFrame;
@@ -37,20 +38,22 @@ public class DesktopFrame {
 
     private ClockThread clock;
     private String username;
+    private String password;
     private Dimension frameDimension, appBarDimension;
     private JFrame frame;
     private JPanel imagePanel, southPanel, appBarPanel;
     private JPopupMenu appMenu;
     private JMenu systemMenu, utilsMenu;
-    private JMenuItem itemLogOut, itemExit;
+    private JMenuItem itemLogOut, itemExit, itemSettings;
     private JButton homeButton;
     private JLabel lblClock;
     private BufferedImage img;
     private Point initialLocation;
     private JMenu user;
 
-    public DesktopFrame(String username) {// implementare desktop con aree di file distinte per ogni utente
+    public DesktopFrame(String username, String password) {// implementare desktop con aree di file distinte per ogni utente
         this.username = username;
+        this.password = password;
         createElements();
         createApp();
         setAppBar();
@@ -235,7 +238,15 @@ public class DesktopFrame {
             }
         });
 
+        itemSettings = new JMenuItem(new AbstractAction("Settings") {
+            public void actionPerformed(ActionEvent e) {
+                new ImpostazioniWindowsFrame(username, password);
+            }
+        });
+
         user = new JMenu(this.getUsername());
+        user.add(itemSettings);
+        user.add(new JSeparator());
         user.add(itemLogOut);
         user.add(itemExit);
 
