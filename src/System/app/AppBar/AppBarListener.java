@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import app.VirtualBox.VirtualBoxApp;
+import app.Paint.PaintApp;
 
 public class AppBarListener implements ActionListener {
     String name;
@@ -17,6 +18,9 @@ public class AppBarListener implements ActionListener {
         switch (name) {
             case "virtualbox":
                 new VirtualBoxApp();
+                break;
+            case "paint":
+                new PaintApp();
                 break;
         }
     }
