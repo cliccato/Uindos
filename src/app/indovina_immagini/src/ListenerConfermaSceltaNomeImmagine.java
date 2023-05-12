@@ -24,7 +24,7 @@ public class ListenerConfermaSceltaNomeImmagine implements ActionListener {
             indovinaImmagineGUI.getT().interrupt();
             indovinaImmagineGUI.getBtnCambiaImg().setVisible(true);
             indovinaImmagineGUI.getBtnConferma().setVisible(false);
-            for (int i=0; i < indovinaImmagineGUI.NUM_RADIOBUTTON; i++){
+            for (int i=0; i < IndovinaImmagineGUI.NUM_RADIOBUTTON; i++){
                 indovinaImmagineGUI.getRb()[i].setEnabled(false);
             }
         } else {            // altrimenti avvisa l'utente che non ha indovinato
