@@ -90,7 +90,7 @@ public class DesktopFrame {
         homeButton.setBorderPainted(false);
         homeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                appMenu.show(homeButton, 0, 0 - (homeButton.getBounds().height * appMenu.getComponentCount()));
+                appMenu.show(homeButton, 0, 0 - (homeButton.getBounds().height * appMenu.getComponentCount() - 50));
             }
         });
 

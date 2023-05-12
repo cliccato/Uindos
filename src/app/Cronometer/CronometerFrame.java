@@ -3,6 +3,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -36,6 +38,7 @@ public class CronometerFrame extends JFrame implements ActionListener, Runnable 
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         pack();
+        setIconImage(new ImageIcon("images/logo/cronometer-logo.png").getImage());
         setVisible(true);
     }
 
