@@ -1,3 +1,16 @@
+/**
+ * ClockFrame è una classe che rappresenta la finestra principale dell'applicazione Clock.
+ * 
+ * La finestra contiene un pannello laterale con pulsanti per le diverse funzionalità dell'applicazione
+ * e un pannello di contenuto per visualizzare il contenuto selezionato.
+ * 
+ * La classe utilizza la libreria Swing per la creazione dell'interfaccia grafica.
+ * 
+ * @author Giorgio Justin Fasullo
+ * @version 1.0
+ * @since 2023-05-12
+ */
+
 package app.UserClock;
 
 import javax.swing.*;
@@ -12,20 +25,31 @@ public class ClockFrame {
     private JPanel contentPanel;
     private JButton btnTimer;
     private JButton btnStopwatch;
-    private JButton btnWorldClock; 
+    private JButton btnWorldClock;
 
     private JLabel contentLabel = new JLabel();
+
+    /**
+     * Costruttore della classe ClockFrame.
+     * Crea e inizializza i componenti dell'interfaccia grafica.
+     */
     public ClockFrame() {
         createComponents();
         setFrame();
     }
 
+    /**
+     * Imposta le dimensioni e le impostazioni del frame principale.
+     */
     private void setFrame() {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(FRAME_DIMENSION);
         frame.setVisible(true);
     }
 
+    /**
+     * Crea e inizializza i componenti dell'interfaccia grafica.
+     */
     private void createComponents() {
         frame = new JFrame("Clock");
         container = this.frame.getContentPane();
@@ -37,9 +61,6 @@ public class ClockFrame {
         sidebarPanel.setLayout(new GridLayout(3, 1));
 
         // Aggiunta dei pulsanti al pannello laterale
-        // JButton homeButton = createSidebarButton("Home");
-        // JButton settingsButton = createSidebarButton("Settings");
-        // JButton helpButton = createSidebarButton("Help");
         btnTimer = createSidebarButton("Timer");
         btnStopwatch = createSidebarButton("Stopwatch");
         btnWorldClock = createSidebarButton("World Clock");
@@ -50,9 +71,6 @@ public class ClockFrame {
 
         // Creazione del pannello contenuto
         contentPanel = new JPanel();
-        // contentPanel.setLayout(new BorderLayout());
-
-        // Aggiunta del contenuto al pannello contenuto
         contentLabel.setHorizontalAlignment(SwingConstants.CENTER);
         contentPanel.add(contentLabel, BorderLayout.CENTER);
 
@@ -61,6 +79,12 @@ public class ClockFrame {
         container.add(contentPanel, BorderLayout.CENTER);
     }
 
+    /**
+     * Crea un pulsante per il pannello laterale.
+     * 
+     * @param text il testo del pulsante
+     * @return il pulsante creato
+     */
     private JButton createSidebarButton(String text) {
         JButton button = new JButton(text);
 
@@ -75,10 +99,20 @@ public class ClockFrame {
         return button;
     }
 
+    /**
+     * Restituisce l'etichetta di contenuto.
+     * 
+     * @return l'etichetta di contenuto
+     */
     public JLabel getLblContent() {
         return contentLabel;
     }
 
+    /**
+     * Restituisce il pannello di contenuto.
+     *
+     * @return il pannello di contenuto
+     */
     public JPanel getPnlContent() {
         return contentPanel;
     }
