@@ -7,7 +7,7 @@
  * 
  * @Author Giorgio Justin Fasullo
  */
-package Rock_paper_scissors;
+package app.Rock_paper_scissors;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

@@ -2,14 +2,14 @@ package System.Desktop;
 
 import javax.swing.*;
 
-import Rock_paper_scissors.RockPaperScissor;
 import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import app.Calculator.CalculatorFrame;
 import app.Cronometer.CronometerFrame;
 import app.Notepad.NotepadFrame;
+import app.Rock_paper_scissors.RockPaperScissor;
 import app.Terminal.TerminalFrame;
-
+import app.UserClock.ClockFrame;
 import System.app.AppBar.AppBarListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -211,6 +211,12 @@ public class DesktopFrame {
         utilsMenu.add(new JMenuItem(new AbstractAction("Rok Paiper Cissor") {
             public void actionPerformed(ActionEvent e) {
                 new RockPaperScissor();
+            }
+        }));
+
+        utilsMenu.add(new JMenuItem(new AbstractAction("Clock") {
+            public void actionPerformed(ActionEvent e) {
+                new ClockFrame();
             }
         }));
 

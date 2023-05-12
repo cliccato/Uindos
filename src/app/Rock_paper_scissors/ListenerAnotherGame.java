@@ -1,4 +1,4 @@
-package Rock_paper_scissors;
+package app.Rock_paper_scissors;
 
 /**
  *

@@ -7,7 +7,7 @@ Applicazioni da fare
 	- impiccato (completato) 
 	- gioco immagini (completato)
 	- macchina virtuale (completato)
-	- carta sasso forbice con gui (in lavorazione)
+	- carta sasso forbice con gui (da fixare le immagini)
 	- mezzatok
 	- timer, cronometro e orari delle varie parti del mondo
 	- selezionatore di sfondo immagine
