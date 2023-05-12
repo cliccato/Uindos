@@ -7,7 +7,7 @@
  * 
  * @author Giorgio Justin Fasullo
  * @version 1.0
- * @since [Inserisci la data di creazione]
+ * @since 2023-05-12
  */
 
 package app.UserClock;
