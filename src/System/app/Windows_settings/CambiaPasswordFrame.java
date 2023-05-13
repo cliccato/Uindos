@@ -37,7 +37,7 @@ public class CambiaPasswordFrame extends JFrame {
         passwordUtente = impostazioniWindowsFrame.getPasswordUtente();
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 300);
+        setSize(800, 800);
         setLayout(new BorderLayout());
 
         // Creazione del pannello per i campi di input

@@ -37,7 +37,7 @@ public class DesktopFrame {
     public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.jpg";
 
     private ClockThread clock;
-    private String username;
+    private static String username;
     private String password;
     private Dimension frameDimension, appBarDimension;
     private JFrame frame;
@@ -52,7 +52,7 @@ public class DesktopFrame {
     private JMenu user;
 
     public DesktopFrame(String username, String password) {// implementare desktop con aree di file distinte per ogni utente
-        this.username = username;
+        DesktopFrame.username = username;
         this.password = password;
         createElements();
         createApp();
@@ -245,7 +245,7 @@ public class DesktopFrame {
             }
         });
 
-        user = new JMenu(this.getUsername());
+        user = new JMenu(DesktopFrame.getUsername());
         user.add(itemSettings);
         user.add(new JSeparator());
         user.add(itemLogOut);
@@ -287,7 +287,7 @@ public class DesktopFrame {
         this.password = password;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 
@@ -295,6 +295,10 @@ public class DesktopFrame {
         return lblClock;
     }
 
+    public JPanel getImagePanel(){
+        return imagePanel;
+    }
+    
     public void disableVisibility() {
         frame.setVisible(false);
     }

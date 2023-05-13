@@ -120,6 +120,14 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         }
     }
 
+    private void createDirectory(){
+        File dir = new File("src/System/Users/" + username);
+        System.out.println(dir.getPath());
+        if (!dir.exists()) {
+            dir.mkdir();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registrationFrame.getRegisterButton()) {  
@@ -127,6 +135,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
                 username = registrationFrame.getUsername();
                 password = new String(registrationFrame.getPassword().getPassword());
                 addUserToCSV();
+                createDirectory();
                 new DesktopFrame(username, password);
                 registrationFrame.dispose();
                 loginFrame.closeFrame();
@@ -145,6 +154,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
                 username = registrationFrame.getUsername();
                 password = new String(registrationFrame.getPassword().getPassword());
                 addUserToCSV();
+                createDirectory();
                 new DesktopFrame(username, password);
                 registrationFrame.dispose();
                 loginFrame.closeFrame();

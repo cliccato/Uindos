@@ -24,7 +24,7 @@ public class RegistrationFrame extends JFrame {
 
     public RegistrationFrame(LoginFrame loginFrame) {
         setTitle("Registrazione Utente");
-        setSize(400, 300);
+        setSize(850, 550);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();

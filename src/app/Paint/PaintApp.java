@@ -12,6 +12,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+import System.Desktop.DesktopFrame;
+
 public class PaintApp {
     private static final String LOGO_PATH = "images/logo/paint-logo.png";
     private JFrame frame;
@@ -136,9 +138,9 @@ public class PaintApp {
         if (name != null && !name.isEmpty()) { // Verifica se il nome del file è stato inserito
             try {
                 if (!isImageSaved) {
-                    ImageIO.write(image, "png", new File("src/app/Paint/Save/" + name + ".png")); // Salva l'immagine su disco come file PNG
+                    ImageIO.write(image, "png", new File("src/System/Users/" + DesktopFrame.getUsername() + "/" + name + ".png")); // Salva l'immagine su disco come file PNG
                 } else {
-                    ImageIO.write(image, "png", new File("src/app/Paint/Save/" + name)); // Salva l'immagine su disco come file PNG
+                    ImageIO.write(image, "png", new File("src/System/Users/" + DesktopFrame.getUsername() + "/" + name)); // Salva l'immagine su disco come file PNG
                 }
                 JOptionPane.showMessageDialog(frame, "Il pannello è stato salvato come immagine.");
             } catch (IOException e) {
@@ -180,7 +182,7 @@ public class PaintApp {
 
     private void openImage() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/app/Paint/Save/")); // Imposta la directory di lavoro come cartella iniziale
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/System/Users/" + DesktopFrame.getUsername())); // Imposta la directory di lavoro come cartella iniziale
         int result = fileChooser.showOpenDialog(frame);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
