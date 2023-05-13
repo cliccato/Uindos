@@ -14,7 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-public class ImpostazioniWindowsFrame extends JFrame{
+public class ImpostazioniWindowsFrame extends JFrame {
 
     private DesktopFrame desktopFrame;
     private JPanel pnlInfoUtente;
@@ -49,8 +48,8 @@ public class ImpostazioniWindowsFrame extends JFrame{
         lblTitolo.setFont(new Font("Tahoma", Font.BOLD, 16));
         lblTitolo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        pnlInfoUtente = new JPanel(new GridLayout(6,2));
-        
+        pnlInfoUtente = new JPanel(new GridLayout(6, 2));
+
         passwordUtente = password;
         nomeUtente = username;
 
@@ -77,7 +76,7 @@ public class ImpostazioniWindowsFrame extends JFrame{
                 }
             }
         });
-        
+
         lblCambiaPassword = new JLabel("<html><u>Cambia password</u></html>");
         lblCambiaPassword.setHorizontalAlignment(SwingConstants.LEFT);
         lblCambiaPassword.setForeground(Color.BLUE);
@@ -103,32 +102,32 @@ public class ImpostazioniWindowsFrame extends JFrame{
         pnlInfoUtente.add(new JLabel());
 
         scrollPane = new JScrollPane(pnlInfoUtente);
-    
+
         add(scrollPane, BorderLayout.CENTER);
         add(lblTitolo, BorderLayout.NORTH);
     }
 
-    public void setPasswordUtente(String passwordUtente){
+    public void setPasswordUtente(String passwordUtente) {
         this.passwordUtente = passwordUtente;
     }
 
-    public String getPasswordUtente(){
+    public String getPasswordUtente() {
         return passwordUtente;
     }
 
-    public String getNomeUtente(){
+    public String getNomeUtente() {
         return nomeUtente;
     }
 
-    public JCheckBox getCheckBoxMostraPassword(){
+    public JCheckBox getCheckBoxMostraPassword() {
         return checkBoxMostraPassword;
     }
 
-    public JLabel getLblPasswordUtente(){
+    public JLabel getLblPasswordUtente() {
         return lblPasswordUtente;
     }
 
-    public DesktopFrame getDesktopFrame(){
+    public DesktopFrame getDesktopFrame() {
         return desktopFrame;
     }
 }

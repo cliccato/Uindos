@@ -10,7 +10,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.StringTokenizer;
-
 import javax.swing.JOptionPane;
 
 import System.Login.ListenerLogin;
@@ -51,8 +50,8 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
 
     private boolean isPasswordOK() {
 
-        if (cambiaPasswordFrame.getOldPassword().isEmpty() || cambiaPasswordFrame.getNewPassword().isEmpty()
-                || cambiaPasswordFrame.getConfirmPassword().isEmpty()) {
+        if (cambiaPasswordFrame.getOldPassword().isEmpty() || cambiaPasswordFrame.getNewPassword().isEmpty() ||
+            cambiaPasswordFrame.getConfirmPassword().isEmpty()) {
             JOptionPane.showMessageDialog(cambiaPasswordFrame, "Compila tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -62,8 +61,8 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
             return false;
         }
 
-        if (cambiaPasswordFrame.getOldPassword().equals(cambiaPasswordFrame.getNewPassword())
-                && cambiaPasswordFrame.getNewPassword().equals(cambiaPasswordFrame.getConfirmPassword())) {
+        if (cambiaPasswordFrame.getOldPassword().equals(cambiaPasswordFrame.getNewPassword()) &&
+            cambiaPasswordFrame.getNewPassword().equals(cambiaPasswordFrame.getConfirmPassword())) {
             JOptionPane.showMessageDialog(cambiaPasswordFrame, "Inserito la stessa password", "Errore", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -79,53 +78,56 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
         return true;
     }
 
-   private void updateCSV() {
-    try {
-        File inputFile = new File(ListenerLogin.USERS_FILE_PATH);
-        BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+    private void updateCSV() {
+        try {
+            File inputFile = new File(ListenerLogin.USERS_FILE_PATH);
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
-        String line;
-        StringBuilder updatedContent = new StringBuilder();
+            String line;
+            StringBuilder updatedContent = new StringBuilder();
+            int lineCount = 0;
+            while ((line = reader.readLine()) != null) {
+                StringTokenizer stringTokenizer = new StringTokenizer(line, ListenerLogin.FIELD_DELIMITATOR);
+                String username = stringTokenizer.nextToken();
+                String password = stringTokenizer.nextToken();
+                System.out.println(username);
+                System.out.println(impostazioniWindowsFrame.getNomeUtente());
+                if (username.equals(impostazioniWindowsFrame.getNomeUtente())) {
+                    // Modifica la password dell'utente
+                    System.out.println(cambiaPasswordFrame.getNewPassword());
+                    password = cambiaPasswordFrame.getNewPassword();
+                    System.out.println(password);
+                }
+                updatedContent.append(String.join(ListenerLogin.FIELD_DELIMITATOR, new String[] {
+                    username,
+                    password
+                }));
+                lineCount++;
+                if (lineCount < getFileLineCount(ListenerLogin.USERS_FILE_PATH)) {
+                    // Aggiungi una nuova riga solo se non è l'ultima riga del file
+                    updatedContent.append("\n");
+                }
+            }
+            reader.close();
+
+            FileWriter writer = new FileWriter(ListenerLogin.USERS_FILE_PATH);
+            writer.write(updatedContent.toString());
+            writer.close();
+
+        } catch (IOException e) {
+            // Gestisci l'IOException
+        }
+    }
+
+    private int getFileLineCount(String filePath) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
         int lineCount = 0;
-        while ((line = reader.readLine()) != null) {
-            StringTokenizer stringTokenizer = new StringTokenizer(line, ListenerLogin.FIELD_DELIMITATOR);
-            String username = stringTokenizer.nextToken();
-            String password = stringTokenizer.nextToken();
-            System.out.println(username);
-            System.out.println(impostazioniWindowsFrame.getNomeUtente());
-            if (username.equals(impostazioniWindowsFrame.getNomeUtente())) {
-                // Modifica la password dell'utente
-                System.out.println(cambiaPasswordFrame.getNewPassword());
-                password = cambiaPasswordFrame.getNewPassword();
-                System.out.println(password);
-            }
-            updatedContent.append(String.join(ListenerLogin.FIELD_DELIMITATOR, new String[]{username, password}));
+        while (reader.readLine() != null) {
             lineCount++;
-            if (lineCount < getFileLineCount(ListenerLogin.USERS_FILE_PATH)) {
-                // Aggiungi una nuova riga solo se non è l'ultima riga del file
-                updatedContent.append("\n");
-            }
         }
         reader.close();
-
-        FileWriter writer = new FileWriter(ListenerLogin.USERS_FILE_PATH);
-        writer.write(updatedContent.toString());
-        writer.close();
-
-    } catch (IOException e) {
-        // Gestisci l'IOException
+        return lineCount;
     }
-}
-
-private int getFileLineCount(String filePath) throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader(filePath));
-    int lineCount = 0;
-    while (reader.readLine() != null) {
-        lineCount++;
-    }
-    reader.close();
-    return lineCount;
-}
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -144,7 +146,7 @@ private int getFileLineCount(String filePath) throws IOException {
                 updateCSV();
                 impostazioniWindowsFrame.getDesktopFrame().setPassword(cambiaPasswordFrame.getNewPassword());
                 JOptionPane.showMessageDialog(cambiaPasswordFrame, "Password cambiata correttamente", "Password cambiata",
-                        JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
                 cambiaPasswordFrame.dispose();
             } else {
                 cambiaPasswordFrame.clearInput();
@@ -171,7 +173,7 @@ private int getFileLineCount(String filePath) throws IOException {
                 updateCSV();
                 impostazioniWindowsFrame.getDesktopFrame().setPassword(cambiaPasswordFrame.getNewPassword());
                 JOptionPane.showMessageDialog(cambiaPasswordFrame, "Password cambiata correttamente", "Password cambiata",
-                        JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
                 cambiaPasswordFrame.dispose();
             } else {
                 cambiaPasswordFrame.clearInput();
@@ -192,5 +194,3 @@ private int getFileLineCount(String filePath) throws IOException {
     }
 
 }
-
-

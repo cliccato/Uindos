@@ -13,6 +13,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import utils.PlaceHolder;
+import utils.PlaceHolder.*;
+
 public class LoginFrame {
 
     private final Dimension TXT_INPUT_SIZE = new Dimension(200, 30);
@@ -61,11 +64,12 @@ public class LoginFrame {
         constraints.gridx = 0;
         constraints.gridy = 0;
         pnlFormInput.add(txtUsername, constraints);
+        PlaceHolder.addPlaceHolder(txtUsername, "username");
 
         txtPassword = new JPasswordField();
         txtPassword.setPreferredSize(TXT_INPUT_SIZE);
         txtPassword.setHorizontalAlignment(JTextField.CENTER);
-        addPlaceHolder();
+        PlaceHolder.addPlaceHolder(txtPassword, "password");
         constraints.gridx = 0;
         constraints.gridy = 1;
         pnlFormInput.add(txtPassword, constraints);
@@ -114,44 +118,44 @@ public class LoginFrame {
         frame.add(pnlFormInput, BorderLayout.CENTER);
     }
 
-    private void addPlaceHolder() {
-        // Aggiungi placeholder al campo di testo txtUsername
-        txtUsername.setText("username");
-        txtUsername.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtUsername.getText().equals("username")) {
-                    txtUsername.setText("");
-                }
-            }
+    // private void addplaceHolder() {
+    //     // Aggiungi placeholder al campo di testo txtUsername
+    //     txtUsername.setText("username");
+    //     txtUsername.addFocusListener(new FocusListener() {
+    //         @Override
+    //         public void focusGained(FocusEvent e) {
+    //             if (txtUsername.getText().equals("username")) {
+    //                 txtUsername.setText("");
+    //             }
+    //         }
 
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtUsername.getText().isEmpty()) {
-                    txtUsername.setText("username");
-                }
-            }
-        });
-        // Aggiungi placeholder al campo di testo txtPassword
-        txtPassword.setForeground(Color.GRAY);
-        txtPassword.setText("password");
-        txtPassword.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (new String(txtPassword.getPassword()).equals("password")) {
-                    txtPassword.setText("");
-                    txtPassword.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (new String(txtPassword.getPassword()).isEmpty()) {
-                    txtPassword.setForeground(Color.GRAY);
-                    txtPassword.setText("password");
-                }
-            }
-        });
-    }
+    //         @Override
+    //         public void focusLost(FocusEvent e) {
+    //             if (txtUsername.getText().isEmpty()) {
+    //                 txtUsername.setText("username");
+    //             }
+    //         }
+    //     });
+    //     // Aggiungi placeholder al campo di testo txtPassword
+    //     txtPassword.setForeground(Color.GRAY);
+    //     txtPassword.setText("password");
+    //     txtPassword.addFocusListener(new FocusListener() {
+    //         @Override
+    //         public void focusGained(FocusEvent e) {
+    //             if (new String(txtPassword.getPassword()).equals("password")) {
+    //                 txtPassword.setText("");
+    //                 txtPassword.setForeground(Color.BLACK);
+    //             }
+    //         }
+    //         @Override
+    //         public void focusLost(FocusEvent e) {
+    //             if (new String(txtPassword.getPassword()).isEmpty()) {
+    //                 txtPassword.setForeground(Color.GRAY);
+    //                 txtPassword.setText("password");
+    //             }
+    //         }
+    //     });
+    // }
 
     private void setFrame() {
         frame.setFocusTraversalKeysEnabled(false);

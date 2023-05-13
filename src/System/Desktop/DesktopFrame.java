@@ -232,7 +232,7 @@ public class DesktopFrame {
             }
         });
 
-        itemExit = new JMenuItem(new AbstractAction("Exit") {
+        itemExit = new JMenuItem(new AbstractAction("Power off") {
             public void actionPerformed(ActionEvent e) {
                 System.exit(1);
             }
