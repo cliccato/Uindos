@@ -25,8 +25,8 @@ import System.Desktop.DesktopFrame;
 
 public class ListenerLogin implements ActionListener, KeyListener {
     private LoginFrame loginFrame;
-    private final String USERS_FILE_PATH = "system69/config/SAM_IL_POMPIERE.conf";
-    private final String FIELD_DELIMITATOR = "|"; // da spostare
+    public static final String USERS_FILE_PATH = "system69/config/SAM_IL_POMPIERE.conf";
+    public static final String FIELD_DELIMITATOR = "|"; // da spostare
 
     public ListenerLogin(LoginFrame loginFrame) {
         this.loginFrame = loginFrame;
@@ -70,6 +70,7 @@ public class ListenerLogin implements ActionListener, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_ENTER && authenticateUser()) {
+            loginFrame.closeFrame();
             new DesktopFrame(loginFrame.getUsername(), loginFrame.getPassword());
         } else {
             loginFrame.alertUserNotFound();

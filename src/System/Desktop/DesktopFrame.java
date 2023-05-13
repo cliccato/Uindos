@@ -238,9 +238,10 @@ public class DesktopFrame {
             }
         });
 
+        DesktopFrame myDesktopFrame = this;
         itemSettings = new JMenuItem(new AbstractAction("Settings") {
             public void actionPerformed(ActionEvent e) {
-                new ImpostazioniWindowsFrame(username, password);
+                new ImpostazioniWindowsFrame(username, password, myDesktopFrame);
             }
         });
 
@@ -280,6 +281,10 @@ public class DesktopFrame {
         } catch (FileNotFoundException e) {
             ; //TMCH
         }
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public String getUsername() {

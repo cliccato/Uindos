@@ -1,11 +1,15 @@
 package System.Login;
 
 import System.Desktop.DesktopFrame;
+import System.Registration.RegistrationFrame;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +24,7 @@ public class LoginFrame {
     private JPasswordField txtPassword;
     private JButton btnLogin;
     private JButton btnShowPassword;
+    private JLabel lblRegistration;
 
     public LoginFrame() {
         createComponents();
@@ -69,6 +74,26 @@ public class LoginFrame {
         btnLogin.addActionListener(new ListenerLogin(this));
         pnlFormInput.add(btnLogin, constraints);
 
+        JLabel lbl = new JLabel("Non hai un account?");
+        lbl.setHorizontalAlignment(SwingConstants.RIGHT);
+        constraints.gridx = 2;
+        constraints.gridy = 1;
+        pnlFormInput.add(lbl, constraints);
+
+        LoginFrame myLoginFrame = this;
+        lblRegistration = new JLabel("<html><u>Registrati</u></html>");
+        lblRegistration.setHorizontalAlignment(SwingConstants.LEFT);
+        lblRegistration.setForeground(Color.BLUE);
+        lblRegistration.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblRegistration.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                new RegistrationFrame(myLoginFrame);
+            }
+        });
+        constraints.gridx = 3;
+        constraints.gridy = 1;
+        pnlFormInput.add(lblRegistration, constraints);
+        frame.add(pnlFormInput, BorderLayout.CENTER);
     }
 
     private void addPlaceHolder() {
