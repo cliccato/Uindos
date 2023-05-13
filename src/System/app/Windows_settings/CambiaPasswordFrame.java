@@ -33,7 +33,7 @@ public class CambiaPasswordFrame extends JFrame {
 
         passwordUtente = impostazioniWindowsFrame.getPasswordUtente();
         
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 300);
         setLayout(new BorderLayout());
 
