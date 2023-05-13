@@ -232,15 +232,16 @@ public class DesktopFrame {
             }
         });
 
-        itemExit = new JMenuItem(new AbstractAction("Exit") {
+        itemExit = new JMenuItem(new AbstractAction("Power off") {
             public void actionPerformed(ActionEvent e) {
                 System.exit(1);
             }
         });
 
+        DesktopFrame myDesktopFrame = this;
         itemSettings = new JMenuItem(new AbstractAction("Settings") {
             public void actionPerformed(ActionEvent e) {
-                new ImpostazioniWindowsFrame(username, password);
+                new ImpostazioniWindowsFrame(username, password, myDesktopFrame);
             }
         });
 
@@ -280,6 +281,10 @@ public class DesktopFrame {
         } catch (FileNotFoundException e) {
             ; //TMCH
         }
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
     public String getUsername() {

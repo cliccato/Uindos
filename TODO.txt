@@ -25,3 +25,6 @@ Applicazioni da fare
 - creare spazi di lavoro separati per gli utenti
 - fare appbar automatica
 - browser
+- login verticale(completato)
+- centrare le nuove applicazioni aperte
+- mettere full screen
