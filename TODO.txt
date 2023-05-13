@@ -8,20 +8,18 @@ Applicazioni da fare
 	- gioco immagini (completato)
 	- macchina virtuale (completato)
 	- carta sasso forbice con gui (da fixare le immagini)
-	- mezzatok
-	- timer, cronometro e orari delle varie parti del mondo
+	- timer, cronometro e orari delle varie parti del mondo (completato)
 	- selezionatore di sfondo immagine
-	-drag and drop desktop
-	-modifica password utente
-	-creazione utente e controlli
-	- snake
+	- drag and drop desktop (fixare quando si clicca Windows)
+	- modifica password utente (completato)
+	- creazione utente e controlli (completato)
 	- forse cestino
 	sistemare barra sotto
 	
 	
 - loghi applicazione (completato)
 - login (completato) 
-- fare configurazione utenti
+- fare configurazione utenti (completato)
 - creare spazi di lavoro separati per gli utenti
 - fare appbar automatica
 - browser
