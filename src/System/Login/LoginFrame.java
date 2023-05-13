@@ -1,5 +1,4 @@
 package System.Login;
-
 import System.Desktop.DesktopFrame;
 import System.Registration.RegistrationFrame;
 
@@ -28,8 +27,6 @@ public class LoginFrame {
 
     public LoginFrame() {
         createComponents();
-        // implementare interfaccia per inserimento password
-        // se password corretta avviare un nuovo desktop
         setBackground();
         setFrame();
 
@@ -44,8 +41,10 @@ public class LoginFrame {
         frame.setIconImage(new ImageIcon(DesktopFrame.WINDOWS_LOGO_PATH).getImage());
 
         pnlFormInput = new JPanel(new GridBagLayout());
-
+        pnlFormInput.setOpaque(false); // Set panel background to transparent
         // Creazione dei constraints per l'allineamento dei componenti
+
+
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -56,33 +55,43 @@ public class LoginFrame {
         txtUsername = new JTextField();
         txtUsername.setPreferredSize(new Dimension(150, 25));
         txtUsername.setHorizontalAlignment(JTextField.CENTER);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
         pnlFormInput.add(txtUsername, constraints);
 
         txtPassword = new JPasswordField();
         txtPassword.setPreferredSize(new Dimension(150, 25));
         txtPassword.setHorizontalAlignment(JTextField.CENTER);
         addPlaceHolder();
+        constraints.gridx = 0;
+        constraints.gridy = 1;
         pnlFormInput.add(txtPassword, constraints);
 
         btnShowPassword = new JButton("Show");
         btnShowPassword.addKeyListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.addActionListener(new ListenerShowPassword(btnShowPassword, txtPassword));
+        constraints.gridx = 1;
+        constraints.gridy = 1;
         pnlFormInput.add(btnShowPassword, constraints);
 
         btnLogin = new JButton("Accedi");
         btnLogin.addKeyListener(new ListenerLogin(this));
         btnLogin.addActionListener(new ListenerLogin(this));
+        constraints.gridx = 0;
+        constraints.gridy = 2;
+        constraints.gridwidth = 2;
         pnlFormInput.add(btnLogin, constraints);
 
         JLabel lbl = new JLabel("Non hai un account?");
-        lbl.setHorizontalAlignment(SwingConstants.RIGHT);
-        constraints.gridx = 2;
-        constraints.gridy = 1;
+        lbl.setHorizontalAlignment(SwingConstants.CENTER);
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 2;
         pnlFormInput.add(lbl, constraints);
 
         LoginFrame myLoginFrame = this;
         lblRegistration = new JLabel("<html><u>Registrati</u></html>");
-        lblRegistration.setHorizontalAlignment(SwingConstants.LEFT);
+        lblRegistration.setHorizontalAlignment(SwingConstants.CENTER);
         lblRegistration.setForeground(Color.BLUE);
         lblRegistration.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         lblRegistration.addMouseListener(new MouseAdapter() {
@@ -90,8 +99,9 @@ public class LoginFrame {
                 new RegistrationFrame(myLoginFrame);
             }
         });
-        constraints.gridx = 3;
-        constraints.gridy = 1;
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        constraints.gridwidth = 2;
         pnlFormInput.add(lblRegistration, constraints);
         frame.add(pnlFormInput, BorderLayout.CENTER);
     }
@@ -125,7 +135,6 @@ public class LoginFrame {
                     txtPassword.setForeground(Color.BLACK);
                 }
             }
-
             @Override
             public void focusLost(FocusEvent e) {
                 if (new String(txtPassword.getPassword()).isEmpty()) {
@@ -162,9 +171,14 @@ public class LoginFrame {
         frame.setContentPane(pnlImage);
         frame.getContentPane().setLayout(new BorderLayout());
 
+        // Crea un pannello per centrare l'input
+        JPanel pnlCenter = new JPanel(new GridBagLayout());
+        pnlCenter.setOpaque(false);
+        pnlCenter.add(pnlFormInput);
+
         // Aggiungi il pannello di input dei dati di accesso al centro del pannello
         // contenuto nella finestra
-        frame.getContentPane().add(pnlFormInput, BorderLayout.NORTH);
+        frame.getContentPane().add(pnlCenter, BorderLayout.CENTER);
 
     }
 
