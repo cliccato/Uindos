@@ -15,7 +15,7 @@ public class PaintApp {
     private static final String LOGO_PATH = "images/logo/paint-logo.png";
     private JFrame frame;
     private JPanel canvas;
-    private Color currentColor = Color.BLACK;
+    private Color currentColor = Color.white;
     private boolean isDrawing = false;
     private String name;
     private BufferedImage image;
@@ -36,7 +36,6 @@ public class PaintApp {
                 g.drawImage(image, 0, 0, null);
             }
         };
-        canvas.setBackground(Color.WHITE); // Imposta lo sfondo su bianco
         canvas.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 isDrawing = true;
@@ -54,6 +53,7 @@ public class PaintApp {
                 }
             }
         });
+        canvas.setBackground(Color.black); // Imposta lo sfondo su bianco
 
         JButton colorBtn = new JButton("Select Color");
         colorBtn.addActionListener(e -> selectColor());
@@ -86,7 +86,7 @@ public class PaintApp {
 
     private void clearCanvas() {
         Graphics2D g = image.createGraphics();
-        g.setColor(Color.WHITE);
+        g.setColor(Color.black);
         g.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
         g.dispose();
 
