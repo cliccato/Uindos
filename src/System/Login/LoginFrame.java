@@ -15,6 +15,10 @@ import java.io.IOException;
 
 public class LoginFrame {
 
+    private final Dimension TXT_INPUT_SIZE = new Dimension(200, 30);
+    private final Dimension BUTTON_INPUT_SIZE = new Dimension(80, 30);
+    private final Dimension LABEL_NEW_ACCOUNT_SIZE = new Dimension(150, 30);
+
     private JFrame frame;
     private BufferedImage img;
     private JPanel pnlImage;
@@ -29,7 +33,6 @@ public class LoginFrame {
         createComponents();
         setBackground();
         setFrame();
-
     }
 
     private void createComponents() {
@@ -53,14 +56,14 @@ public class LoginFrame {
         constraints.weighty = 1.0;
 
         txtUsername = new JTextField();
-        txtUsername.setPreferredSize(new Dimension(150, 25));
+        txtUsername.setPreferredSize(TXT_INPUT_SIZE);
         txtUsername.setHorizontalAlignment(JTextField.CENTER);
         constraints.gridx = 0;
         constraints.gridy = 0;
         pnlFormInput.add(txtUsername, constraints);
 
         txtPassword = new JPasswordField();
-        txtPassword.setPreferredSize(new Dimension(150, 25));
+        txtPassword.setPreferredSize(TXT_INPUT_SIZE);
         txtPassword.setHorizontalAlignment(JTextField.CENTER);
         addPlaceHolder();
         constraints.gridx = 0;
@@ -70,6 +73,8 @@ public class LoginFrame {
         btnShowPassword = new JButton("Show");
         btnShowPassword.addKeyListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.addActionListener(new ListenerShowPassword(btnShowPassword, txtPassword));
+        btnShowPassword.setPreferredSize(BUTTON_INPUT_SIZE);
+        btnShowPassword.setPreferredSize(BUTTON_INPUT_SIZE);
         constraints.gridx = 1;
         constraints.gridy = 1;
         pnlFormInput.add(btnShowPassword, constraints);
@@ -77,6 +82,7 @@ public class LoginFrame {
         btnLogin = new JButton("Accedi");
         btnLogin.addKeyListener(new ListenerLogin(this));
         btnLogin.addActionListener(new ListenerLogin(this));
+        btnLogin.setPreferredSize(BUTTON_INPUT_SIZE);
         constraints.gridx = 0;
         constraints.gridy = 2;
         constraints.gridwidth = 2;
@@ -84,6 +90,7 @@ public class LoginFrame {
 
         JLabel lbl = new JLabel("Non hai un account?");
         lbl.setHorizontalAlignment(SwingConstants.CENTER);
+        lbl.setPreferredSize(LABEL_NEW_ACCOUNT_SIZE);
         constraints.gridx = 0;
         constraints.gridy = 3;
         constraints.gridwidth = 2;
@@ -94,6 +101,7 @@ public class LoginFrame {
         lblRegistration.setHorizontalAlignment(SwingConstants.CENTER);
         lblRegistration.setForeground(Color.BLUE);
         lblRegistration.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        lblRegistration.setPreferredSize(BUTTON_INPUT_SIZE);
         lblRegistration.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 new RegistrationFrame(myLoginFrame);
