@@ -7,20 +7,17 @@ Applicazioni da fare
 	- impiccato (completato) 
 	- gioco immagini (completato)
 	- macchina virtuale (completato)
-	- carta sasso forbice con gui (da fixare le immagini)
+	- carta sasso forbice con gui (completato)
 	- timer, cronometro e orari delle varie parti del mondo (completato)
 	- selezionatore di sfondo immagine (da sistemare)
 	- drag and drop desktop (fixare quando si clicca Windows)
 	- modifica password utente (completato)
-	- creazione utente e controlli (completato)
-	sistemare barra sotto (fare bottoni a quadratini)
-	
+	- creazione utente e controlli (completato)	
 	
 - loghi applicazione (completato)
 - login (completato) 
 - fare configurazione utenti (completato)
-- fare cartella giochi nel desk
-top 
+- fare cartella giochi nel desktop (completato) 
 - vedere cosa succede ora con virtalBox
 - creare spazi di lavoro separati per gli utenti (completato)
 - fare appbar automatica (completato)

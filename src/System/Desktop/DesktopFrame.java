@@ -30,10 +30,10 @@ public class DesktopFrame {
     public static final int APP_WIDTH = 16;
 
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
-    public static final String FILE_ICON_PATH = "images/icon/file-icon.png";
     public static final String APP_LIST_PATH = "src/applist.csv";
     public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
     public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
+    public static final String GAMES_PATH = "src/games";
 
     private ClockThread clock;
     private static String username;

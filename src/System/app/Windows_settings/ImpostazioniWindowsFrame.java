@@ -106,7 +106,7 @@ public class ImpostazioniWindowsFrame {
         btnCambiaSfondo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/System/Users/" + DesktopFrame.getUsername())); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/System/Users/" + DesktopFrame.getUsername() + "/immagini paint")); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();

@@ -124,13 +124,11 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         File dir = new File("src/System/Users/" + username);
         File dirFileTxt = new File(dir.getAbsolutePath() + "/file di testo");
         File dirImgPaint = new File(dir.getAbsolutePath() + "/immagini paint");
-        File dirBackGround = new File(dir.getAbsolutePath() + "/background");
         System.out.println(dir.getPath());
         if (!dir.exists()) {
             dir.mkdir();
             dirFileTxt.mkdir();
             dirImgPaint.mkdir();
-            dirBackGround.mkdir();
         }
     }
 

@@ -16,7 +16,6 @@ public class NotepadFrame {
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem openMenuItem, saveMenuItem, newMenuItem, exitMenuItem, infoMenutItem;
-    private JLabel lblSalvataggio;
     private JFileChooser fileChooser;
 
     public NotepadFrame() {
@@ -52,7 +51,6 @@ public class NotepadFrame {
         });
 
         frame.setJMenuBar(menuBar);
-        frame.getContentPane().add(lblSalvataggio, BorderLayout.SOUTH);
         frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         frame.setVisible(true);
@@ -68,17 +66,12 @@ public class NotepadFrame {
         saveMenuItem = new JMenuItem("Save");
         newMenuItem = new JMenuItem("New");
         exitMenuItem = new JMenuItem("Exit");
-        lblSalvataggio = new JLabel("File nuovo");
         fileChooser = new JFileChooser();
         infoMenutItem = new JMenuItem("Info");
     }
 
     public JFrame getFrame(){
         return frame;
-    }
-
-    public JLabel getLblSalvataggio(){
-        return lblSalvataggio;
     }
 
     public JFileChooser getFileChooser(){

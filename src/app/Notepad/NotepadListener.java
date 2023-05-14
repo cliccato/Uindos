@@ -28,7 +28,6 @@ public class NotepadListener implements ActionListener{
             case "New":
 
                 NF.getTextArea().setText("");
-                NF.getLblSalvataggio().setText("File nuovo");
                 NF.getFrame().setTitle("Notepad - (Nuovo)");
                 name = "";
                 isFileSaved = false;
