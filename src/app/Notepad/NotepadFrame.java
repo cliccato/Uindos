@@ -9,13 +9,13 @@ public class NotepadFrame {
         WIDTH = 600;
     }
 
-    JFrame frame;
-    JTextArea textArea;
-    JMenuBar menuBar;
-    JMenu fileMenu;
-    JMenuItem openMenuItem, saveMenuItem, newMenuItem, exitMenuItem, infoMenutItem;
-    JLabel lblSalvataggio;
-    JFileChooser fileChooser;
+    private JFrame frame;
+    private JTextArea textArea;
+    private JMenuBar menuBar;
+    private JMenu fileMenu;
+    private JMenuItem openMenuItem, saveMenuItem, newMenuItem, exitMenuItem, infoMenutItem;
+    private JLabel lblSalvataggio;
+    private JFileChooser fileChooser;
 
     public NotepadFrame() {
         createElements();
@@ -37,10 +37,12 @@ public class NotepadFrame {
         menuBar.add(fileMenu);
         menuBar.add(infoMenutItem);
 
-        newMenuItem.addActionListener(new NotepadListener(this));
-        openMenuItem.addActionListener(new NotepadListener(this));
-        saveMenuItem.addActionListener(new NotepadListener(this));
-        exitMenuItem.addActionListener(new NotepadListener(this));
+        NotepadListener notepadListener = new NotepadListener(this);
+
+        newMenuItem.addActionListener(notepadListener);
+        openMenuItem.addActionListener(notepadListener);
+        saveMenuItem.addActionListener(notepadListener);
+        exitMenuItem.addActionListener(notepadListener);
         infoMenutItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Non ci sono info");
@@ -55,7 +57,7 @@ public class NotepadFrame {
     }
 
     public void createElements() {
-        frame = new JFrame("Notepad");
+        frame = new JFrame("Notepad - (Nuovo)");
         textArea = new JTextArea();
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
@@ -66,5 +68,21 @@ public class NotepadFrame {
         lblSalvataggio = new JLabel("File nuovo");
         fileChooser = new JFileChooser();
         infoMenutItem = new JMenuItem("Info");
+    }
+
+    public JFrame getFrame(){
+        return frame;
+    }
+
+    public JLabel getLblSalvataggio(){
+        return lblSalvataggio;
+    }
+
+    public JFileChooser getFileChooser(){
+        return fileChooser;
+    }
+
+    public JTextArea getTextArea(){
+        return textArea;
     }
 }
