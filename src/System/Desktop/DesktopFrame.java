@@ -34,7 +34,7 @@ public class DesktopFrame {
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
     public static final String FILE_ICON_PATH = "images/icon/file-icon.png";
     public static final String APP_LIST_PATH = "src/applist.csv";
-    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.jpg";
+    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
 
     private ClockThread clock;
     private static String username;
