@@ -7,6 +7,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 
 import System.Login.LoginFrame;
+import utils.GestoreFrame;
 import utils.RimuoviCartella;
 
 public class ListenerEliminaUtente implements ActionListener {
@@ -30,7 +31,7 @@ public class ListenerEliminaUtente implements ActionListener {
                         System.out.println("Impossibile rimuovere la cartella.");
                     }
                     JOptionPane.showMessageDialog(null, "L'utente è stato eliminato.", "Utente eliminato", JOptionPane.INFORMATION_MESSAGE);
-                    impostazioniWindowsFrame.chiudiFrame();
+                    GestoreFrame.chiudiTuttiFrame();
                     new LoginFrame();
                 } else {
                     System.out.println("La cartella non esiste." + path);
