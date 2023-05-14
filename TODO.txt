@@ -19,6 +19,9 @@ Applicazioni da fare
 - loghi applicazione (completato)
 - login (completato) 
 - fare configurazione utenti (completato)
+- fare cartella giochi nel desk
+top 
+- vedere cosa succede ora con virtalBox
 - creare spazi di lavoro separati per gli utenti (completato)
 - fare appbar automatica (completato)
 - browser (completato)
