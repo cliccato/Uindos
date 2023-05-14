@@ -21,6 +21,7 @@ import java.awt.*;
 
 public class ClockFrame {
     public static final Dimension FRAME_DIMENSION = new Dimension(800, 600);
+    private static final String LOGO_PATH = "images/logo/clock-logo.png";
 
     private JFrame frame;
     private Container container;
@@ -49,6 +50,7 @@ public class ClockFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(FRAME_DIMENSION);
         frame.setVisible(true);
+        frame.setIconImage(new ImageIcon(LOGO_PATH).getImage());
     }
 
     /**
