@@ -155,7 +155,7 @@ public class DesktopFrame {
 
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
-                GestoreFrame.rimuoviFrame(frame);
+                GestoreFrame.chiudiTuttiFrame();
                 new LoginFrame();
             }
         });
@@ -257,7 +257,7 @@ public class DesktopFrame {
         } catch (FileNotFoundException e) {
             ; //TMCH
         }
-        
+        GestoreFrame.aggiungiFrame(frame);  
     }
 
     public void setAppBar() {
