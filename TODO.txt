@@ -9,8 +9,6 @@ Applicazioni da fare
 	- macchina virtuale (completato)
 	- carta sasso forbice con gui (completato)
 	- timer, cronometro e orari delle varie parti del mondo (completato)
-	- selezionatore di sfondo immagine (da sistemare)
-	- drag and drop desktop (fixare quando si clicca Windows)
 	- modifica password utente (completato)
 	- creazione utente e controlli (completato)	
 	
@@ -18,10 +16,17 @@ Applicazioni da fare
 - login (completato) 
 - fare configurazione utenti (completato)
 - fare cartella giochi nel desktop (completato) 
-- vedere cosa succede ora con virtalBox
 - creare spazi di lavoro separati per gli utenti (completato)
 - fare appbar automatica (completato)
 - browser (completato)
 - login verticale(completato)
-- centrare le nuove applicazioni aperte
-- mettere full screen
+
+
+Cose da sistemare/fare:
+	- selezionatore di sfondo immagine (da sistemare)
+	- mettere full screen (da fare)
+	- centrare le nuove applicazioni aperte (da fare)
+	- selezionatore di sfondo immagine (da sistemare)
+	- vedere cosa succede ora con virtualBox
+	- drag and drop desktop (fixare quando si clicca Windows)
+	- mettere possibilità di cambiare font (da fare)
