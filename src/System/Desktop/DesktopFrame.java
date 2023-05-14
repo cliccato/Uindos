@@ -1,13 +1,12 @@
 package System.Desktop;
 
 import javax.swing.*;
-
+import System.Desktop.DesktopListener;
 import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import System.app.Windows_settings.ImpostazioniWindowsFrame;
 import app.Calculator.CalculatorFrame;
 import app.Notepad.NotepadFrame;
-import app.Rock_paper_scissors.RockPaperScissor;
 import app.Terminal.TerminalFrame;
 import app.UserClock.ClockFrame;
 import utils.GestoreFrame;
@@ -21,7 +20,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
-
 import javax.imageio.ImageIO;
 
 public class DesktopFrame {
@@ -34,6 +32,7 @@ public class DesktopFrame {
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
     public static final String FILE_ICON_PATH = "images/icon/file-icon.png";
     public static final String APP_LIST_PATH = "src/applist.csv";
+    public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
     public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
 
     private ClockThread clock;
@@ -66,54 +65,7 @@ public class DesktopFrame {
 
         imagePanel.setLayout(new GridLayout(3, 5, 1, 1));
 
-        for (int i = 0; i < 15; i++) {
-            JButton b = new JButton(new ImageIcon(FILE_ICON_PATH));
-            b.setText("" + i);
-
-            b.addMouseListener(new MouseAdapter() {
-                public void mousePressed(MouseEvent e) {
-                    initialLocation = e.getPoint();
-                }
-            });
-            b.addMouseMotionListener(new MouseAdapter() {
-                public void mouseDragged(MouseEvent e) {
-                    int dx = e.getX() - initialLocation.x;
-                    int dy = e.getY() - initialLocation.y;
-                    int newX = b.getX() + dx;
-                    int newY = b.getY() + dy;
-                    
-                    // Verifica se la nuova posizione del pulsante è all'interno del frame
-                    if (newX < 0) {
-                        newX = 0;
-                    }
-                    if (newY < 0) {
-                        newY = 0;
-                    }
-                    if (newX + b.getWidth() > frame.getWidth()) {
-                        newX = frame.getWidth() - b.getWidth();
-                    }
-                    if (newY + b.getHeight() > frame.getHeight()) {
-                        newY = frame.getHeight() - b.getHeight();
-                    }
-                    
-                    // Imposta la nuova posizione del pulsante
-                    b.setLocation(newX, newY);
-                }
-            });
-            b.addMouseListener(new MouseAdapter(){
-                @Override
-                public void mouseClicked(MouseEvent e){
-                    if(e.getClickCount()==2){
-                        new NotepadFrame();
-                    }
-                }
-            });
-            
-            b.setOpaque(false);
-            b.setContentAreaFilled(false);
-            b.setBorderPainted(false);
-            imagePanel.add(b);
-        }
+        setDesktop();
 
         appMenu.setOpaque(true);
         appMenu.setBackground(Color.WHITE);
@@ -137,13 +89,6 @@ public class DesktopFrame {
 
         lblClock.setFont(new Font("Arial", Font.PLAIN, 20));
         lblClock.setForeground(Color.WHITE);
-
-        /*
-         * appBarPanel.add(new JButton("Test"));
-         * appBarPanel.add(new JButton("Test"));
-         * appBarPanel.add(new JButton("Test"));
-         * appBarPanel.add(new JButton("Test"));
-         */
 
         southPanel.add(homeButton, BorderLayout.WEST);
         southPanel.add(appBarPanel, BorderLayout.CENTER);
@@ -185,8 +130,6 @@ public class DesktopFrame {
         };
     }
 
-    // TODO rimpiazzarlo con un ciclo for e un array di stringhe contenente il nome
-    // dell'app
     public void createApp() {
         systemMenu.add(new JMenuItem(new AbstractAction("Terminal") {
             public void actionPerformed(ActionEvent e) {
@@ -194,7 +137,7 @@ public class DesktopFrame {
             }
         }));
 
-        utilsMenu.add(new JMenuItem(new AbstractAction("Notepad") {
+        systemMenu.add(new JMenuItem(new AbstractAction("Notepad") {
             public void actionPerformed(ActionEvent e) {
                 new NotepadFrame();
             }
@@ -209,16 +152,13 @@ public class DesktopFrame {
         utilsMenu.add(new JMenuItem(new AbstractAction("Rok Paiper Cissor") {
             public void actionPerformed(ActionEvent e) {
                 new RockPaperScissor();
-            }
-        }));
+        }
 
         utilsMenu.add(new JMenuItem(new AbstractAction("Clock") {
             public void actionPerformed(ActionEvent e) {
                 new ClockFrame();
             }
         }));
-
-        // appMenu.add(new JMenuItem(this.getUsername()));
 
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
@@ -250,6 +190,82 @@ public class DesktopFrame {
         appMenu.add(user);
         appMenu.add(systemMenu);
         appMenu.add(utilsMenu);
+    }
+
+    public void setDesktop() {
+        File file = new File(DESKTOP_LIST_PATH);
+        Scanner scanner;
+
+        try {
+            Vector<String> v = new Vector<>();
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                v.add(scanner.nextLine());
+            }
+            scanner.close();
+
+            for (String s : v) {
+                String name = s.split(";")[0];
+                String logoPath = s.split(";")[1];
+                JButton b = new JButton(new ImageIcon(logoPath));
+                b.setText(name);
+                b.setOpaque(false);
+                b.setContentAreaFilled(false);
+                b.setBorderPainted(false);
+
+                b.addMouseListener(new MouseAdapter() {
+                    public void mousePressed(MouseEvent e) {
+                        initialLocation = e.getPoint();
+                    }
+                });
+
+                b.addMouseMotionListener(new MouseAdapter() {
+                    public void mouseDragged(MouseEvent e) {
+                        int dx = e.getX() - initialLocation.x;
+                        int dy = e.getY() - initialLocation.y;
+                        int newX = b.getX() + dx;
+                        int newY = b.getY() + dy;
+    
+                        if (newX < 0) {
+                            newX = 0;
+                        }
+                        if (newY < 0) {
+                            newY = 0;
+                        }
+                        if (newX + b.getWidth() > frame.getWidth()) {
+                            newX = frame.getWidth() - b.getWidth();
+                        }
+                        if (newY + b.getHeight() > frame.getHeight()) {
+                            newY = frame.getHeight() - b.getHeight();
+                        }
+                        
+                        b.setLocation(newX, newY);
+                    }
+                });
+
+                b.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        if(e.getClickCount()==2){
+                            new DesktopListener(name);
+                        }
+                    }
+                });
+
+                imagePanel.add(b);
+            }
+
+            for (int i = 0; i < 15-v.size(); i++) {
+                JButton b = new JButton("");
+                b.setOpaque(false);
+                b.setContentAreaFilled(false);
+                b.setBorderPainted(false);
+                imagePanel.add(b);
+            }
+        } catch (FileNotFoundException e) {
+            ; //TMCH
+        }
+        
     }
 
     public void setAppBar() {
