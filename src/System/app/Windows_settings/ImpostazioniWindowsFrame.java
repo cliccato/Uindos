@@ -1,6 +1,9 @@
 package System.app.Windows_settings;
 
 import System.Desktop.DesktopFrame;
+import System.Login.LoginFrame;
+import utils.GestoreFrame;
+import utils.RimuoviCartella;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -30,8 +33,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
-public class ImpostazioniWindowsFrame extends JFrame {
+public class ImpostazioniWindowsFrame {
 
+    private JFrame frame;
     private DesktopFrame desktopFrame;
     private JPanel pnlInfoUtente;
     private JScrollPane scrollPane;
@@ -42,22 +46,23 @@ public class ImpostazioniWindowsFrame extends JFrame {
     private JLabel lblCambiaPassword;
     private String passwordUtente;
     private String nomeUtente;
+    private JButton btnEliminaUtente;
 
     public ImpostazioniWindowsFrame(String username, String password, DesktopFrame desktopFrame) {
-        super("Impostazioni");
+        frame = new JFrame("Impostazioni");
 
         this.desktopFrame = desktopFrame;
-        setIconImage(new ImageIcon("images/logo/impostazioni-logo.png").getImage());
-        setSize(300, 200);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setIconImage(new ImageIcon("images/logo/impostazioni-logo.png").getImage());
+        frame.setSize(300, 200);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Creazione dei componenti 
         JLabel lblTitolo = new JLabel("Impostazioni");
         lblTitolo.setFont(new Font("Tahoma", Font.BOLD, 16));
         lblTitolo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        pnlInfoUtente = new JPanel(new GridLayout(6, 2));
+        pnlInfoUtente = new JPanel(new GridLayout(7, 2));
 
         passwordUtente = password;
         nomeUtente = username;
@@ -123,6 +128,9 @@ public class ImpostazioniWindowsFrame extends JFrame {
             }
         });
 
+        btnEliminaUtente = new JButton("Elimina utente");
+        btnEliminaUtente.addActionListener(new ListenerEliminaUtente(this));
+            
         pnlInfoUtente.add(new JLabel("Nome utente ->"));
         pnlInfoUtente.add(lblNomeUtente);
         pnlInfoUtente.add(checkBoxMostraPassword);
@@ -135,11 +143,14 @@ public class ImpostazioniWindowsFrame extends JFrame {
         pnlInfoUtente.add(new JLabel());
         pnlInfoUtente.add(lblCambiaPassword);
         pnlInfoUtente.add(new JLabel());
+        pnlInfoUtente.add(btnEliminaUtente);
+        pnlInfoUtente.add(new JLabel());
 
         scrollPane = new JScrollPane(pnlInfoUtente);
 
-        add(scrollPane, BorderLayout.CENTER);
-        add(lblTitolo, BorderLayout.NORTH);
+        frame.add(scrollPane, BorderLayout.CENTER);
+        frame.add(lblTitolo, BorderLayout.NORTH);
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     public void setPasswordUtente(String passwordUtente) {
@@ -164,5 +175,9 @@ public class ImpostazioniWindowsFrame extends JFrame {
 
     public DesktopFrame getDesktopFrame() {
         return desktopFrame;
+    }
+
+    public void chiudiFrame() {
+        frame.dispose();
     }
 }

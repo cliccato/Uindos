@@ -14,6 +14,9 @@
 package app.UserClock;
 
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 
 public class ClockFrame {
@@ -36,6 +39,7 @@ public class ClockFrame {
     public ClockFrame() {
         createComponents();
         setFrame();
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     /**

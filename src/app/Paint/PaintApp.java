@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import System.Desktop.DesktopFrame;
+import app.indovina_immagini.src.GestioneIndovinaImmagineGUI;
+import utils.GestoreFrame;
 
 public class PaintApp {
     private static final String LOGO_PATH = "images/logo/paint-logo.png";
@@ -86,6 +88,7 @@ public class PaintApp {
         frame.getContentPane().add(canvas);
         frame.getContentPane().add(controlsPanel, "South");
         frame.setVisible(true);
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     private void draw(int x, int y) {

@@ -7,6 +7,9 @@ package app.Rock_paper_scissors;
  */
 
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 
 public class RockPaperScissor {
@@ -52,6 +55,7 @@ public class RockPaperScissor {
     public RockPaperScissor() {
         createComponents();
         setFrame();
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     /**

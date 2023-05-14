@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import utils.GestoreFrame;
+
 public class NotepadFrame {
     static int HEIGHT, WIDTH; {
         HEIGHT = 1200;
@@ -54,6 +56,7 @@ public class NotepadFrame {
         frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         frame.setVisible(true);
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     public void createElements() {

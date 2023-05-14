@@ -1,5 +1,8 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -44,5 +47,6 @@ public class ClassificaCategoriaImmaginiGUI {
         frmClassificaCategoriaImmagini.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmClassificaCategoriaImmagini.setVisible(true);
         frmPrincipale.setVisible(false);
+        GestoreFrame.aggiungiFrame(frmPrincipale);
     }
 }

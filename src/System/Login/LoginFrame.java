@@ -13,6 +13,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import utils.GestoreFrame;
 import utils.PlaceHolder;
 import utils.PlaceHolder.*;
 
@@ -36,6 +37,7 @@ public class LoginFrame {
         createComponents();
         setBackground();
         setFrame();
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     private void createComponents() {

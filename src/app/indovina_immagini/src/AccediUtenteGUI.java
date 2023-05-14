@@ -1,5 +1,8 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -70,6 +73,7 @@ public class AccediUtenteGUI {
         frmAccediUtente.setSize(dimension);
         frmAccediUtente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmAccediUtente.setVisible(true);
+        GestoreFrame.aggiungiFrame(frmAccediUtente);
     }
 
     public JFrame getFrmAccediUtente() {

@@ -13,6 +13,9 @@
 package app.Terminal;
 
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,6 +35,7 @@ public class TerminalFrame {
         setFrameProperties();
         addElements();
         setText();
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     private void createElements() {

@@ -2,6 +2,7 @@ package System.Registration;
 
 import javax.swing.*;
 import System.app.Windows_settings.*;
+import utils.GestoreFrame;
 import utils.PlaceHolder;
 import System.Login.LoginFrame;
 import java.awt.*;
@@ -15,12 +16,6 @@ public class RegistrationFrame extends JFrame {
     private JLabel lblRequisitiPassword;
     private JButton btnMostraNascondiOldPassword;
     private JButton btnMostraNascondiNewPassword;
-
-    public void clearInput(){
-        usernameTextField.setText("");
-        passwordField.setText("");
-        confirmPasswordField.setText("");
-    }
 
     public RegistrationFrame(LoginFrame loginFrame) {
         setTitle("Registrazione Utente");
@@ -79,6 +74,13 @@ public class RegistrationFrame extends JFrame {
         add(southPanel, BorderLayout.SOUTH);
 
         setVisible(true);
+        GestoreFrame.aggiungiFrame(this);
+    }
+
+    public void clearInput(){
+        usernameTextField.setText("");
+        passwordField.setText("");
+        confirmPasswordField.setText("");
     }
 
     public String getUsername(){

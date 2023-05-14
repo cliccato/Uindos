@@ -1,5 +1,8 @@
 package app.Tris;
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.util.Random;
 
@@ -67,6 +70,7 @@ public class TrisFrame{
         frmTris.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmTris.setSize(new Dimension(600,600));
         frmTris.setVisible(true);
+        GestoreFrame.aggiungiFrame(frmTris);
     }
 
     public void setMosse(int mosse) {

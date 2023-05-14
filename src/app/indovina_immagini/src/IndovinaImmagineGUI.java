@@ -1,5 +1,8 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
@@ -249,6 +252,7 @@ public class IndovinaImmagineGUI {
         // creazione e avvio del thread timer
         t = new ThreadTempoRimanente(this);
         t.start();
+        GestoreFrame.aggiungiFrame(frmIndovinaImmagine);
     }
 
     public void setPunteggio(int punteggio) {

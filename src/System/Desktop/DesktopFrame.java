@@ -6,11 +6,11 @@ import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import System.app.Windows_settings.ImpostazioniWindowsFrame;
 import app.Calculator.CalculatorFrame;
-import app.Cronometer.CronometerFrame;
 import app.Notepad.NotepadFrame;
 import app.Rock_paper_scissors.RockPaperScissor;
 import app.Terminal.TerminalFrame;
 import app.UserClock.ClockFrame;
+import utils.GestoreFrame;
 import System.app.AppBar.AppBarListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -154,6 +154,7 @@ public class DesktopFrame {
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     private void createElements() {
@@ -205,12 +206,6 @@ public class DesktopFrame {
             }
         }));
 
-        utilsMenu.add(new JMenuItem(new AbstractAction("Cronometer") {
-            public void actionPerformed(ActionEvent e) {
-                new CronometerFrame();
-            }
-        }));
-
         utilsMenu.add(new JMenuItem(new AbstractAction("Rok Paiper Cissor") {
             public void actionPerformed(ActionEvent e) {
                 new RockPaperScissor();
@@ -227,7 +222,8 @@ public class DesktopFrame {
 
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
-                disableVisibility();
+                // closeFrame();
+                GestoreFrame.chiudiTuttiFrame();
                 new LoginFrame();
             }
         });
@@ -299,7 +295,7 @@ public class DesktopFrame {
         return imagePanel;
     }
     
-    public void disableVisibility() {
-        frame.setVisible(false);
+    public void closeFrame() {
+        frame.dispose();
     }
 }
