@@ -9,6 +9,7 @@ public class GestoreFrame {
 
     public static void aggiungiFrame(JFrame frame) {
         frameAperti.add(frame);
+        frame.setLocationRelativeTo(null);
     }
 
     public static void rimuoviFrame(JFrame frame) {

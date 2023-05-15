@@ -8,6 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.util.ArrayList;
+import utils.GestoreFrame;
 
 public class BrowserApp extends JFrame implements HyperlinkListener {
   private static final String LOGO_PATH = "images/logo/browser-logo.png";
@@ -64,6 +65,7 @@ public class BrowserApp extends JFrame implements HyperlinkListener {
     getContentPane().setLayout(new BorderLayout());
     getContentPane().add(bttnPanel, BorderLayout.NORTH);
     getContentPane().add(new JScrollPane(displayEditorPane), BorderLayout.CENTER);
+    GestoreFrame.aggiungiFrame(this);
   }
 
   private void backActn() {
