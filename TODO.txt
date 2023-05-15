@@ -30,3 +30,5 @@ Cose da sistemare/fare:
 	- vedere cosa succede ora con virtualBox
 	- drag and drop desktop (fixare quando si clicca Windows)
 	- mettere possibilità di cambiare font (da fare)
+	-fix controllo che l'utente esista gia
+	
