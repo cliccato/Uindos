@@ -34,6 +34,7 @@ public class DesktopFrame {
     public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
     public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
     public static final String GAMES_PATH = "src/games";
+    public static final String POINTER_PATH = "images/icon/mouse-pointer.png";
 
     private ClockThread clock;
     private static String username;
@@ -98,6 +99,9 @@ public class DesktopFrame {
         frame.add(southPanel, BorderLayout.SOUTH);
 
         frame.setLocationRelativeTo(null);
+
+        setPointer();
+
         frame.setVisible(true);
     }
 
@@ -127,6 +131,14 @@ public class DesktopFrame {
                 g.drawImage(img, 0, 0, null);
             }
         };
+    }
+
+    public void setPointer() {
+        Point point = new Point(0,0);
+        Toolkit tkit=Toolkit.getDefaultToolkit();
+        Image img = tkit.getImage(POINTER_PATH);
+        Cursor cursor = tkit.createCustomCursor(img, point, "");
+        frame.setCursor(cursor);
     }
 
     public void createApp() {
