@@ -90,13 +90,9 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
                 StringTokenizer stringTokenizer = new StringTokenizer(line, ListenerLogin.FIELD_DELIMITATOR);
                 String username = stringTokenizer.nextToken();
                 String password = stringTokenizer.nextToken();
-                System.out.println(username);
-                System.out.println(impostazioniWindowsFrame.getNomeUtente());
                 if (username.equals(impostazioniWindowsFrame.getNomeUtente())) {
                     // Modifica la password dell'utente
-                    System.out.println(cambiaPasswordFrame.getNewPassword());
                     password = cambiaPasswordFrame.getNewPassword();
-                    System.out.println(password);
                 }
                 updatedContent.append(String.join(ListenerLogin.FIELD_DELIMITATOR, new String[] {
                     username,
