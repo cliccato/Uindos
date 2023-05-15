@@ -33,4 +33,5 @@ Cose da sistemare/fare:
 	-fix controllo che l'utente esista gia
 	-controllo passwrod nella cancellazione utente
 	-cancellazione utente nel file utente
+	-icona utente
 	
