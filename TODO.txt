@@ -31,7 +31,7 @@ Cose da sistemare/fare:
 	- drag and drop desktop (fixare quando si clicca Windows)
 	- mettere possibilità di cambiare font (da fare)
 	-fix controllo che l'utente esista gia
-	-controllo passwrod nella cancellazione utente
+	-controllo passwrod nella cancellazione utente (completato)
 	-cancellazione utente nel file utente (completata)
 	-icona utente
 	
