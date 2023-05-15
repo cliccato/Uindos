@@ -78,7 +78,6 @@ public class RegistrationFrame extends JFrame {
     }
 
     public void clearInput(){
-        usernameTextField.setText("");
         passwordField.setText("");
         confirmPasswordField.setText("");
     }
