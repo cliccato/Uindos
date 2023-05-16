@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -35,6 +36,8 @@ import javax.swing.SwingConstants;
 
 public class ImpostazioniWindowsFrame {
 
+    public static final Dimension FRAME_DIMENSION = new Dimension(400, 300);
+
     private JFrame frame;
     private DesktopFrame desktopFrame;
     private JPanel pnlInfoUtente;
@@ -53,7 +56,7 @@ public class ImpostazioniWindowsFrame {
 
         this.desktopFrame = desktopFrame;
         frame.setIconImage(new ImageIcon("images/logo/impostazioni-logo.png").getImage());
-        frame.setSize(300, 200);
+        frame.setSize(FRAME_DIMENSION);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -91,16 +94,27 @@ public class ImpostazioniWindowsFrame {
             }
         });
 
+
+        btnEliminaUtente = new JButton("Elimina utente");
+
         lblCambiaPassword = new JLabel("<html><u>Cambia password</u></html>");
         lblCambiaPassword.setHorizontalAlignment(SwingConstants.LEFT);
         lblCambiaPassword.setForeground(Color.BLUE);
         lblCambiaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         ImpostazioniWindowsFrame myImpostazioniWindowsFrame = this;
-        lblCambiaPassword.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                new CambiaPasswordFrame(myImpostazioniWindowsFrame);
-            }
-        });
+
+        if (username.equals("username") || username.equals("admin")) {
+            btnEliminaUtente.setEnabled(false);
+            lblCambiaPassword.setEnabled(false);
+        } else {
+            lblCambiaPassword.addMouseListener(new MouseAdapter() {
+                public void mouseClicked(MouseEvent e) {
+                    frame.dispose();
+                    new CambiaPasswordFrame(myImpostazioniWindowsFrame);
+                }
+            });
+            btnEliminaUtente.addActionListener(new ListenerEliminaUtente(this));
+        }
 
         btnCambiaSfondo = new JButton("Cambia sfondo");
         btnCambiaSfondo.addActionListener(new ActionListener() {
@@ -128,9 +142,6 @@ public class ImpostazioniWindowsFrame {
             }
         });
 
-        btnEliminaUtente = new JButton("Elimina utente");
-        btnEliminaUtente.addActionListener(new ListenerEliminaUtente(this));
-            
         pnlInfoUtente.add(new JLabel("Nome utente ->"));
         pnlInfoUtente.add(lblNomeUtente);
         pnlInfoUtente.add(checkBoxMostraPassword);
@@ -140,11 +151,12 @@ public class ImpostazioniWindowsFrame {
         pnlInfoUtente.add(new JSeparator());
         pnlInfoUtente.add(new JSeparator());
         pnlInfoUtente.add(btnCambiaSfondo);
-        pnlInfoUtente.add(new JLabel());
-        pnlInfoUtente.add(lblCambiaPassword);
-        pnlInfoUtente.add(new JLabel());
         pnlInfoUtente.add(btnEliminaUtente);
-        pnlInfoUtente.add(new JLabel());
+        pnlInfoUtente.add(lblCambiaPassword);
+
+        // pnlInfoUtente.add(new JLabel());
+        // pnlInfoUtente.add(new JLabel());
+        // pnlInfoUtente.add(new JLabel());
 
         scrollPane = new JScrollPane(pnlInfoUtente);
 

@@ -148,6 +148,7 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
                 cambiaPasswordFrame.clearInput();
             }
         } else {
+            new ImpostazioniWindowsFrame(impostazioniWindowsFrame.getNomeUtente(), impostazioniWindowsFrame.getPasswordUtente(), impostazioniWindowsFrame.getDesktopFrame());
             cambiaPasswordFrame.dispose();
         }
     }
