@@ -32,3 +32,11 @@ Cose da sistemare/fare:
 	- icona utente (fare)
 	- sistemare timer cronometro (fixare)
 	- sistemare terminale (da fare)
+	- far si che quando si schiaccia l'orologio apra a lato un calendario
+	- app calendario
+	- gioco del fucile
+	- mezzatok
+	- dark mode
+	- mettere easter egg
+	- applicazione soundboard
+	- mettere anche il giorno nell'orario
