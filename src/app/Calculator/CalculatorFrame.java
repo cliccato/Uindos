@@ -4,14 +4,15 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 public class CalculatorFrame {
 
-  JFrame frame;
-  JPanel panel;
-  JTextField display;
-  JButton[] buttons;
-  String[] labels = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C" };
+  private JFrame frame;
+  private JPanel panel;
+  private JTextField display;
+  private JButton[] buttons;
+  private String[] labels = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C" };
 
   public CalculatorFrame() {
     createElements();
@@ -24,7 +25,7 @@ public class CalculatorFrame {
 
     frame.setSize(400, 400);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setIconImage(new ImageIcon("images/logo/calculator-logo.png").getImage());
+    frame.setIconImage(new ImageIcon(UindosPath.CALCULATOR_LOGO_PATH).getImage());
     frame.add(display, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
     frame.setVisible(true);
