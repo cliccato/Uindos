@@ -1,30 +1,37 @@
 scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
-- aggiustare notepad
-- file di testo per ogni utente
+- aggiustare notepad (completato)
+- file di testo per ogni utente (completato)
 
 Applicazioni da fare
 	- tris (completato)
 	- impiccato (completato) 
 	- gioco immagini (completato)
 	- macchina virtuale (completato)
-	- carta sasso forbice con gui (da fixare le immagini)
-	- mezzatok
-	- timer, cronometro e orari delle varie parti del mondo
-	- selezionatore di sfondo immagine
-	-drag and drop desktop
-	-modifica password utente
-	-creazione utente e controlli
-	- snake
-	- forse cestino
-	sistemare barra sotto
-	
+	- carta sasso forbice con gui (completato)
+	- timer, cronometro e orari delle varie parti del mondo (completato)
+	- modifica password utente (completato)
+	- creazione utente e controlli (completato)	
 	
 - loghi applicazione (completato)
 - login (completato) 
-- fare configurazione utenti
-- creare spazi di lavoro separati per gli utenti
-- fare appbar automatica
-- browser
+- fare configurazione utenti (completato)
+- fare cartella giochi nel desktop (completato) 
+- creare spazi di lavoro separati per gli utenti (completato)
+- fare appbar automatica (completato)
+- browser (completato)
 - login verticale(completato)
-- centrare le nuove applicazioni aperte
-- mettere full screen
+
+
+Cose da sistemare/fare:
+	- selezionatore di sfondo immagine (da sistemare)
+	- mettere full screen (da fare)
+	- centrare le nuove applicazioni aperte (completato)
+	- selezionatore di sfondo immagine (da sistemare)
+	- vedere cosa succede ora con virtualBox (da fixare)
+	- drag and drop desktop (fixare quando si clicca Windows)
+	- mettere possibilità di cambiare font (da fare)
+	-fix controllo che l'utente esista gia
+	-controllo passwrod nella cancellazione utente (completato)
+	-cancellazione utente nel file utente (completata)
+	-icona utente
+	

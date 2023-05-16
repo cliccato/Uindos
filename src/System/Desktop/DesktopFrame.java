@@ -1,16 +1,15 @@
 package System.Desktop;
 
 import javax.swing.*;
-
+import System.Desktop.DesktopListener;
 import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import System.app.Windows_settings.ImpostazioniWindowsFrame;
 import app.Calculator.CalculatorFrame;
-import app.Cronometer.CronometerFrame;
 import app.Notepad.NotepadFrame;
-import app.Rock_paper_scissors.RockPaperScissor;
 import app.Terminal.TerminalFrame;
 import app.UserClock.ClockFrame;
+import utils.GestoreFrame;
 import System.app.AppBar.AppBarListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +20,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
-
 import javax.imageio.ImageIO;
 
 public class DesktopFrame {
@@ -32,12 +30,14 @@ public class DesktopFrame {
     public static final int APP_WIDTH = 16;
 
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
-    public static final String FILE_ICON_PATH = "images/icon/file-icon.png";
     public static final String APP_LIST_PATH = "src/applist.csv";
-    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.jpg";
+    public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
+    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
+    public static final String GAMES_PATH = "src/games";
+    public static final String POINTER_PATH = "images/icon/mouse-pointer.png";
 
     private ClockThread clock;
-    private String username;
+    private static String username;
     private String password;
     private Dimension frameDimension, appBarDimension;
     private JFrame frame;
@@ -52,7 +52,7 @@ public class DesktopFrame {
     private JMenu user;
 
     public DesktopFrame(String username, String password) {// implementare desktop con aree di file distinte per ogni utente
-        this.username = username;
+        DesktopFrame.username = username;
         this.password = password;
         createElements();
         createApp();
@@ -66,54 +66,7 @@ public class DesktopFrame {
 
         imagePanel.setLayout(new GridLayout(3, 5, 1, 1));
 
-        for (int i = 0; i < 15; i++) {
-            JButton b = new JButton(new ImageIcon(FILE_ICON_PATH));
-            b.setText("" + i);
-
-            b.addMouseListener(new MouseAdapter() {
-                public void mousePressed(MouseEvent e) {
-                    initialLocation = e.getPoint();
-                }
-            });
-            b.addMouseMotionListener(new MouseAdapter() {
-                public void mouseDragged(MouseEvent e) {
-                    int dx = e.getX() - initialLocation.x;
-                    int dy = e.getY() - initialLocation.y;
-                    int newX = b.getX() + dx;
-                    int newY = b.getY() + dy;
-                    
-                    // Verifica se la nuova posizione del pulsante è all'interno del frame
-                    if (newX < 0) {
-                        newX = 0;
-                    }
-                    if (newY < 0) {
-                        newY = 0;
-                    }
-                    if (newX + b.getWidth() > frame.getWidth()) {
-                        newX = frame.getWidth() - b.getWidth();
-                    }
-                    if (newY + b.getHeight() > frame.getHeight()) {
-                        newY = frame.getHeight() - b.getHeight();
-                    }
-                    
-                    // Imposta la nuova posizione del pulsante
-                    b.setLocation(newX, newY);
-                }
-            });
-            b.addMouseListener(new MouseAdapter(){
-                @Override
-                public void mouseClicked(MouseEvent e){
-                    if(e.getClickCount()==2){
-                        new NotepadFrame();
-                    }
-                }
-            });
-            
-            b.setOpaque(false);
-            b.setContentAreaFilled(false);
-            b.setBorderPainted(false);
-            imagePanel.add(b);
-        }
+        setDesktop();
 
         appMenu.setOpaque(true);
         appMenu.setBackground(Color.WHITE);
@@ -138,13 +91,6 @@ public class DesktopFrame {
         lblClock.setFont(new Font("Arial", Font.PLAIN, 20));
         lblClock.setForeground(Color.WHITE);
 
-        /*
-         * appBarPanel.add(new JButton("Test"));
-         * appBarPanel.add(new JButton("Test"));
-         * appBarPanel.add(new JButton("Test"));
-         * appBarPanel.add(new JButton("Test"));
-         */
-
         southPanel.add(homeButton, BorderLayout.WEST);
         southPanel.add(appBarPanel, BorderLayout.CENTER);
         southPanel.add(lblClock, BorderLayout.EAST);
@@ -153,6 +99,9 @@ public class DesktopFrame {
         frame.add(southPanel, BorderLayout.SOUTH);
 
         frame.setLocationRelativeTo(null);
+
+        setPointer();
+
         frame.setVisible(true);
     }
 
@@ -184,8 +133,14 @@ public class DesktopFrame {
         };
     }
 
-    // TODO rimpiazzarlo con un ciclo for e un array di stringhe contenente il nome
-    // dell'app
+    public void setPointer() {
+        Point point = new Point(0,0);
+        Toolkit tkit=Toolkit.getDefaultToolkit();
+        Image img = tkit.getImage(POINTER_PATH);
+        Cursor cursor = tkit.createCustomCursor(img, point, "");
+        frame.setCursor(cursor);
+    }
+
     public void createApp() {
         systemMenu.add(new JMenuItem(new AbstractAction("Terminal") {
             public void actionPerformed(ActionEvent e) {
@@ -193,7 +148,7 @@ public class DesktopFrame {
             }
         }));
 
-        utilsMenu.add(new JMenuItem(new AbstractAction("Notepad") {
+        systemMenu.add(new JMenuItem(new AbstractAction("Notepad") {
             public void actionPerformed(ActionEvent e) {
                 new NotepadFrame();
             }
@@ -204,30 +159,15 @@ public class DesktopFrame {
                 new CalculatorFrame();
             }
         }));
-
-        utilsMenu.add(new JMenuItem(new AbstractAction("Cronometer") {
-            public void actionPerformed(ActionEvent e) {
-                new CronometerFrame();
-            }
-        }));
-
-        utilsMenu.add(new JMenuItem(new AbstractAction("Rok Paiper Cissor") {
-            public void actionPerformed(ActionEvent e) {
-                new RockPaperScissor();
-            }
-        }));
-
         utilsMenu.add(new JMenuItem(new AbstractAction("Clock") {
             public void actionPerformed(ActionEvent e) {
                 new ClockFrame();
             }
         }));
 
-        // appMenu.add(new JMenuItem(this.getUsername()));
-
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
-                disableVisibility();
+                GestoreFrame.chiudiTuttiFrame();
                 new LoginFrame();
             }
         });
@@ -245,7 +185,7 @@ public class DesktopFrame {
             }
         });
 
-        user = new JMenu(this.getUsername());
+        user = new JMenu(DesktopFrame.getUsername());
         user.add(itemSettings);
         user.add(new JSeparator());
         user.add(itemLogOut);
@@ -254,6 +194,82 @@ public class DesktopFrame {
         appMenu.add(user);
         appMenu.add(systemMenu);
         appMenu.add(utilsMenu);
+    }
+
+    public void setDesktop() {
+        File file = new File(DESKTOP_LIST_PATH);
+        Scanner scanner;
+
+        try {
+            Vector<String> v = new Vector<>();
+            scanner = new Scanner(file);
+            while (scanner.hasNextLine()) {
+                v.add(scanner.nextLine());
+            }
+            scanner.close();
+
+            for (String s : v) {
+                String name = s.split(";")[0];
+                String logoPath = s.split(";")[1];
+                JButton b = new JButton(new ImageIcon(logoPath));
+                b.setText(name);
+                b.setOpaque(false);
+                b.setContentAreaFilled(false);
+                b.setBorderPainted(false);
+
+                b.addMouseListener(new MouseAdapter() {
+                    public void mousePressed(MouseEvent e) {
+                        initialLocation = e.getPoint();
+                    }
+                });
+
+                b.addMouseMotionListener(new MouseAdapter() {
+                    public void mouseDragged(MouseEvent e) {
+                        int dx = e.getX() - initialLocation.x;
+                        int dy = e.getY() - initialLocation.y;
+                        int newX = b.getX() + dx;
+                        int newY = b.getY() + dy;
+    
+                        if (newX < 0) {
+                            newX = 0;
+                        }
+                        if (newY < 0) {
+                            newY = 0;
+                        }
+                        if (newX + b.getWidth() > frame.getWidth()) {
+                            newX = frame.getWidth() - b.getWidth();
+                        }
+                        if (newY + b.getHeight() > frame.getHeight()) {
+                            newY = frame.getHeight() - b.getHeight();
+                        }
+                        
+                        b.setLocation(newX, newY);
+                    }
+                });
+
+                b.addMouseListener(new MouseAdapter(){
+                    @Override
+                    public void mouseClicked(MouseEvent e){
+                        if(e.getClickCount()==2){
+                            new DesktopListener(name);
+                        }
+                    }
+                });
+
+                imagePanel.add(b);
+            }
+
+            for (int i = 0; i < 15-v.size(); i++) {
+                JButton b = new JButton("");
+                b.setOpaque(false);
+                b.setContentAreaFilled(false);
+                b.setBorderPainted(false);
+                imagePanel.add(b);
+            }
+        } catch (FileNotFoundException e) {
+            ; //TMCH
+        }
+        GestoreFrame.aggiungiFrame(frame);  
     }
 
     public void setAppBar() {
@@ -287,7 +303,7 @@ public class DesktopFrame {
         this.password = password;
     }
 
-    public String getUsername() {
+    public static String getUsername() {
         return username;
     }
 
@@ -295,7 +311,11 @@ public class DesktopFrame {
         return lblClock;
     }
 
-    public void disableVisibility() {
-        frame.setVisible(false);
+    public JPanel getImagePanel(){
+        return imagePanel;
     }
+    
+    // public void disableVisibility() {
+    //     frame.setVisible(false);
+    // }
 }

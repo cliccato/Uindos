@@ -1,5 +1,8 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
@@ -130,6 +133,7 @@ public class RegistrazioneUtenteGUI {
         frmRegistrazioneUtente.setSize(dimension);
         frmRegistrazioneUtente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmRegistrazioneUtente.setVisible(true);
+        GestoreFrame.aggiungiFrame(frmRegistrazioneUtente);
     }
 
     public JLabel getLblStato() {

@@ -10,6 +10,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
+import utils.GestoreFrame;
+
 public class CambiaPasswordFrame extends JFrame {
 
     private JPanel inputPanel;
@@ -24,20 +26,14 @@ public class CambiaPasswordFrame extends JFrame {
     private JButton btnMostraNascondiOldPassword;
     private JButton btnMostraNascondiNewPassword;
     private JButton btnMostraNascondiConfirmPassword;
-
-    public void clearInput() {
-        txtOldPassword.setText("");
-        txtNewPassword.setText("");
-        txtConfirmPassword.setText("");
-    }
-
+  
     public CambiaPasswordFrame(ImpostazioniWindowsFrame impostazioniWindowsFrame) {
         super("Cambia Password");
 
         passwordUtente = impostazioniWindowsFrame.getPasswordUtente();
 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(400, 300);
+        setSize(800, 800);
         setLayout(new BorderLayout());
 
         // Creazione del pannello per i campi di input
@@ -95,6 +91,13 @@ public class CambiaPasswordFrame extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
 
         setVisible(true);
+        GestoreFrame.aggiungiFrame(this);
+    }
+
+    public void clearInput() {
+        txtOldPassword.setText("");
+        txtNewPassword.setText("");
+        txtConfirmPassword.setText("");
     }
 
     public JButton getBtnAnnulla() {

@@ -37,7 +37,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
                 StringTokenizer stringTokenizer = new StringTokenizer(fileLine, ListenerLogin.FIELD_DELIMITATOR);
                 String usernameFile = stringTokenizer.nextToken();
                 String passwordFile = stringTokenizer.nextToken();
-                if (usernameFile.equals(username) && passwordFile.equals(password)) {
+                if (usernameFile.equals(username)) {
                     return true;
                 }
             }
@@ -82,18 +82,18 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         password =  new String(registrationFrame.getPassword().getPassword());
         String confirmPassword = new String(registrationFrame.getConfirmPassword().getPassword());
         
+        // Controllo che i campi non siano vuoti
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            JOptionPane.showMessageDialog(registrationFrame, "Compila tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
         // Controllo che l'utente non sia già presente nel file CSV
         if (isUserAlreadyPresent()) {
             JOptionPane.showMessageDialog(registrationFrame, "Utente già esistente", "Errore", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        // Controllo che i campi non siano vuoti
-        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-            JOptionPane.showMessageDialog(registrationFrame, "Compila tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-        
         // Controllo che le password siano uguali
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(registrationFrame, "Password non corrispondono", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -104,6 +104,13 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         if (!isPasswordEffective(password)) {
             return false;
         }
+        // Controllo che l'utente non sia già presente nel file CSV
+        if (isUserAlreadyPresent()) {
+            JOptionPane.showMessageDialog(registrationFrame, "Utente già esistente", "Errore", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+       
 
         JOptionPane.showMessageDialog(registrationFrame, "Registrazione effettuata!", "Registrazione", JOptionPane.INFORMATION_MESSAGE);
         return true;        
@@ -111,12 +118,25 @@ public class ListenerRegistration implements ActionListener,KeyListener {
 
     private void addUserToCSV(){
         try {
+            System.out.println(username + password);
             // Creo un FileWriter per scrivere nel file
             FileWriter fw = new FileWriter(new File(ListenerLogin.USERS_FILE_PATH), true);
             fw.write("\n" + username + ListenerLogin.FIELD_DELIMITATOR + password);
             fw.close();
         } catch (Exception e) {
             //  TMCH
+        }
+    }
+
+    private void createDirectory(){
+        File dir = new File("src/System/Users/" + username);
+        File dirFileTxt = new File(dir.getAbsolutePath() + "/file di testo");
+        File dirImgPaint = new File(dir.getAbsolutePath() + "/immagini paint");
+        System.out.println(dir.getPath());
+        if (!dir.exists()) {
+            dir.mkdir();
+            dirFileTxt.mkdir();
+            dirImgPaint.mkdir();
         }
     }
 
@@ -127,6 +147,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
                 username = registrationFrame.getUsername();
                 password = new String(registrationFrame.getPassword().getPassword());
                 addUserToCSV();
+                createDirectory();
                 new DesktopFrame(username, password);
                 registrationFrame.dispose();
                 loginFrame.closeFrame();
@@ -145,6 +166,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
                 username = registrationFrame.getUsername();
                 password = new String(registrationFrame.getPassword().getPassword());
                 addUserToCSV();
+                createDirectory();
                 new DesktopFrame(username, password);
                 registrationFrame.dispose();
                 loginFrame.closeFrame();

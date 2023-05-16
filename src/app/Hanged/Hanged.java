@@ -1,5 +1,8 @@
 package app.Hanged;
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.io.File;
 import java.util.Vector;
@@ -116,6 +119,7 @@ public class Hanged {
         frmImpiccato.setSize(dimension);
         frmImpiccato.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmImpiccato.setVisible(true);
+        GestoreFrame.aggiungiFrame(frmImpiccato);
     }
 
     public void setFile(File file){

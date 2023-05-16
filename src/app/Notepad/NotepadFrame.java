@@ -3,19 +3,20 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import utils.GestoreFrame;
+
 public class NotepadFrame {
     static int HEIGHT, WIDTH; {
         HEIGHT = 1200;
         WIDTH = 600;
     }
 
-    JFrame frame;
-    JTextArea textArea;
-    JMenuBar menuBar;
-    JMenu fileMenu;
-    JMenuItem openMenuItem, saveMenuItem, newMenuItem, exitMenuItem, infoMenutItem;
-    JLabel lblSalvataggio;
-    JFileChooser fileChooser;
+    private JFrame frame;
+    private JTextArea textArea;
+    private JMenuBar menuBar;
+    private JMenu fileMenu;
+    private JMenuItem openMenuItem, saveMenuItem, newMenuItem, exitMenuItem, infoMenutItem;
+    private JFileChooser fileChooser;
 
     public NotepadFrame() {
         createElements();
@@ -37,10 +38,12 @@ public class NotepadFrame {
         menuBar.add(fileMenu);
         menuBar.add(infoMenutItem);
 
-        newMenuItem.addActionListener(new NotepadListener(this));
-        openMenuItem.addActionListener(new NotepadListener(this));
-        saveMenuItem.addActionListener(new NotepadListener(this));
-        exitMenuItem.addActionListener(new NotepadListener(this));
+        NotepadListener notepadListener = new NotepadListener(this);
+
+        newMenuItem.addActionListener(notepadListener);
+        openMenuItem.addActionListener(notepadListener);
+        saveMenuItem.addActionListener(notepadListener);
+        exitMenuItem.addActionListener(notepadListener);
         infoMenutItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Non ci sono info");
@@ -48,14 +51,14 @@ public class NotepadFrame {
         });
 
         frame.setJMenuBar(menuBar);
-        frame.getContentPane().add(lblSalvataggio, BorderLayout.SOUTH);
         frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 
         frame.setVisible(true);
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     public void createElements() {
-        frame = new JFrame("Notepad");
+        frame = new JFrame("Notepad - (Nuovo)");
         textArea = new JTextArea();
         menuBar = new JMenuBar();
         fileMenu = new JMenu("File");
@@ -63,8 +66,19 @@ public class NotepadFrame {
         saveMenuItem = new JMenuItem("Save");
         newMenuItem = new JMenuItem("New");
         exitMenuItem = new JMenuItem("Exit");
-        lblSalvataggio = new JLabel("File nuovo");
         fileChooser = new JFileChooser();
         infoMenutItem = new JMenuItem("Info");
+    }
+
+    public JFrame getFrame(){
+        return frame;
+    }
+
+    public JFileChooser getFileChooser(){
+        return fileChooser;
+    }
+
+    public JTextArea getTextArea(){
+        return textArea;
     }
 }

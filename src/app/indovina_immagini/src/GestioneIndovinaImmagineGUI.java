@@ -1,5 +1,8 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
+
+import utils.GestoreFrame;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Vector;
@@ -200,6 +203,7 @@ public class GestioneIndovinaImmagineGUI {
         frmPrincipale.setSize(dimension);
         frmPrincipale.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frmPrincipale.setVisible(true);
+        GestoreFrame.aggiungiFrame(frmPrincipale);
     }
 
     public void setClassifica(Vector<Partita> classifica) {
