@@ -34,4 +34,5 @@ Cose da sistemare/fare:
 	-controllo passwrod nella cancellazione utente (completato)
 	-cancellazione utente nel file utente (completata)
 	-icona utente
+	-sistemare timer cronometro
 	
