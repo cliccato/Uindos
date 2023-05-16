@@ -25,13 +25,13 @@ Applicazioni da fare
 Cose da sistemare/fare:
 	- selezionatore di sfondo immagine (da sistemare)
 	- mettere full screen (da fare)
-	- centrare le nuove applicazioni aperte (da fare)
+	- centrare le nuove applicazioni aperte (completato)
 	- selezionatore di sfondo immagine (da sistemare)
-	- vedere cosa succede ora con virtualBox
+	- vedere cosa succede ora con virtualBox (da fixare)
 	- drag and drop desktop (fixare quando si clicca Windows)
 	- mettere possibilità di cambiare font (da fare)
 	-fix controllo che l'utente esista gia
-	-controllo passwrod nella cancellazione utente
-	-cancellazione utente nel file utente
+	-controllo passwrod nella cancellazione utente (completato)
+	-cancellazione utente nel file utente (completata)
 	-icona utente
 	

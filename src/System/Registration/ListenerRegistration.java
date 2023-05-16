@@ -87,7 +87,13 @@ public class ListenerRegistration implements ActionListener,KeyListener {
             JOptionPane.showMessageDialog(registrationFrame, "Compila tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
+
+        // Controllo che l'utente non sia già presente nel file CSV
+        if (isUserAlreadyPresent()) {
+            JOptionPane.showMessageDialog(registrationFrame, "Utente già esistente", "Errore", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
         // Controllo che le password siano uguali
         if (!password.equals(confirmPassword)) {
             JOptionPane.showMessageDialog(registrationFrame, "Password non corrispondono", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -112,6 +118,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
 
     private void addUserToCSV(){
         try {
+            System.out.println(username + password);
             // Creo un FileWriter per scrivere nel file
             FileWriter fw = new FileWriter(new File(ListenerLogin.USERS_FILE_PATH), true);
             fw.write("\n" + username + ListenerLogin.FIELD_DELIMITATOR + password);
