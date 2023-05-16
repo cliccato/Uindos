@@ -31,3 +31,4 @@ Cose da sistemare/fare:
 	- mettere possibilità di cambiare font (da fare)
 	- icona utente (fare)
 	- sistemare timer cronometro (fixare)
+	- sistemare terminale (da fare)
