@@ -15,13 +15,13 @@ package app.Terminal;
 import javax.swing.*;
 
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TerminalFrame {
-    private static final String LOGO_PATH = "images/logo/terminal-logo.png";
     private static final int HEIGHT = 800;
     private static final int WIDTH = 800;
     private Path path = Paths.get(".").toAbsolutePath().normalize();
@@ -54,7 +54,7 @@ public class TerminalFrame {
 
     private void setFrameProperties() {
         frame.setSize(HEIGHT, WIDTH);
-        frame.setIconImage(new ImageIcon(LOGO_PATH).getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.TERMINAL_LOGO_PATH).getImage());
         frame.setLayout(new BorderLayout());
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -9,6 +9,7 @@ import app.Hanged.Hanged;
 import app.Rock_paper_scissors.RockPaperScissor;
 import app.Tris.TrisFrame;
 import app.indovina_immagini.src.GestioneIndovinaImmagineGUI;
+import utils.UindosPath;
 
 public class DesktopListener{
     String name;
@@ -22,7 +23,7 @@ public class DesktopListener{
                 break;
             case "cartella giochi":
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/" + DesktopFrame.GAMES_PATH)); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/" + UindosPath.GAMES_PATH)); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();

@@ -15,6 +15,7 @@ import System.Login.ListenerLogin;
 import System.Login.LoginFrame;
 import utils.GestoreFrame;
 import utils.RimuoviCartella;
+import utils.UindosPath;
 
 public class ListenerEliminaUtente implements ActionListener {
             private ImpostazioniWindowsFrame impostazioniWindowsFrame;
@@ -25,13 +26,13 @@ public class ListenerEliminaUtente implements ActionListener {
 
             public void deleteUserCSV() {
                 try {
-                    File inputFile = new File(ListenerLogin.USERS_FILE_PATH);
+                    File inputFile = new File(UindosPath.USERS_FILE_PATH);
                     BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             
                     String line;
                     StringBuilder updatedContent = new StringBuilder();
                     int lineCount = 0;
-                    int totalLines = getFileLineCount(ListenerLogin.USERS_FILE_PATH);
+                    int totalLines = getFileLineCount(UindosPath.USERS_FILE_PATH);
                     
                     while ((line = reader.readLine()) != null) {
                         StringTokenizer stringTokenizer = new StringTokenizer(line, ListenerLogin.FIELD_DELIMITATOR);
@@ -51,7 +52,7 @@ public class ListenerEliminaUtente implements ActionListener {
                         updatedContent.setLength(updatedContent.length() - 1);
                     }
             
-                    FileWriter writer = new FileWriter(ListenerLogin.USERS_FILE_PATH);
+                    FileWriter writer = new FileWriter(UindosPath.USERS_FILE_PATH);
                     writer.write(updatedContent.toString());
                     writer.close();
                 } catch (IOException e) {
@@ -72,7 +73,7 @@ public class ListenerEliminaUtente implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 int confirm = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler eliminare l'utente?", "Conferma eliminazione", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                String path = "src/System/Users/" + impostazioniWindowsFrame.getNomeUtente() + "/"; // Sostituisci con il percorso della cartella da rimuovere
+                String path = UindosPath.USER_FOLDER_PATH + impostazioniWindowsFrame.getNomeUtente() + "/"; // Sostituisci con il percorso della cartella da rimuovere
 
                 File directory = new File(path);
 

@@ -53,4 +53,8 @@ public class CalculatorFrame {
     display = new JTextField(20);
     buttons = new JButton[labels.length];
   }
+
+  public JTextField getDisplay() {
+    return display;
+  }
 }

@@ -10,6 +10,7 @@ import app.Notepad.NotepadFrame;
 import app.Terminal.TerminalFrame;
 import app.UserClock.ClockFrame;
 import utils.GestoreFrame;
+import utils.UindosPath;
 import System.app.AppBar.AppBarListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -28,12 +29,6 @@ public class DesktopFrame {
     public static final int WIDTH = 1280;
     public static final int APP_HEIGHT = 16;
     public static final int APP_WIDTH = 16;
-
-    public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
-    public static final String APP_LIST_PATH = "src/applist.csv";
-    public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
-    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
-    public static final String GAMES_PATH = "system69/games";
 
     private ClockThread clock;
     private static String username;
@@ -61,7 +56,7 @@ public class DesktopFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setIconImage(new ImageIcon(WINDOWS_LOGO_PATH).getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH).getImage());
 
         imagePanel.setLayout(new GridLayout(3, 5, 1, 1));
 
@@ -104,7 +99,7 @@ public class DesktopFrame {
 
     private void createElements() {
         frame = new JFrame("Uindos");
-        homeButton = new JButton(new ImageIcon(WINDOWS_LOGO_PATH));
+        homeButton = new JButton(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH));
         appBarPanel = new JPanel();
         southPanel = new JPanel();
         frameDimension = new Dimension(WIDTH, HEIGHT);
@@ -117,7 +112,7 @@ public class DesktopFrame {
         clock = new ClockThread(this);
 
         try {
-            img = ImageIO.read(new File(DEFAULT_BACKGROUND_PATH));
+            img = ImageIO.read(new File(UindosPath.DEFAULT_BACKGROUND_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,7 +181,7 @@ public class DesktopFrame {
     }
 
     public void setDesktop() {
-        File file = new File(DESKTOP_LIST_PATH);
+        File file = new File(UindosPath.DESKTOP_LIST_PATH);
         Scanner scanner;
 
         try {
@@ -262,7 +257,7 @@ public class DesktopFrame {
     }
 
     public void setAppBar() {
-        File file = new File(APP_LIST_PATH);
+        File file = new File(UindosPath.APP_LIST_PATH);
         Scanner scanner;
 
         try {

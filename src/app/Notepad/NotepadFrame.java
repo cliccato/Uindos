@@ -4,6 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 public class NotepadFrame {
     static int HEIGHT, WIDTH; {
@@ -23,7 +24,7 @@ public class NotepadFrame {
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(HEIGHT, WIDTH);
-        frame.setIconImage(new ImageIcon("images\\logo\\notepad-logo.png").getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.NOTEPAD_LOGO_PATH).getImage());
         frame.setLayout(new BorderLayout());
 
         textArea.setFont(new Font("Verdana", Font.PLAIN, 20));

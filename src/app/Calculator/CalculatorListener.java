@@ -3,14 +3,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CalculatorListener implements ActionListener {
-    CalculatorFrame C;
+    private CalculatorFrame C;
 
     public CalculatorListener(CalculatorFrame C) {
         this.C = C;
     }
 
     public void actionPerformed(ActionEvent e) {
-        String input = C.display.getText();
+        String input = C.getDisplay().getText();
         String[] parts = input.split("[+\\-*/]");
         int num1 = Integer.parseInt(parts[0]);
         int num2 = Integer.parseInt(parts[1]);
@@ -24,7 +24,6 @@ public class CalculatorListener implements ActionListener {
         } else if (input.contains("/")) {
             result = num1 / num2;
         }
-        C.display.setText(Integer.toString(result));
+        C.getDisplay().setText(Integer.toString(result));
     }
-
 }

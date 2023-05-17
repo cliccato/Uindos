@@ -2,6 +2,7 @@ package app.Hanged;
 import javax.swing.*;
 
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 import java.awt.*;
 import java.io.File;
@@ -9,7 +10,6 @@ import java.util.Vector;
 
 public class Hanged {
 
-    private static final String HANGED_LOGO_PATH = "images/logo/hanged-logo.png";
     public static final int NUM_TENTATIVI = 7;
     private JFrame frmImpiccato;
     private JMenuBar menuImpiccato;
@@ -39,7 +39,7 @@ public class Hanged {
 
         //creazione finestra per il gioco dell'impiccato
         frmImpiccato = new JFrame("Impiccato");
-        frmImpiccato.setIconImage((new ImageIcon(HANGED_LOGO_PATH)).getImage());
+        frmImpiccato.setIconImage((new ImageIcon(UindosPath.HANGED_LOGO_PATH)).getImage());
         Container c = frmImpiccato.getContentPane();
         c.setLayout(new BorderLayout());
         //creazione menu

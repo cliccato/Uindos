@@ -15,6 +15,7 @@ import java.io.IOException;
 
 import utils.GestoreFrame;
 import utils.PlaceHolder;
+import utils.UindosPath;
 import utils.PlaceHolder.*;
 
 public class LoginFrame {
@@ -46,7 +47,7 @@ public class LoginFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setIconImage(new ImageIcon(DesktopFrame.WINDOWS_LOGO_PATH).getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH).getImage());
 
         pnlFormInput = new JPanel(new GridBagLayout());
         pnlFormInput.setOpaque(false); // Set panel background to transparent
@@ -120,45 +121,6 @@ public class LoginFrame {
         frame.add(pnlFormInput, BorderLayout.CENTER);
     }
 
-    // private void addplaceHolder() {
-    //     // Aggiungi placeholder al campo di testo txtUsername
-    //     txtUsername.setText("username");
-    //     txtUsername.addFocusListener(new FocusListener() {
-    //         @Override
-    //         public void focusGained(FocusEvent e) {
-    //             if (txtUsername.getText().equals("username")) {
-    //                 txtUsername.setText("");
-    //             }
-    //         }
-
-    //         @Override
-    //         public void focusLost(FocusEvent e) {
-    //             if (txtUsername.getText().isEmpty()) {
-    //                 txtUsername.setText("username");
-    //             }
-    //         }
-    //     });
-    //     // Aggiungi placeholder al campo di testo txtPassword
-    //     txtPassword.setForeground(Color.GRAY);
-    //     txtPassword.setText("password");
-    //     txtPassword.addFocusListener(new FocusListener() {
-    //         @Override
-    //         public void focusGained(FocusEvent e) {
-    //             if (new String(txtPassword.getPassword()).equals("password")) {
-    //                 txtPassword.setText("");
-    //                 txtPassword.setForeground(Color.BLACK);
-    //             }
-    //         }
-    //         @Override
-    //         public void focusLost(FocusEvent e) {
-    //             if (new String(txtPassword.getPassword()).isEmpty()) {
-    //                 txtPassword.setForeground(Color.GRAY);
-    //                 txtPassword.setText("password");
-    //             }
-    //         }
-    //     });
-    // }
-
     private void setFrame() {
         frame.setFocusTraversalKeysEnabled(false);
         frame.setLocationRelativeTo(null);
@@ -167,7 +129,7 @@ public class LoginFrame {
 
     private void setBackground() {
         try {
-            img = ImageIO.read(new File(DesktopFrame.DEFAULT_BACKGROUND_PATH));
+            img = ImageIO.read(new File(UindosPath.DEFAULT_BACKGROUND_PATH));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -22,10 +22,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import System.Desktop.DesktopFrame;
+import utils.UindosPath;
 
 public class ListenerLogin implements ActionListener, KeyListener {
     private LoginFrame loginFrame;
-    public static final String USERS_FILE_PATH = "system69/config/SAM_IL_POMPIERE.conf";
     public static final String FIELD_DELIMITATOR = "|"; // da spostare
 
     public ListenerLogin(LoginFrame loginFrame) {
@@ -35,7 +35,7 @@ public class ListenerLogin implements ActionListener, KeyListener {
     private boolean authenticateUser() {
         String usernameInsert = loginFrame.getUsername();
         String passwordInsert = loginFrame.getPassword();
-        try (BufferedReader fIN = new BufferedReader(new FileReader(new File(USERS_FILE_PATH)))) {
+        try (BufferedReader fIN = new BufferedReader(new FileReader(new File(UindosPath.USERS_FILE_PATH)))) {
             String fileLine;
             while ((fileLine = fIN.readLine()) != null) {
                 StringTokenizer stringTokenizer = new StringTokenizer(fileLine, FIELD_DELIMITATOR);

@@ -4,6 +4,7 @@ import System.Desktop.DesktopFrame;
 import System.Login.LoginFrame;
 import utils.GestoreFrame;
 import utils.RimuoviCartella;
+import utils.UindosPath;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -55,7 +56,7 @@ public class ImpostazioniWindowsFrame {
         frame = new JFrame("Impostazioni");
 
         this.desktopFrame = desktopFrame;
-        frame.setIconImage(new ImageIcon("images/logo/impostazioni-logo.png").getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.IMPOSTAZIONI_LOGO_PATH).getImage());
         frame.setSize(FRAME_DIMENSION);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -120,7 +121,7 @@ public class ImpostazioniWindowsFrame {
         btnCambiaSfondo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/System/Users/" + DesktopFrame.getUsername() + "/immagini paint")); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/immagini paint")); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();

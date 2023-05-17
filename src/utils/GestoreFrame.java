@@ -7,7 +7,6 @@ import java.awt.*;
 
 public class GestoreFrame {
     private static List<JFrame> frameAperti = new ArrayList<>();
-    public static final String POINTER_PATH = "images/icon/mouse-pointer02.png";
 
     public static void aggiungiFrame(JFrame frame) {
         frameAperti.add(frame);
@@ -29,7 +28,7 @@ public class GestoreFrame {
     public static void setPointer(JFrame frame) {
         Point point = new Point(0,0);
         Toolkit tkit=Toolkit.getDefaultToolkit();
-        Image img = tkit.getImage(POINTER_PATH);
+        Image img = tkit.getImage(UindosPath.POINTER_PATH);
         Cursor cursor = tkit.createCustomCursor(img, point, "");
         frame.setCursor(cursor);
     }

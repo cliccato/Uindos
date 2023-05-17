@@ -9,6 +9,7 @@ package app.Rock_paper_scissors;
 import javax.swing.*;
 
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 import java.awt.*;
 
@@ -16,7 +17,6 @@ public class RockPaperScissor {
     public static final String IMG_ROCK_PATH = "src/app/Rock_paper_scissors/img/rock.jpeg";
     public static final String IMG_PAPER_PATH = "src/app/Rock_paper_scissors/img/paper.jpeg";
     public static final String IMG_SCISSOR_PATH = "src/app/Rock_paper_scissors/img/scissor.jpeg";
-    public static final String ICON_GAME_PATH = "images/logo/rock-paper-scissors.png";
     public static final int N_MOVES = 3;
     public static final int N_PLAYERS = 2;
     public static final String[] MOVES = {
@@ -134,7 +134,7 @@ public class RockPaperScissor {
         Dimension frameDimension = new Dimension(1000, 1000);
         frame.setSize(frameDimension);
         frame.setLocationRelativeTo(null);
-        ImageIcon img = new ImageIcon(ICON_GAME_PATH);
+        ImageIcon img = new ImageIcon(UindosPath.ROCK_PAPER_SCISSOR_LOGO_PATH);
 
         frame.setIconImage(img.getImage());
         frame.pack();

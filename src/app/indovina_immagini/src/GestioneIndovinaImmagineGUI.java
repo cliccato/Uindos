@@ -2,6 +2,7 @@ package app.indovina_immagini.src;
 import javax.swing.*;
 
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,6 @@ import java.util.Vector;
 public class GestioneIndovinaImmagineGUI {
 
     private JFrame frmPrincipale;                   // frame principale
-    private static final String INDOVINA_IMMAGINE_LOGO_PATH = "images/logo/indovina-immagine.png";
     private JLabel lblUtente;                       // label utente
     private JLabel lblStato;                        // label stato
     private JMenuBar menuBar;                       // menu bar
@@ -43,7 +43,7 @@ public class GestioneIndovinaImmagineGUI {
 
         // creazione frame
         frmPrincipale = new JFrame("Applicazione indovina nome dall'immagine");
-        frmPrincipale.setIconImage((new ImageIcon(INDOVINA_IMMAGINE_LOGO_PATH).getImage()));
+        frmPrincipale.setIconImage((new ImageIcon(UindosPath.INDOVINA_IMMAGINE_LOGO_PATH).getImage()));
         Container c = frmPrincipale.getContentPane();
         c.setLayout(new BorderLayout());
         c.setBackground(Color.DARK_GRAY);
