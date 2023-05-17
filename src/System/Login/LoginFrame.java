@@ -22,7 +22,6 @@ public class LoginFrame {
     private final Dimension TXT_INPUT_SIZE = new Dimension(200, 30);
     private final Dimension BUTTON_INPUT_SIZE = new Dimension(80, 30);
     private final Dimension LABEL_NEW_ACCOUNT_SIZE = new Dimension(150, 30);
-    public static final String POINTER_PATH = "images/icon/mouse-pointer.png";
 
     private JFrame frame;
     private BufferedImage img;
@@ -38,18 +37,8 @@ public class LoginFrame {
         createComponents();
         setBackground();
         setFrame();
-        setPointer();
         GestoreFrame.aggiungiFrame(frame);
     }
-
-    public void setPointer() {
-        Point point = new Point(0,0);
-        Toolkit tkit=Toolkit.getDefaultToolkit();
-        Image img = tkit.getImage(POINTER_PATH);
-        Cursor cursor = tkit.createCustomCursor(img, point, "");
-        frame.setCursor(cursor);
-    }
-
 
     private void createComponents() {
         frame = new JFrame("Login");

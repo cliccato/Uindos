@@ -4,14 +4,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.html.*;
 import java.awt.BorderLayout;
-import java.awt.*;
 import java.awt.event.*;
 import java.net.URL;
 import java.util.ArrayList;
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 public class BrowserApp extends JFrame implements HyperlinkListener {
-  private static final String LOGO_PATH = "images/logo/browser-logo.png";
   private JButton buttonBack = new JButton("<"), buttonForward = new JButton(">");
   private JTextField locationTextField = new JTextField(35);
   private JEditorPane displayEditorPane = new JEditorPane();
@@ -22,7 +21,7 @@ public class BrowserApp extends JFrame implements HyperlinkListener {
     setSize(640, 480);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
-    setIconImage(new ImageIcon(LOGO_PATH).getImage());
+    setIconImage(new ImageIcon(UindosPath.BROWSER_LOGO_PATH).getImage());
     JPanel bttnPanel = new JPanel();
 
     buttonBack.addActionListener(new ActionListener() {

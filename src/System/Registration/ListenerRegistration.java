@@ -104,6 +104,13 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         if (!isPasswordEffective(password)) {
             return false;
         }
+        // Controllo che l'utente non sia già presente nel file CSV
+        if (isUserAlreadyPresent()) {
+            JOptionPane.showMessageDialog(registrationFrame, "Utente già esistente", "Errore", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+       
 
         JOptionPane.showMessageDialog(registrationFrame, "Registrazione effettuata!", "Registrazione", JOptionPane.INFORMATION_MESSAGE);
         return true;        

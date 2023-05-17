@@ -72,12 +72,13 @@ public class ListenerEliminaUtente implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 int confirm = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler eliminare l'utente?", "Conferma eliminazione", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
-                    String path = "src/System/Users/" + impostazioniWindowsFrame.getNomeUtente() + "/"; // Sostituisci con il percorso della cartella da rimuovere
+                String path = "src/System/Users/" + impostazioniWindowsFrame.getNomeUtente() + "/"; // Sostituisci con il percorso della cartella da rimuovere
 
                 File directory = new File(path);
 
                 if (directory.exists()) {
                     if (RimuoviCartella.rimuoviCartella(directory)) {
+                        // deleteUserCSV();
                         System.out.println("Cartella rimossa con successo.");
                         deleteUserCSV();
                         JOptionPane.showMessageDialog(null, "L'utente è stato eliminato.", "Utente eliminato", JOptionPane.INFORMATION_MESSAGE);
