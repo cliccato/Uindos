@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import System.Desktop.DesktopFrame;
+import utils.UindosDirectoryName;
 import utils.UindosPath;
 
 public class NotepadListener implements ActionListener{
@@ -43,7 +44,7 @@ public class NotepadListener implements ActionListener{
                 if (name != null && !name.isEmpty()) { // Verifica se il nome del file è stato inserito
                     try {
                         FileWriter fw;
-                        fw = new FileWriter( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/file di testo/" +  name);
+                        fw = new FileWriter( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO +  name);
                         fw.write(NF.getTextArea().getText()); // Salva 
                         isFileSaved = true;
                         fw.close();
@@ -59,7 +60,7 @@ public class NotepadListener implements ActionListener{
 
             NF.getTextArea().setText("");
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/file di testo")); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO)); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(NF.getFrame());
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();

@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import System.Desktop.DesktopFrame;
 import System.Login.ListenerLogin;
 import System.Login.LoginFrame;
+import utils.UindosDirectoryName;
+import utils.UindosFileName;
 import utils.UindosPath;
 
 public class ListenerRegistration implements ActionListener,KeyListener {
@@ -129,15 +131,27 @@ public class ListenerRegistration implements ActionListener,KeyListener {
     }
 
     private void createDirectory(){
-        File dir = new File(UindosPath.USER_FOLDER_PATH + username);
-        File dirFileTxt = new File(dir.getAbsolutePath() + "/file di testo");
-        File dirImgPaint = new File(dir.getAbsolutePath() + "/immagini paint");
-        System.out.println(dir.getPath());
-        if (!dir.exists()) {
-            dir.mkdir();
-            dirFileTxt.mkdir();
-            dirImgPaint.mkdir();
-        }
+        try  {
+            File dir = new File(UindosPath.USER_FOLDER_PATH + username);
+            File dirFoto = new File(dir.getAbsoluteFile() + "/" + UindosDirectoryName.DIRECTORY_FOTO);
+            File dirImgPaint = new File(dirFoto.getAbsolutePath() + "/" + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT);
+            File dirBackground = new File(dirFoto.getAbsolutePath() + "/" + UindosDirectoryName.DIRECTORY_BACKGROUND_DESKTOP);
+            File dirFileTxt = new File(dir.getAbsolutePath() + "/" + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO);
+            File config = new File(dir.getAbsolutePath() + "/" + UindosFileName.CONFIG_FILE_NAME);
+            System.out.println(dir.getPath());
+            if (!dir.exists()) {
+                dir.mkdir();
+                config.createNewFile();
+                dirFileTxt.mkdir();
+                dirFoto.mkdir();
+                dirImgPaint.mkdir();
+                dirBackground.mkdir();
+            }
+            } catch(IOException e) {
+                System.out.println(e.getStackTrace());
+            } catch(Exception e) {
+                System.out.println(e.getStackTrace());
+            }
     }
 
     @Override

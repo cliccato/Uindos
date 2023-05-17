@@ -79,7 +79,6 @@ public class ListenerEliminaUtente implements ActionListener {
 
                 if (directory.exists()) {
                     if (RimuoviCartella.rimuoviCartella(directory)) {
-                        // deleteUserCSV();
                         System.out.println("Cartella rimossa con successo.");
                         deleteUserCSV();
                         JOptionPane.showMessageDialog(null, "L'utente è stato eliminato.", "Utente eliminato", JOptionPane.INFORMATION_MESSAGE);

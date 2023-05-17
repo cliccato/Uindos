@@ -14,6 +14,7 @@ import javax.swing.*;
 
 import System.Desktop.DesktopFrame;
 import utils.GestoreFrame;
+import utils.UindosDirectoryName;
 import utils.UindosPath;
     
 public class PaintApp {
@@ -115,12 +116,6 @@ public class PaintApp {
     }
 
     private void createNewCanvas() {
-        // if (isCanvasModified()) {
-        //     int option = JOptionPane.showConfirmDialog(frame, "Desideri salvare le modifiche prima di creare un nuovo disegno?", "Salva modifiche", JOptionPane.YES_NO_OPTION);
-        //     if (option == JOptionPane.YES_OPTION) {
-        //         saveCanvas();
-        //     }
-        // }
         int width = canvas.getWidth();
         int height = canvas.getHeight();
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -137,9 +132,9 @@ public class PaintApp {
         if (name != null && !name.isEmpty()) { // Verifica se il nome del file è stato inserito
             try {
                 if (!isImageSaved) {
-                    ImageIO.write(image, "png", new File( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/immagini paint/" + name + ".png")); // Salva l'immagine su disco come file PNG
-                } else {
-                    ImageIO.write(image, "png", new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/immagini paint/" + name)); // Salva l'immagine su disco come file PNG
+                    ImageIO.write(image, "png", new File( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT + name + ".png")); // Salva l'immagine su disco come file PNG
+                } else {  
+                    ImageIO.write(image, "png", new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT + name)); // Salva l'immagine su disco come file PNG
                 }
                 JOptionPane.showMessageDialog(frame, "Il pannello è stato salvato come immagine.");
             } catch (IOException e) {
@@ -180,7 +175,7 @@ public class PaintApp {
 
     private void openImage() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/immagini paint")); // Imposta la directory di lavoro come cartella iniziale
+        fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT)); // Imposta la directory di lavoro come cartella iniziale
         int result = fileChooser.showOpenDialog(frame);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();

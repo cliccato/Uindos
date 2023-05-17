@@ -4,6 +4,7 @@ import System.Desktop.DesktopFrame;
 import System.Login.LoginFrame;
 import utils.GestoreFrame;
 import utils.RimuoviCartella;
+import utils.UindosDirectoryName;
 import utils.UindosPath;
 
 import java.awt.BorderLayout;
@@ -121,7 +122,7 @@ public class ImpostazioniWindowsFrame {
         btnCambiaSfondo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/immagini paint")); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT)); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
