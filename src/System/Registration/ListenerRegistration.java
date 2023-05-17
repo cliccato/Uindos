@@ -129,7 +129,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
     }
 
     private void createDirectory(){
-        File dir = new File("src/System/Users/" + username);
+        File dir = new File(UindosPath.USER_FOLDER_PATH + username);
         File dirFileTxt = new File(dir.getAbsolutePath() + "/file di testo");
         File dirImgPaint = new File(dir.getAbsolutePath() + "/immagini paint");
         System.out.println(dir.getPath());

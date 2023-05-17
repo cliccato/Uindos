@@ -16,7 +16,7 @@ public class UindosPath {
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
 
     /* folder */
-    public static final String USER_FOLDER_PATH = "src/System/Users/";
+    public static final String USER_FOLDER_PATH = "system69/Users/";
 
     /* csv */
     public static final String APP_LIST_PATH = "src/applist.csv";
