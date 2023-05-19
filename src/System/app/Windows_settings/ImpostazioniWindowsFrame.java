@@ -24,6 +24,8 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -121,23 +123,48 @@ public class ImpostazioniWindowsFrame {
             btnEliminaUtente.addActionListener(new ListenerEliminaUtente(this));
         }
 
-        btnCambiaSfondo = new JButton("Cambia sfondo");
-        btnCambiaSfondo.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Imposta la directory di lavoro come cartella iniziale
-                int result = fileChooser.showOpenDialog(null);
-                if (result == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                        System.out.println(selectedFile.getPath());
-                        System.out.println(selectedFile.getAbsolutePath());
-                        GestoreConfig.changeConfig(username, GestoreConfig.CAMPO_BACKGROUND, selectedFile.getPath());
-                    GestoreFrame.chiudiTuttiFrame();      
-                    new DesktopFrame(username, password);
-                }
-            }
-        });
+        // btnCambiaSfondo = new JButton("Cambia sfondo");
+        // btnCambiaSfondo.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         JFileChooser fileChooser = new JFileChooser();
+        //         fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Imposta la directory di lavoro come cartella iniziale
+        //         int result = fileChooser.showOpenDialog(null);
+        //         if (result == JFileChooser.APPROVE_OPTION) {
+        //             File selectedFile = fileChooser.getSelectedFile();
+        //                 System.out.println(selectedFile.getPath());
+        //                 System.out.println(selectedFile.getAbsolutePath());
 
+        //                 GestoreConfig.changeConfig(username, GestoreConfig.CAMPO_BACKGROUND, selectedFile.getAbsolutePath());
+        //             GestoreFrame.chiudiTuttiFrame();      
+        //             new DesktopFrame(username, password);
+        //         }
+        //     }
+        // });
+
+            btnCambiaSfondo = new JButton("Cambia sfondo");
+    btnCambiaSfondo.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Set the working directory as the initial folder
+            int result = fileChooser.showOpenDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String absolutePath = selectedFile.getAbsolutePath();
+                String currentPath = System.getProperty("user.dir");
+                Path pathAbsolute = Paths.get(absolutePath);
+                Path pathBase = Paths.get(currentPath);
+                Path pathRelative = pathBase.relativize(pathAbsolute);
+                String relativePath = pathRelative.toString();
+
+                System.out.println(relativePath);
+                // System.out.println(absolutePath);
+
+                GestoreConfig.changeConfig(username, GestoreConfig.CAMPO_BACKGROUND, relativePath);
+                GestoreFrame.chiudiTuttiFrame();
+                new DesktopFrame(username, password);
+            }
+        }
+    });
         pnlInfoUtente.add(new JLabel("Nome utente ->"));
         pnlInfoUtente.add(lblNomeUtente);
         pnlInfoUtente.add(checkBoxMostraPassword);

@@ -17,7 +17,6 @@ public class GestoreConfig {
 
         try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + "/" + UindosFileName.CONFIG_FILE_NAME);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            System.out.println(UindosPath.USER_FOLDER_PATH + username + "/" + UindosFileName.CONFIG_FILE_NAME);
             String line;
                 line = bufferedReader.readLine();
             // config.setBackground(bufferedReader.readLine());
@@ -44,17 +43,19 @@ public class GestoreConfig {
 
                     String line;
                     int lineNumber = 1;
-
-                    while ((line = reader.readLine()) != null) {
-                        if (lineNumber == lineConfig) {
-                            writer.write(newConfig);
-                        } else {
-                            writer.write(line);
-                        }
-
-                        writer.newLine();
-                        lineNumber++;
+                                   while ((line = reader.readLine()) != null) {
+                    if (lineNumber == lineConfig) {
+                        writer.write(newConfig);
+                    } else {
+                        writer.write(line);
                     }
+
+                    if (reader.ready()) {
+                        writer.newLine();
+                    }
+
+                    lineNumber++;
+                }
                 }
 
                 // Replace the original file with the temporary file

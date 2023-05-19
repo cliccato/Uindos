@@ -28,7 +28,7 @@ public class PaintApp {
 
     public PaintApp() {
         frame = new JFrame("Peint");
-        frame.setSize(800, 600);
+        frame.setSize(1280,720);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(new ImageIcon(UindosPath.PAINT_LOGO_PATH).getImage());
 
