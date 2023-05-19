@@ -3,7 +3,9 @@ package System.app.Windows_settings;
 import System.Desktop.DesktopFrame;
 import System.Login.LoginFrame;
 import utils.GestoreFrame;
-import utils.RimuoviCartella;
+import utils.Config;
+import utils.GestoreCartelle;
+import utils.GestoreConfig;
 import utils.UindosDirectoryName;
 import utils.UindosPath;
 
@@ -52,6 +54,7 @@ public class ImpostazioniWindowsFrame {
     private String passwordUtente;
     private String nomeUtente;
     private JButton btnEliminaUtente;
+    private Config config;
 
     public ImpostazioniWindowsFrame(String username, String password, DesktopFrame desktopFrame) {
         frame = new JFrame("Impostazioni");
@@ -122,24 +125,15 @@ public class ImpostazioniWindowsFrame {
         btnCambiaSfondo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT)); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    try {
-                        BufferedImage newImage = ImageIO.read(selectedFile);
-                        if (newImage != null) {
-                            JPanel imagePanel = desktopFrame.getImagePanel();
-                            Graphics g = imagePanel.getGraphics();
-                            g.drawImage(newImage, 0, 0, null);
-                            g.dispose();
-                        } else {
-                            JOptionPane.showMessageDialog(null, "Errore durante l'apertura dell'immagine.", "Errore", JOptionPane.ERROR_MESSAGE);
-                        }
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        JOptionPane.showMessageDialog(null, "Errore durante l'apertura dell'immagine.", "Errore", JOptionPane.ERROR_MESSAGE);
-                    }
+                        System.out.println(selectedFile.getPath());
+                        System.out.println(selectedFile.getAbsolutePath());
+                        GestoreConfig.changeConfig(username, GestoreConfig.CAMPO_BACKGROUND, selectedFile.getPath());
+                    GestoreFrame.chiudiTuttiFrame();      
+                    new DesktopFrame(username, password);
                 }
             }
         });

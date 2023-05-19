@@ -23,7 +23,10 @@ public class UindosPath {
     public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
 
     /* background */
-    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
+
+    public static final String DEFAULT_USER_FOLDER_PATH = "Default_user_folder/";
+
+    public static final String DEFAULT_BACKGROUND_FOLDER_PATH = DEFAULT_USER_FOLDER_PATH + "Foto/background/";
 
     /* files */
     public static final String GAMES_PATH = "system69/games";

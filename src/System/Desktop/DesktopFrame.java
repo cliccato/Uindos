@@ -9,6 +9,8 @@ import app.Calculator.CalculatorFrame;
 import app.Notepad.NotepadFrame;
 import app.Terminal.TerminalFrame;
 import app.UserClock.ClockFrame;
+import utils.Config;
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 import System.app.AppBar.AppBarListener;
@@ -44,13 +46,16 @@ public class DesktopFrame {
     private BufferedImage img;
     private Point initialLocation;
     private JMenu user;
+    private Config config;
 
     public DesktopFrame(String username, String password) {// implementare desktop con aree di file distinte per ogni utente
         DesktopFrame.username = username;
         this.password = password;
+        config = GestoreConfig.loadConfig(username);
         createElements();
         createApp();
         setAppBar();
+
 
         frame.setSize(frameDimension);
         frame.setResizable(false);
@@ -112,7 +117,8 @@ public class DesktopFrame {
         clock = new ClockThread(this);
 
         try {
-            img = ImageIO.read(new File(UindosPath.DEFAULT_BACKGROUND_PATH));
+            System.out.println(config.getBackground()); 
+            img = ImageIO.read(new File(config.getBackground()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -148,7 +154,7 @@ public class DesktopFrame {
                 new ClockFrame();
             }
         }));
-
+        
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
                 GestoreFrame.chiudiTuttiFrame();

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import System.Login.ListenerLogin;
 import System.Login.LoginFrame;
 import utils.GestoreFrame;
-import utils.RimuoviCartella;
+import utils.GestoreCartelle;
 import utils.UindosPath;
 
 public class ListenerEliminaUtente implements ActionListener {
@@ -78,7 +78,7 @@ public class ListenerEliminaUtente implements ActionListener {
                 File directory = new File(path);
 
                 if (directory.exists()) {
-                    if (RimuoviCartella.rimuoviCartella(directory)) {
+                    if (GestoreCartelle.rimuoviCartella(directory)) {
                         System.out.println("Cartella rimossa con successo.");
                         deleteUserCSV();
                         JOptionPane.showMessageDialog(null, "L'utente è stato eliminato.", "Utente eliminato", JOptionPane.INFORMATION_MESSAGE);

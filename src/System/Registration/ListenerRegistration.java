@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.StringTokenizer;
 
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import javax.swing.JOptionPane;
 import System.Desktop.DesktopFrame;
 import System.Login.ListenerLogin;
 import System.Login.LoginFrame;
+import utils.GestoreCartelle;
 import utils.UindosDirectoryName;
 import utils.UindosFileName;
 import utils.UindosPath;
@@ -133,24 +135,14 @@ public class ListenerRegistration implements ActionListener,KeyListener {
     private void createDirectory(){
         try  {
             File dir = new File(UindosPath.USER_FOLDER_PATH + username);
-            File dirFoto = new File(dir.getAbsoluteFile() + "/" + UindosDirectoryName.DIRECTORY_FOTO);
-            File dirImgPaint = new File(dirFoto.getAbsolutePath() + "/" + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT);
-            File dirBackground = new File(dirFoto.getAbsolutePath() + "/" + UindosDirectoryName.DIRECTORY_BACKGROUND_DESKTOP);
-            File dirFileTxt = new File(dir.getAbsolutePath() + "/" + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO);
-            File config = new File(dir.getAbsolutePath() + "/" + UindosFileName.CONFIG_FILE_NAME);
+
+            GestoreCartelle.copyFolder(Paths.get(UindosPath.DEFAULT_USER_FOLDER_PATH), Paths.get(UindosPath.USER_FOLDER_PATH + username + "/"));
             System.out.println(dir.getPath());
-            if (!dir.exists()) {
-                dir.mkdir();
-                config.createNewFile();
-                dirFileTxt.mkdir();
-                dirFoto.mkdir();
-                dirImgPaint.mkdir();
-                dirBackground.mkdir();
-            }
+
             } catch(IOException e) {
-                System.out.println(e.getStackTrace());
+                System.out.println(e.getMessage());
             } catch(Exception e) {
-                System.out.println(e.getStackTrace());
+                System.out.println(e.getMessage());
             }
     }
 
