@@ -1,5 +1,6 @@
 package utils;
 
+import java.awt.Font;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,21 +9,28 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.StringTokenizer;
 
 public class GestoreConfig {
-    public static final int CAMPO_BACKGROUND = 1;
+    public static final int BACKGROUND = 1;
+    public static final int FONT = 2;
 
     public static Config loadConfig(String username) {
         Config config = new Config();
 
         try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + "/" + UindosFileName.CONFIG_FILE_NAME);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
-                line = bufferedReader.readLine();
-            // config.setBackground(bufferedReader.readLine());
-            System.out.println(line);
+            line = bufferedReader.readLine();
             config.setBackground(line);
 
+            line = bufferedReader.readLine();
+            StringTokenizer tokenizer = new StringTokenizer(line, ";");
+            String fontName = tokenizer.nextToken();
+            int fontStyle = Integer.parseInt(tokenizer.nextToken());
+            int fontSize = Integer.parseInt(tokenizer.nextToken());
+
+            config.setFont(new Font(fontName, fontStyle, fontSize));
         } catch (IOException e) {
             System.err.println("Error occurred while reading the file: " + e.getMessage());
         }

@@ -37,13 +37,12 @@ public class DesktopFrame {
     private JFrame frame;
     private JPanel imagePanel, southPanel, appBarPanel, dateClockPanel;
     private JPopupMenu appMenu;
-    private JMenu systemMenu, utilsMenu;
+    private JMenu systemMenu, utilsMenu, user;
     private JMenuItem itemLogOut, itemExit, itemSettings;
     private JButton homeButton;
     private JLabel lblClock, lblDate;
     private BufferedImage img;
     private Point initialLocation;
-    private JMenu user;
     private Config config;
 
     public DesktopFrame(String username, String password) {// implementare desktop con aree di file distinte per ogni utente
@@ -118,10 +117,15 @@ public class DesktopFrame {
         frameDimension = new Dimension(WIDTH, HEIGHT);
         appBarDimension = new Dimension(APP_HEIGHT, WIDTH - APP_WIDTH);
         lblClock = new JLabel("");
+        lblClock.setFont(config.getFont());
         lblDate = new JLabel("");
+        lblDate.setFont(config.getFont());
         appMenu = new JPopupMenu();
+        appMenu.setFont(config.getFont());
         systemMenu = new JMenu("System");
+        systemMenu.setFont(config.getFont());
         utilsMenu = new JMenu("Utils");
+        utilsMenu.setFont(config.getFont());
 
         new ClockThread(this);
 
@@ -145,24 +149,24 @@ public class DesktopFrame {
             public void actionPerformed(ActionEvent e) {
                 new TerminalFrame();
             }
-        }));
+        })).setFont(config.getFont());;
 
         systemMenu.add(new JMenuItem(new AbstractAction("Notepad") {
             public void actionPerformed(ActionEvent e) {
                 new NotepadFrame();
             }
-        }));
+        })).setFont(config.getFont());;
 
         utilsMenu.add(new JMenuItem(new AbstractAction("Calculator") {
             public void actionPerformed(ActionEvent e) {
                 new CalculatorFrame();
             }
-        }));
+        })).setFont(config.getFont());;
         utilsMenu.add(new JMenuItem(new AbstractAction("Clock") {
             public void actionPerformed(ActionEvent e) {
                 new ClockFrame();
             }
-        }));
+        })).setFont(config.getFont());;
         
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
@@ -170,12 +174,14 @@ public class DesktopFrame {
                 new LoginFrame();
             }
         });
+        itemLogOut.setFont(config.getFont());
 
         itemExit = new JMenuItem(new AbstractAction("Power off") {
             public void actionPerformed(ActionEvent e) {
                 System.exit(1);
             }
         });
+        itemExit.setFont(config.getFont());
 
         DesktopFrame myDesktopFrame = this;
         itemSettings = new JMenuItem(new AbstractAction("Settings") {
@@ -183,8 +189,10 @@ public class DesktopFrame {
                 new ImpostazioniWindowsFrame(username, password, myDesktopFrame);
             }
         });
+        itemSettings.setFont(config.getFont());
 
         user = new JMenu(DesktopFrame.getUsername());
+        user.setFont(config.getFont());
         user.add(itemSettings);
         user.add(new JSeparator());
         user.add(itemLogOut);
@@ -215,7 +223,8 @@ public class DesktopFrame {
                 b.setOpaque(false);
                 b.setContentAreaFilled(false);
                 b.setBorderPainted(false);
-
+                b.setFont(config.getFont());
+                
                 b.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
                         initialLocation = e.getPoint();

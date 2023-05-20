@@ -62,6 +62,7 @@ public class LoginFrame {
         constraints.weighty = 1.0;
 
         txtUsername = new JTextField();
+        txtUsername.setFont(new Font("Apple Casual", 0, 15));
         txtUsername.setPreferredSize(TXT_INPUT_SIZE);
         txtUsername.setHorizontalAlignment(JTextField.CENTER);
         constraints.gridx = 0;
