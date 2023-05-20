@@ -22,8 +22,8 @@ Applicazioni da fare
 - login verticale(completato)
 
 Cose da sistemare/fare:
-	- selezionatore di sfondo immagine (da sistemare)
-	- mettere full screen (da fare)
+	- selezionatore di sfondo immagine (fatto)
+	- mettere 1920 x 1080 (da fare)
 	- centrare le nuove applicazioni aperte (completato)
 	- selettore cursore (da fare)
 	- vedere cosa succede ora con virtualBox (sistemare)
@@ -40,3 +40,10 @@ Cose da sistemare/fare:
 	- mettere easter egg
 	- applicazione soundboard
 	- mettere anche il giorno nell'orario
+	- file configurazione utente (completato)
+	- file path (completato)
+	-gestori (completato)
+	-cartella di default (fatto)
+	- sistemare size paint per far si che le immagini salvate possono essere usate come sfondo
+	- migliorare la grafjca generale
+	
