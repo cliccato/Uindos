@@ -1,7 +1,6 @@
 package System.Desktop;
 
 import javax.swing.*;
-import System.Desktop.DesktopListener;
 import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import System.app.Windows_settings.ImpostazioniWindowsFrame;
@@ -32,17 +31,16 @@ public class DesktopFrame {
     public static final int APP_HEIGHT = 16;
     public static final int APP_WIDTH = 16;
 
-    private ClockThread clock;
     private static String username;
     private String password;
     private Dimension frameDimension, appBarDimension;
     private JFrame frame;
-    private JPanel imagePanel, southPanel, appBarPanel;
+    private JPanel imagePanel, southPanel, appBarPanel, dateClockPanel;
     private JPopupMenu appMenu;
     private JMenu systemMenu, utilsMenu;
     private JMenuItem itemLogOut, itemExit, itemSettings;
     private JButton homeButton;
-    private JLabel lblClock;
+    private JLabel lblClock, lblDate;
     private BufferedImage img;
     private Point initialLocation;
     private JMenu user;
@@ -55,7 +53,6 @@ public class DesktopFrame {
         createElements();
         createApp();
         setAppBar();
-
 
         frame.setSize(frameDimension);
         frame.setResizable(false);
@@ -73,7 +70,7 @@ public class DesktopFrame {
         southPanel.setLayout(new BorderLayout());
         southPanel.setBackground(new Color(0, 0, 0));
 
-        appBarPanel.setLayout(new GridLayout());
+        appBarPanel.setLayout(new FlowLayout());
         appBarPanel.setSize(appBarDimension);
         appBarPanel.setBackground(new Color(0, 0, 0));
         appBarPanel.setOpaque(true);
@@ -89,16 +86,26 @@ public class DesktopFrame {
 
         lblClock.setFont(new Font("Arial", Font.PLAIN, 20));
         lblClock.setForeground(Color.WHITE);
+        lblClock.setPreferredSize(new Dimension(10, 10));
+        lblClock.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDate.setFont(new Font("Arial", Font.PLAIN, 20));
+        lblDate.setForeground(Color.WHITE);
+        lblDate.setPreferredSize(new Dimension(10, 10));
+        lblDate.setHorizontalAlignment(SwingConstants.CENTER);
+
+        dateClockPanel.setPreferredSize(new Dimension(115, 30));
+        dateClockPanel.setBackground(Color.BLACK);
+        dateClockPanel.add(lblClock);
+        dateClockPanel.add(lblDate);
 
         southPanel.add(homeButton, BorderLayout.WEST);
         southPanel.add(appBarPanel, BorderLayout.CENTER);
-        southPanel.add(lblClock, BorderLayout.EAST);
+        southPanel.add(dateClockPanel, BorderLayout.EAST);
 
         frame.add(imagePanel, BorderLayout.CENTER);
         frame.add(southPanel, BorderLayout.SOUTH);
 
         frame.setLocationRelativeTo(null);
-
         frame.setVisible(true);
     }
 
@@ -107,14 +114,16 @@ public class DesktopFrame {
         homeButton = new JButton(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH));
         appBarPanel = new JPanel();
         southPanel = new JPanel();
+        dateClockPanel = new JPanel(new GridLayout(2, 1));
         frameDimension = new Dimension(WIDTH, HEIGHT);
         appBarDimension = new Dimension(APP_HEIGHT, WIDTH - APP_WIDTH);
         lblClock = new JLabel("");
+        lblDate = new JLabel("");
         appMenu = new JPopupMenu();
         systemMenu = new JMenu("System");
         utilsMenu = new JMenu("Utils");
 
-        clock = new ClockThread(this);
+        new ClockThread(this);
 
         try {
             System.out.println(config.getBackground()); 
@@ -277,15 +286,16 @@ public class DesktopFrame {
             for (String s : v) {
                 String name = s.split(";")[0];
                 String logoPath = s.split(";")[1];
-                JButton b = new JButton(new ImageIcon(logoPath));
-                b.setOpaque(false);
-                b.setContentAreaFilled(false);
-                b.setBorderPainted(false);
+                JButton b = new SquareButton(new ImageIcon(logoPath));
+                b.setPreferredSize(new Dimension(40, 30));
+                b.setMaximumSize(new Dimension(40, 30));
+                b.setMinimumSize(new Dimension(40, 30));
+                b.setAlignmentY(Component.CENTER_ALIGNMENT);
                 b.addActionListener(new AppBarListener(name));
                 appBarPanel.add(b);
             }
         } catch (FileNotFoundException e) {
-            ; //TMCH
+            // TMCH
         }
     }
 
@@ -301,11 +311,11 @@ public class DesktopFrame {
         return lblClock;
     }
 
+    public JLabel getLblDate(){
+        return lblDate;
+    }
+
     public JPanel getImagePanel(){
         return imagePanel;
     }
-    
-    // public void disableVisibility() {
-    //     frame.setVisible(false);
-    // }
 }

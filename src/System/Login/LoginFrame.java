@@ -5,24 +5,18 @@ import System.Registration.RegistrationFrame;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import org.w3c.dom.UserDataHandler;
 
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import utils.Config;
-import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.PlaceHolder;
 import utils.UindosFileName;
 import utils.UindosPath;
-import utils.PlaceHolder.*;
 
 public class LoginFrame {
 
@@ -39,7 +33,6 @@ public class LoginFrame {
     private JButton btnLogin;
     private JButton btnShowPassword;
     private JLabel lblRegistration;
-    private Config config;
 
     public LoginFrame() {
         createComponents();

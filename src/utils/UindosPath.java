@@ -14,6 +14,7 @@ public class UindosPath {
     public static final String USER_CLOCK_LOGO_PATH = "images/logo/clock-logo.png";
     public static final String IMPOSTAZIONI_LOGO_PATH = "images/logo/impostazioni-logo.png";
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
+    public static final String CALENDAR_LOGO_PATH = "images/logo/calendar-logo.png";
 
     /* folder */
     public static final String USER_FOLDER_PATH = "system69/Users/";

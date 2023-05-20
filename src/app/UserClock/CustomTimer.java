@@ -89,9 +89,9 @@ public class CustomTimer extends JPanel {
         long remainingTime = startTime - System.currentTimeMillis();
         if (remainingTime <= 0) {
             isRunning = false;
+            startTime = 0;
             updateTimer.stop();
             btnAvvia.setEnabled(true);
-            btnPausa.setEnabled(false);
             lblTempo.setText("Tempo scaduto!");
             Toolkit.getDefaultToolkit().beep(); //aggiunta di alert
             JOptionPane.showMessageDialog(this, "Tempo scaduto!"); // Mostra l'alert

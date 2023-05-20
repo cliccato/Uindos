@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import app.VirtualBox.VirtualBoxApp;
+import app.Calendar.CalendarApp;
 import app.Notepad.NotepadFrame;
 import app.Paint.PaintApp;
 
@@ -26,6 +27,8 @@ public class AppBarListener implements ActionListener {
             case "paint":
                 new PaintApp();
                 break;
+            case "calendar":
+                new CalendarApp();
         }
     }
 }

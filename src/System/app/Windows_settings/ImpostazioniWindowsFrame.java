@@ -1,10 +1,8 @@
 package System.app.Windows_settings;
 
 import System.Desktop.DesktopFrame;
-import System.Login.LoginFrame;
 import utils.GestoreFrame;
-import utils.Config;
-import utils.GestoreCartelle;
+
 import utils.GestoreConfig;
 import utils.UindosDirectoryName;
 import utils.UindosPath;
@@ -15,26 +13,21 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -56,7 +49,7 @@ public class ImpostazioniWindowsFrame {
     private String passwordUtente;
     private String nomeUtente;
     private JButton btnEliminaUtente;
-    private Config config;
+    private JButton btnCambiaCursore;
 
     public ImpostazioniWindowsFrame(String username, String password, DesktopFrame desktopFrame) {
         frame = new JFrame("Impostazioni");
@@ -123,48 +116,39 @@ public class ImpostazioniWindowsFrame {
             btnEliminaUtente.addActionListener(new ListenerEliminaUtente(this));
         }
 
-        // btnCambiaSfondo = new JButton("Cambia sfondo");
-        // btnCambiaSfondo.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         JFileChooser fileChooser = new JFileChooser();
-        //         fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Imposta la directory di lavoro come cartella iniziale
-        //         int result = fileChooser.showOpenDialog(null);
-        //         if (result == JFileChooser.APPROVE_OPTION) {
-        //             File selectedFile = fileChooser.getSelectedFile();
-        //                 System.out.println(selectedFile.getPath());
-        //                 System.out.println(selectedFile.getAbsolutePath());
+        btnCambiaSfondo = new JButton("Cambia sfondo");
+        btnCambiaSfondo.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Set the working directory as the initial folder
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser.getSelectedFile();
+                    String absolutePath = selectedFile.getAbsolutePath();
+                    String currentPath = System.getProperty("user.dir");
+                    Path pathAbsolute = Paths.get(absolutePath);
+                    Path pathBase = Paths.get(currentPath);
+                    Path pathRelative = pathBase.relativize(pathAbsolute);
+                    String relativePath = pathRelative.toString();
 
-        //                 GestoreConfig.changeConfig(username, GestoreConfig.CAMPO_BACKGROUND, selectedFile.getAbsolutePath());
-        //             GestoreFrame.chiudiTuttiFrame();      
-        //             new DesktopFrame(username, password);
-        //         }
-        //     }
-        // });
+                    System.out.println(relativePath);
+                    // System.out.println(absolutePath);
 
-            btnCambiaSfondo = new JButton("Cambia sfondo");
-    btnCambiaSfondo.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Set the working directory as the initial folder
-            int result = fileChooser.showOpenDialog(null);
-            if (result == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                String absolutePath = selectedFile.getAbsolutePath();
-                String currentPath = System.getProperty("user.dir");
-                Path pathAbsolute = Paths.get(absolutePath);
-                Path pathBase = Paths.get(currentPath);
-                Path pathRelative = pathBase.relativize(pathAbsolute);
-                String relativePath = pathRelative.toString();
-
-                System.out.println(relativePath);
-                // System.out.println(absolutePath);
-
-                GestoreConfig.changeConfig(username, GestoreConfig.CAMPO_BACKGROUND, relativePath);
-                GestoreFrame.chiudiTuttiFrame();
-                new DesktopFrame(username, password);
+                    GestoreConfig.changeConfig(username, GestoreConfig.CAMPO_BACKGROUND, relativePath);
+                    GestoreFrame.chiudiTuttiFrame();
+                    new DesktopFrame(username, password);
+                }
             }
-        }
-    });
+        });
+
+        btnCambiaCursore = new JButton("Cambia cursore");
+        btnCambiaCursore.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser fileChooser = new JFileChooser();
+                
+            }
+        });
+
         pnlInfoUtente.add(new JLabel("Nome utente ->"));
         pnlInfoUtente.add(lblNomeUtente);
         pnlInfoUtente.add(checkBoxMostraPassword);

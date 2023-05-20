@@ -19,8 +19,6 @@ import System.Desktop.DesktopFrame;
 import System.Login.ListenerLogin;
 import System.Login.LoginFrame;
 import utils.GestoreCartelle;
-import utils.UindosDirectoryName;
-import utils.UindosFileName;
 import utils.UindosPath;
 
 public class ListenerRegistration implements ActionListener,KeyListener {

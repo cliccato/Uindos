@@ -21,7 +21,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class TerminalListener implements ActionListener {
     private static final int MAX_OUTPUT_LINES = 30;
