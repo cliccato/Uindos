@@ -21,9 +21,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class TerminalListener implements ActionListener {
-    private static final int MAX_OUTPUT_LINES = 500;
+    private static final int MAX_OUTPUT_LINES = 30;
     
     private final TerminalFrame terminal;
     private Path workingDirectory;
@@ -35,30 +36,32 @@ public class TerminalListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (terminal.getTaOutput().getLineCount() >= MAX_OUTPUT_LINES) {
+            clearScreen();
+        }
+
         String input = terminal.getTxtInputField().getText();
         terminal.getTxtInputField().setText("");
         terminal.getTaOutput().append(input + "\n");
 
-        if (terminal.getTaOutput().getLineCount() >= MAX_OUTPUT_LINES) {
-            removeFirstLine();
+        if (input.startsWith("cd ")) {
+            if (input.compareTo("cd ..")==1) {
+                goUpDirectory();
+            } else {
+              String newPath = input.substring(3);
+                workingDirectory = workingDirectory.resolve(newPath).normalize();
+                //terminal.getTaOutput().append(workingDirectory + ">");  
+            }
         }
 
         switch (input) {
             case "cls":
                 clearScreen();
                 break;
-            case "cd ..":
-                goUpDirectory();
-                break;
             default:
                 executeCommand(input);
                 break;
         }
-    }
-
-    private void removeFirstLine() {
-        int index = terminal.getTaOutput().getText().indexOf("\n") + 1;
-        terminal.getTaOutput().replaceRange("", 0, index);
     }
 
     private void clearScreen() {
@@ -70,19 +73,19 @@ public class TerminalListener implements ActionListener {
         terminal.getTaOutput().append(workingDirectory + ">");
     }
 
-    private void executeCommand(String input) {
+    private void executeCommand(String command) {
         try {
-            ProcessBuilder builder = new ProcessBuilder("cmd", "/c", "cd", workingDirectory.toString(), "&&", input);
-            builder.redirectErrorStream(true);
-            Process process = builder.start();
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe", "/c", "cd " + workingDirectory.toString() + "&&" + command);
+            //processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            Process process = processBuilder.start();
             BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
             while ((line = reader.readLine()) != null) {
                 terminal.getTaOutput().append(line + "\n");
             }
-            terminal.getTaOutput().append(workingDirectory + ">");
-        } catch (IOException ex) {
-            terminal.getTaOutput().append("Error executing command " + ex);
+        } catch (IOException e) {
+            terminal.getTaOutput().append(e + "\n");
         }
+        terminal.getTaOutput().append(workingDirectory + ">");
     }
 }

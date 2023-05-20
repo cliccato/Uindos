@@ -14,9 +14,9 @@ package app.Terminal;
 
 import javax.swing.*;
 
+import System.Desktop.DesktopFrame;
 import utils.GestoreFrame;
 import utils.UindosPath;
-
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,7 +24,7 @@ import java.nio.file.Paths;
 public class TerminalFrame {
     private static final int HEIGHT = 800;
     private static final int WIDTH = 800;
-    private Path path = Paths.get(".").toAbsolutePath().normalize();
+    private Path path = Paths.get(".").resolve(UindosPath.USER_FOLDER_PATH).resolve(DesktopFrame.getUsername()).toAbsolutePath().normalize();
     private JFrame frame;
     private JTextArea taOutput;
     private JTextField txtInputField;
