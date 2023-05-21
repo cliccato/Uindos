@@ -128,7 +128,7 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == cambiaPasswordFrame.getBntConferma()) {
+        if (e.getSource() == cambiaPasswordFrame.getBtnConferma()) {
             if (isPasswordOK()) {
                 impostazioniWindowsFrame.setPasswordUtente(cambiaPasswordFrame.getNewPassword());
                 if (impostazioniWindowsFrame.getCheckBoxMostraPassword().isSelected()) {
@@ -156,7 +156,7 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getSource() == cambiaPasswordFrame.getBntConferma() && e.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (e.getSource() == cambiaPasswordFrame.getBtnConferma() && e.getKeyCode() == KeyEvent.VK_ENTER) {
             if (isPasswordOK()) {
                 impostazioniWindowsFrame.setPasswordUtente(cambiaPasswordFrame.getNewPassword());
                 if (impostazioniWindowsFrame.getCheckBoxMostraPassword().isSelected()) {

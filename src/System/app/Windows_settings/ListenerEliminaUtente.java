@@ -79,7 +79,9 @@ public class ListenerEliminaUtente implements MouseListener {
             String password = JOptionPane.showInputDialog(null, "Inserisci la password per confermare l'eliminazione:", "Conferma password", JOptionPane.PLAIN_MESSAGE);
 
             // Verifica la password
-            if (verificaPassword(password)) {
+            if (password == null) {
+                
+            } else if (verificaPassword(password)) {
                 String path = UindosPath.USER_FOLDER_PATH + impostazioniWindowsFrame.getNomeUtente() + "/";
                 File directory = new File(path);
 

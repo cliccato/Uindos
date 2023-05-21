@@ -15,7 +15,6 @@ public class CustomTimer extends JPanel {
     private JLabel lblTempo;
     private JButton btnAvvia;
     private JButton btnPausa;
-    private JButton btnReset;
     private boolean isRunning;
     private long startTime;
     private Timer updateTimer;
@@ -33,12 +32,9 @@ public class CustomTimer extends JPanel {
         btnAvvia.setFont(font);
         btnPausa = new JButton("Pausa");
         btnPausa.setFont(font);
-        btnReset = new JButton("Reset/Stop");
-        btnReset.setFont(font);
 
         btnAvvia.addActionListener(e -> avviaTempo());
         btnPausa.addActionListener(e -> pausaTempo());
-        btnReset.addActionListener(e -> resetTempo());
 
         setLayout(new BorderLayout());
         add(lblTempo, BorderLayout.NORTH);
@@ -46,7 +42,6 @@ public class CustomTimer extends JPanel {
         JPanel pnlBottoni = new JPanel();
         pnlBottoni.add(btnAvvia);
         pnlBottoni.add(btnPausa);
-        pnlBottoni.add(btnReset);
         add(pnlBottoni, BorderLayout.CENTER);
 
         Dimension frameDimension = new Dimension(300, 400);
@@ -106,7 +101,7 @@ public class CustomTimer extends JPanel {
             seconds %= 60;
             DecimalFormat decimalFormat = new DecimalFormat("00");
             lblTempo.setText("Tempo: " + decimalFormat.format(hours) + " hr " +
-                decimalFormat.format(minutes) + " min " + new DecimalFormat("0.0").format(seconds) + " sec");
+            decimalFormat.format(minutes) + " min " + new DecimalFormat("0.0").format(seconds) + " sec");
         }
     }
 
@@ -121,19 +116,6 @@ public class CustomTimer extends JPanel {
             btnAvvia.setEnabled(true);
             btnPausa.setEnabled(false);
         }
-    }
-
-    /**
-     * Resetta il timer.
-     * Ferma il timer, reimposta il tempo iniziale e resetta l'etichetta del tempo.
-     */
-    private void resetTempo() {
-        isRunning = false;
-        if (updateTimer != null)
-            updateTimer.stop();
-        lblTempo.setText("Tempo: " + startTime + "sec");
-        btnAvvia.setEnabled(true);
-        btnPausa.setEnabled(false);
     }
 
     /**

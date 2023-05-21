@@ -40,7 +40,7 @@ public class NotepadListener implements ActionListener{
                     name+= ".txt";
                 }
         
-                if (name != null && !name.isEmpty()) { // Verifica se il nome del file è stato inserito
+                if (!name.equals(".txt")) { // Verifica se il nome del file è stato inserito
                     try {
                         FileWriter fw;
                         fw = new FileWriter( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO +  name);
@@ -52,6 +52,8 @@ public class NotepadListener implements ActionListener{
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
+                } else {
+                    JOptionPane.showMessageDialog(NF.getFrame(), "Inserisci un nome!");
                 }
                
                 break;

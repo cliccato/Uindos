@@ -28,7 +28,7 @@ public class UindosPath {
 
     public static final String DEFAULT_USER_FOLDER_PATH = "Default_user_folder/";
     public static final String BACKGROUND_REGISTRATION_PATH = "images/background/registration.png";
-    public static final String BACKGROUND_SETTINGS_PATH = "images/background/impostazioni.png";
+    public static final String BACKGROUND_SETTINGS_PATH = "images/background/settings.png";
     public static final String DEFAULT_BACKGROUND_FOLDER_PATH = DEFAULT_USER_FOLDER_PATH + "Foto/background/";
 
     /* files */

@@ -61,6 +61,7 @@ public class ImpostazioniWindowsFrame {
         lblPasswordUtente = new JLabel(new String(pass));
 
         checkBoxMostraPassword = new JCheckBox("Mostra password");
+        checkBoxMostraPassword.setOpaque(false);
         checkBoxMostraPassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (checkBoxMostraPassword.isSelected()) {
@@ -79,25 +80,29 @@ public class ImpostazioniWindowsFrame {
         lblCambiaPassword = new JLabel("<html><u>Cambia password</u></html>");
         lblCambiaPassword.setHorizontalAlignment(SwingConstants.LEFT);
         lblCambiaPassword.setForeground(Color.BLUE);
-        lblCambiaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         lblEliminaUtente = new JLabel("<html><u>Elimina utente</u></html>");
-        lblEliminaUtente.setHorizontalAlignment(SwingConstants.LEFT);
+        lblEliminaUtente.setHorizontalAlignment(SwingConstants.RIGHT);
         lblEliminaUtente.setForeground(Color.RED);
-        lblEliminaUtente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         if (username.equals("username") || username.equals("admin")) {
             lblEliminaUtente.setEnabled(false);
             lblCambiaPassword.setEnabled(false);
         } else {
+            lblEliminaUtente.addMouseListener(new ListenerEliminaUtente(this, lblEliminaUtente));
             lblCambiaPassword.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     frame.dispose();
                     new CambiaPasswordFrame(ImpostazioniWindowsFrame.this);
                 }
+                public void mouseEntered(MouseEvent e) {
+                    lblCambiaPassword.setForeground(new Color(0, 0, 128)); // Blu scuro
+                }
+                public void mouseExited(MouseEvent e) {
+                    lblCambiaPassword.setForeground(Color.BLUE);
+                }
+            
             });
-            ListenerEliminaUtente listenerEliminaUtente = new ListenerEliminaUtente(this, lblEliminaUtente);
-            lblEliminaUtente.addMouseListener(listenerEliminaUtente);
         }
 
         btnCambiaSfondo = new JButton("Cambia sfondo");
@@ -175,7 +180,7 @@ public class ImpostazioniWindowsFrame {
 
         gbc.gridy = 5;
         gbc.gridx = 0;
-        gbc.gridwidth = 2;
+        gbc.gridwidth = 1;
         pnlInfoUtente.add(lblCambiaPassword, gbc);
 
         gbc.gridx = 1;
