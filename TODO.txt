@@ -2,8 +2,13 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 
 #TODO
 	- [ ] Fondamentali
+		- [ ] vedere perchè quando si aprono le impostazioni l'immagine non appare
 		- [ ] sistemare il clock
-		- [ ] migliorare la grafica generale
+		- [ ] sistemare logout con virtualBox
+		- [ ] migliorare la grafica generale (nelle impostazioni bisogna ingrandire i componenti)
+		- [ ] selezionatore font 
+		- [ ] selettore cursore (come ultima cosa, possiamo anche non farlo)
+		- [ ] selezionatore lingua (stessa cosa del cursore)
 		- [x] aggiustare notepad  
 		- [x] file di testo per ogni utente  
 		- [x] loghi applicazione  
@@ -13,10 +18,6 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [x] creazione utente e controlli  	
 		- [x] selezionatore di sfondo immagine  
 		- [x] centrare le nuove applicazioni aperte  
-		- [ ] selettore cursore  
-		- [ ] sistemare logout con virtualBox  
-		- [ ] selezionatore font  
-		- [ ] selezionatore lingua
 		- [x] sistemare terminale  
 		- [x] file configurazione utente  
 		- [x] file path  
@@ -43,7 +44,7 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [x] cartella di default  
 		- [x] sistemare size paint per far si che le immagini salvate possono essere usate come sfondo
 		- [ ] Presentazione grafica iniziale
-		- [ ] Cambiare colore in rosso dell'elimina utente e chidere la password quando si preme
+		- [x] Cambiare colore in rosso dell'elimina utente e chidere la password quando si preme
 
 	- [ ] Perfezionamenti finali
 		- [ ] mettere 1920 x 1080 o comunque una resoluzione piu grande
