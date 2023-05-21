@@ -6,7 +6,7 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [ ] sistemare il clock
 		- [ ] sistemare logout con virtualBox
 		- [ ] migliorare la grafica generale (nelle impostazioni bisogna ingrandire i componenti)
-		- [ ] selezionatore font 
+		- [x] selezionatore font 
 		- [ ] selettore cursore (come ultima cosa, possiamo anche non farlo)
 		- [ ] selezionatore lingua (stessa cosa del cursore)
 		- [x] aggiustare notepad  
@@ -22,6 +22,7 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [x] file configurazione utente  
 		- [x] file path  
 		- [x] gestori  
+		- [ ] mettere font in tutte le app
 
 	- [ ] Media importanza
 		- [x] browser  
