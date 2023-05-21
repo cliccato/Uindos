@@ -15,6 +15,7 @@ package app.UserClock;
 
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 
@@ -32,12 +33,15 @@ public class ClockFrame {
     private JButton btnWorldClock;
 
     private JLabel contentLabel = new JLabel();
+    private Font font;
+    private String username;
 
     /**
      * Costruttore della classe ClockFrame.
      * Crea e inizializza i componenti dell'interfaccia grafica.
      */
-    public ClockFrame() {
+    public ClockFrame(String username) {
+        this.username = username;
         createComponents();
         setFrame();
         GestoreFrame.aggiungiFrame(frame);
@@ -60,6 +64,7 @@ public class ClockFrame {
         frame = new JFrame("Clock");
         container = this.frame.getContentPane();
 
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
         // Creazione del pannello laterale
         sidebarPanel = new JPanel();
         sidebarPanel.setBackground(Color.DARK_GRAY);
@@ -68,8 +73,11 @@ public class ClockFrame {
 
         // Aggiunta dei pulsanti al pannello laterale
         btnTimer = createSidebarButton("Timer");
+        btnTimer.setFont(font);
         btnStopwatch = createSidebarButton("Stopwatch");
+        btnStopwatch.setFont(font);
         btnWorldClock = createSidebarButton("World Clock");
+        btnWorldClock.setFont(font);
 
         sidebarPanel.add(btnTimer);
         sidebarPanel.add(btnStopwatch);
@@ -99,7 +107,7 @@ public class ClockFrame {
         button.setBackground(Color.DARK_GRAY);
         button.setBorderPainted(false);
         button.setFocusPainted(false);
-        button.setFont(new Font("Arial", Font.BOLD, 14));
+        button.setFont(font);
         button.addActionListener(new ListenerSideBar(this));
 
         return button;
@@ -121,5 +129,9 @@ public class ClockFrame {
      */
     public JPanel getPnlContent() {
         return contentPanel;
+    }
+
+    public Font getFont() {
+        return font;
     }
 }

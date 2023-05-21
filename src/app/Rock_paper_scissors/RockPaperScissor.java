@@ -8,6 +8,7 @@ package app.Rock_paper_scissors;
 
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 
@@ -48,11 +49,15 @@ public class RockPaperScissor {
     private JLabel lblUser;
     private JLabel lblComputer;
 
+    private Font font;
+    private String username;
+
     /**
      * Costruttore della classe RockPaperScissor.
      * Crea e inizializza i componenti GUI del gioco.
      */
-    public RockPaperScissor() {
+    public RockPaperScissor(String username) {
+        this.username = username;
         createComponents();
         setFrame();
         GestoreFrame.aggiungiFrame(frame);
@@ -64,6 +69,7 @@ public class RockPaperScissor {
     private void createComponents() {
         frame = new JFrame("Rock Paper Scissor");
         container = this.frame.getContentPane();
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 
         container.setLayout(new BorderLayout());
 
@@ -71,14 +77,20 @@ public class RockPaperScissor {
         pnlStatistics = new JPanel(new GridLayout(1, 3));
 
         lblUserWins = new JLabel("User wins: " + userWins);
+        lblUserWins.setFont(font);
+
         lblComputerWins = new JLabel("Computer wins: " + computerWins);
+        lblComputerWins.setFont(font);
+
         lblDraws = new JLabel("Draws: " + draws);
+        lblDraws.setFont(font);
 
         pnlStatistics.add(lblUserWins);
         pnlStatistics.add(lblComputerWins);
         pnlStatistics.add(lblDraws);
 
         btnPlayAgain = new JButton("Play Again");
+        btnPlayAgain.setFont(font);
         btnPlayAgain.setVisible(false);
         btnPlayAgain.addActionListener(new ListenerAnotherGame(this));
         pnlSummary.add(pnlStatistics);
@@ -102,6 +114,7 @@ public class RockPaperScissor {
 
         pnlMoves = new JPanel(new GridLayout(3, 3));
         lblChooseMove = new JLabel("Choose move");
+        lblChooseMove.setFont(font);
         lblChooseMove.setHorizontalAlignment(JLabel.CENTER);
 
         pnlMoves.add(imgRock[0]);
@@ -115,8 +128,10 @@ public class RockPaperScissor {
         pnlMoves.add(imgPaper[1]);
         pnlMoves.add(imgScissor[1]);
         lblUser = new JLabel("User"); // User name
+        lblUser.setFont(font);
         lblUser.setHorizontalAlignment(JLabel.CENTER);
         lblComputer = new JLabel("Computer"); // Computer name
+        lblComputer.setFont(font);
         lblComputer.setHorizontalAlignment(JLabel.CENTER);
 
         pnlGame.add(lblComputer, BorderLayout.NORTH);

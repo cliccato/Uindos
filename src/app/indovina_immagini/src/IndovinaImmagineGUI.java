@@ -1,6 +1,7 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 
 import java.awt.*;
@@ -40,6 +41,7 @@ public class IndovinaImmagineGUI {
                                                                             // (serve per non generare le stesse immagini)
 
     // metodo per prelevare tutti i nomi di una categoria d'immagini dal file
+    private Font font;
     private Vector<String> ottieniNomiImmaginiDaFile(){
         Vector<String> nomi_immagini = new Vector<>();
 
@@ -118,7 +120,7 @@ public class IndovinaImmagineGUI {
         Container c = frmIndovinaImmagine.getContentPane();
         c.setLayout(new BorderLayout());
         c.setBackground(Color.BLACK);
-
+        font = (Font) GestoreConfig.getConfig(gestioneIndovinaImmagineGUI.getUsername(), GestoreConfig.FONT);
         // nomi dei giochi presi da file
         nomi_immagini = ottieniNomiImmaginiDaFile();
 
@@ -225,13 +227,13 @@ public class IndovinaImmagineGUI {
         }
 
         //aggiunta font ai componenti
-        lblStato.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblPunteggio.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblTempoRimanente.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        btnConferma.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        btnCambiaImg.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
+        lblStato.setFont( font);
+        lblPunteggio.setFont( font);
+        lblTempoRimanente.setFont( font);
+        btnConferma.setFont( font);
+        btnCambiaImg.setFont( font);
         for (int i = 0; i < NUM_RADIOBUTTON; i++) {
-            rb[i].setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
+            rb[i].setFont( font);
         }
 
         // generazione casuale della prima immagine

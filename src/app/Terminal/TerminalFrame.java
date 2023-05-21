@@ -15,6 +15,7 @@ package app.Terminal;
 import javax.swing.*;
 
 import System.Desktop.DesktopFrame;
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 import java.awt.*;
@@ -28,8 +29,11 @@ public class TerminalFrame {
     private JFrame frame;
     private JTextArea taOutput;
     private JTextField txtInputField;
+    private Font font;
+    private String username;
 
-    public TerminalFrame() {
+    public TerminalFrame(String username) {
+        this.username = username;
         createElements();
         setLookAndFeel();
         setFrameProperties();
@@ -40,8 +44,11 @@ public class TerminalFrame {
 
     private void createElements() {
         frame = new JFrame("Terminal");
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
         taOutput = new JTextArea();
+        taOutput.setFont(font);
         txtInputField = new JTextField();
+        txtInputField.setFont(font);
     }
 
     private void setLookAndFeel() {

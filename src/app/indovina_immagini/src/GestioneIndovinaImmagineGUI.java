@@ -1,6 +1,7 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 
@@ -34,19 +35,21 @@ public class GestioneIndovinaImmagineGUI {
     private Vector<Utente> utenti;          // utenti registrati
     private Vector<Integer> IDGiaDetti;     // ID degli utenti
     private Vector<Partita> classifica;     // classifica generale
+    private String username;
     // font
-    public static Font fntBtnCslTesto = new Font("Arial", Font.BOLD, 12);
-    public static Font fntLblMenuItem = new Font("Serif", Font.ITALIC, 12);
+    public Font font;
 
     // costruttore
-    public GestioneIndovinaImmagineGUI(){
+    public GestioneIndovinaImmagineGUI(String username){
 
+        this.username = username;
         // creazione frame
         frmPrincipale = new JFrame("Applicazione indovina nome dall'immagine");
         frmPrincipale.setIconImage((new ImageIcon(UindosPath.INDOVINA_IMMAGINE_LOGO_PATH).getImage()));
         Container c = frmPrincipale.getContentPane();
         c.setLayout(new BorderLayout());
         c.setBackground(Color.DARK_GRAY);
+        font = (Font) GestoreConfig.getConfig(username,GestoreConfig.FONT);
 
         // creazione array
         utenti = new Vector<>();
@@ -83,22 +86,22 @@ public class GestioneIndovinaImmagineGUI {
         voceClassificaCategoriaImmaginiStarCinema = new JMenuItem("Immagini di star del cinema");
 
         // aggiunta font
-        voceUtente.setFont(fntLblMenuItem);
-        voceUtenteAccedi.setFont(fntLblMenuItem);
-        voceUtenteRegistrati.setFont(fntLblMenuItem);
-        voceUtenteLogout.setFont(fntLblMenuItem);
-        voceIndovinaImmagini.setFont(fntLblMenuItem);
-        voceIndovinaImmaginiVideogiochi.setFont(fntLblMenuItem);
-        voceIndovinaImmaginiCalciatori.setFont(fntLblMenuItem);
-        voceIndovinaImmaginiStarCinema.setFont(fntLblMenuItem);
-        voceClassifica.setFont(fntLblMenuItem);
-        voceClassificaGenerale.setFont(fntLblMenuItem);
-        voceClassificaSpecificaCategoriaImmagini.setFont(fntLblMenuItem);
-        voceClassificaCategoriaImmaginiVideogiochi.setFont(fntLblMenuItem);
-        voceClassificaCategoriaImmaginiCalciatori.setFont(fntLblMenuItem);
-        voceClassificaCategoriaImmaginiStarCinema.setFont(fntLblMenuItem);
-        lblStato.setFont(fntLblMenuItem);
-        lblUtente.setFont(fntLblMenuItem);
+        voceUtente.setFont(font);
+        voceUtenteAccedi.setFont(font);
+        voceUtenteRegistrati.setFont(font);
+        voceUtenteLogout.setFont(font);
+        voceIndovinaImmagini.setFont(font);
+        voceIndovinaImmaginiVideogiochi.setFont( font);
+        voceIndovinaImmaginiCalciatori.setFont( font);
+        voceIndovinaImmaginiStarCinema.setFont( font);
+        voceClassifica.setFont( font);
+        voceClassificaGenerale.setFont( font);
+        voceClassificaSpecificaCategoriaImmagini.setFont( font);
+        voceClassificaCategoriaImmaginiVideogiochi.setFont( font);
+        voceClassificaCategoriaImmaginiCalciatori.setFont( font);
+        voceClassificaCategoriaImmaginiStarCinema.setFont( font);
+        lblStato.setFont( font);
+        lblUtente.setFont( font);
 
         voceUtente.add(voceUtenteAccedi);
         voceUtente.add(voceUtenteRegistrati);
@@ -123,7 +126,7 @@ public class GestioneIndovinaImmagineGUI {
         voceUtenteAccedi.addActionListener((ActionEvent e) -> {
             lblStato.setText("");
             frmPrincipale.setVisible(false);
-            new AccediUtenteGUI(this);
+            new AccediUtenteGUI(this, username);
         });
 
         voceUtenteRegistrati.addActionListener((ActionEvent e) -> {
@@ -147,7 +150,7 @@ public class GestioneIndovinaImmagineGUI {
             JFrame frame = new JFrame(voceClassificaGenerale.getText());
 
             JButton btnIndietro = new JButton("INDIETRO");
-            btnIndietro.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
+            btnIndietro.setFont( font);
             btnIndietro.addActionListener((ActionEvent event) -> {
                 frmPrincipale.setVisible(true);
                 frame.setVisible(false);
@@ -163,7 +166,7 @@ public class GestioneIndovinaImmagineGUI {
             }
 
             JTable tabellaClassifica = new JTable(classificaGenerale, campi);
-            tabellaClassifica.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
+            tabellaClassifica.setFont( font);
             tabellaClassifica.setEnabled(false);
             tabellaClassifica.setGridColor(Color.YELLOW);
             tabellaClassifica.setBackground(Color.CYAN);
@@ -264,5 +267,9 @@ public class GestioneIndovinaImmagineGUI {
 
     public Vector<Partita> getClassifica() {
         return classifica;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

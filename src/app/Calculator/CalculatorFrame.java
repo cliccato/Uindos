@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 
@@ -13,13 +14,19 @@ public class CalculatorFrame {
   private JTextField display;
   private JButton[] buttons;
   private String[] labels = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C" };
+  private Font font;
 
-  public CalculatorFrame() {
+  public CalculatorFrame(String username) {
     createElements();
     panel.setLayout(new GridLayout(4, 4));
 
+    GestoreConfig.getConfig(username, GestoreConfig.FONT);
+
+    display.setFont(font);
+
     for (int i = 0; i < labels.length; i++) {
       buttons[i] = new JButton(labels[i]);
+      buttons[i].setFont(font);
       panel.add(buttons[i]);
     }
 

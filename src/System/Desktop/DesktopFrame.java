@@ -147,24 +147,24 @@ public class DesktopFrame {
     public void createApp() {
         systemMenu.add(new JMenuItem(new AbstractAction("Terminal") {
             public void actionPerformed(ActionEvent e) {
-                new TerminalFrame();
+                new TerminalFrame(username);
             }
         })).setFont(config.getFont());;
 
         systemMenu.add(new JMenuItem(new AbstractAction("Notepad") {
             public void actionPerformed(ActionEvent e) {
-                new NotepadFrame();
+                new NotepadFrame(username);
             }
         })).setFont(config.getFont());;
 
         utilsMenu.add(new JMenuItem(new AbstractAction("Calculator") {
             public void actionPerformed(ActionEvent e) {
-                new CalculatorFrame();
+                new CalculatorFrame(username);
             }
         })).setFont(config.getFont());;
         utilsMenu.add(new JMenuItem(new AbstractAction("Clock") {
             public void actionPerformed(ActionEvent e) {
-                new ClockFrame();
+                new ClockFrame(username);
             }
         })).setFont(config.getFont());;
         
@@ -259,7 +259,7 @@ public class DesktopFrame {
                     @Override
                     public void mouseClicked(MouseEvent e){
                         if(e.getClickCount()==2){
-                            new DesktopListener(name);
+                            new DesktopListener(name, username);
                         }
                     }
                 });
@@ -300,7 +300,7 @@ public class DesktopFrame {
                 b.setMaximumSize(new Dimension(40, 30));
                 b.setMinimumSize(new Dimension(40, 30));
                 b.setAlignmentY(Component.CENTER_ALIGNMENT);
-                b.addActionListener(new AppBarListener(name));
+                b.addActionListener(new AppBarListener(name, username));
                 appBarPanel.add(b);
             }
         } catch (FileNotFoundException e) {

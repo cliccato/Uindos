@@ -24,13 +24,17 @@ public class CustomTimer extends JPanel {
      * Crea un'istanza di CustomTimer.
      * Inizializza i componenti grafici e imposta il layout.
      */
-    public CustomTimer() {
+    public CustomTimer(Font font) {
         isRunning = false;
         lblTempo = new JLabel("Tempo: 0.0 sec");
+        lblTempo.setFont(font);
         lblTempo.setHorizontalAlignment(SwingConstants.CENTER);
         btnAvvia = new JButton("Avvia");
+        btnAvvia.setFont(font);
         btnPausa = new JButton("Pausa");
+        btnPausa.setFont(font);
         btnReset = new JButton("Reset/Stop");
+        btnReset.setFont(font);
 
         btnAvvia.addActionListener(e -> avviaTempo());
         btnPausa.addActionListener(e -> pausaTempo());

@@ -2,6 +2,7 @@ package app.Calendar;
 
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 import utils.WindowsStyleComponents;
@@ -19,24 +20,29 @@ public class CalendarApp {
     private ImmutableTableModel tableModel;
     private JComboBox<String> monthComboBox;
     private JComboBox<String> yearComboBox;
+    private Font font;
 
-    public CalendarApp() {
+    public CalendarApp(String username) {
         frame = new JFrame("Calendar app");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(new ImageIcon(UindosPath.CALENDAR_LOGO_PATH).getImage());
         
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
+
         GestoreFrame.aggiungiFrame(frame);
         // Creazione del modello immutabile della tabella
         tableModel = new ImmutableTableModel(new Object[]{"Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"}, 0);
 
-        // Creazione della tabella
-        calendarTable = new JTable(tableModel);
-        calendarTable.setRowHeight(40);
-        calendarTable.getTableHeader().setReorderingAllowed(false);
-        calendarTable.getTableHeader().setResizingAllowed(false);
-        calendarTable.setCellSelectionEnabled(false);
-        calendarTable.setFocusable(false);
+    
+    // Creazione della tabella
+    calendarTable = new JTable(tableModel);
+    calendarTable.setRowHeight(40);
+    calendarTable.getTableHeader().setReorderingAllowed(false);
+    calendarTable.getTableHeader().setResizingAllowed(false);
+    calendarTable.setCellSelectionEnabled(false);
+    calendarTable.setFocusable(false);
         calendarTable.setDefaultRenderer(Object.class, new UneditableTableCellRenderer());
+        calendarTable.setFont(font);
 
         // Impostazione delle dimensioni delle colonne
         for (int i = 0; i < 7; i++) {
@@ -50,6 +56,8 @@ public class CalendarApp {
         WindowsStyleComponents.customizeComboBox(monthComboBox);
         WindowsStyleComponents.customizeComboBox(yearComboBox);
 
+        monthComboBox.setFont(font);
+        yearComboBox.setFont(font);
         // Aggiunta dell'azione di cambio mese/anno
         ActionListener changeDateListener = e -> {
             int selectedMonthIndex = monthComboBox.getSelectedIndex();

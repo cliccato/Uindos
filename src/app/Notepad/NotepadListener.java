@@ -28,7 +28,6 @@ public class NotepadListener implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case "New":
-
                 NF.getTextArea().setText("");
                 NF.getFrame().setTitle("Notepad - (Nuovo)");
                 name = "";

@@ -27,20 +27,26 @@ public class CustomStopWatch extends JPanel {
     private long startTime;
     private long pausedTime;
     private Timer updateTimer;
-    private ArrayList < Double > parziali;
+    private ArrayList <Double> parziali;
 
     /**
      * Crea un'istanza di CustomStopWatch.
      */
-    public CustomStopWatch() {
+    public CustomStopWatch(Font font) {
         isRunning = false;
         lblTempo = new JLabel("Tempo: 0.0 sec");
+        lblTempo.setFont(font);
         lblTempo.setHorizontalAlignment(SwingConstants.CENTER);
         btnAvvia = new JButton("Avvia");
+        btnAvvia.setFont(font);
         btnPausa = new JButton("Pausa");
+        btnPausa.setFont(font);
         btnReset = new JButton("Reset/Stop");
+        btnReset.setFont(font);
         btnParziale = new JButton("Parziale");
+        btnParziale.setFont(font);
         txtParziali = new JTextArea(10, 15);
+        txtParziali.setFont(font);
         txtParziali.setEditable(false);
         txtParziali.setLineWrap(true);
         txtParziali.setWrapStyleWord(true);

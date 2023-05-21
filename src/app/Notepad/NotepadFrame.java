@@ -1,16 +1,16 @@
 package app.Notepad;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 
 public class NotepadFrame {
-    static int HEIGHT, WIDTH; {
-        HEIGHT = 1200;
-        WIDTH = 600;
-    }
+    public static int HEIGHT = 1200;
+    public static int WIDTH = 600;
 
     private JFrame frame;
     private JTextArea textArea;
@@ -18,8 +18,11 @@ public class NotepadFrame {
     private JMenu fileMenu;
     private JMenuItem openMenuItem, saveMenuItem, newMenuItem, exitMenuItem, infoMenutItem;
     private JFileChooser fileChooser;
+    private Font font;
+    private String username;
 
-    public NotepadFrame() {
+    public NotepadFrame(String username) {
+        this.username = username;
         createElements();
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,7 +30,7 @@ public class NotepadFrame {
         frame.setIconImage(new ImageIcon(UindosPath.NOTEPAD_LOGO_PATH).getImage());
         frame.setLayout(new BorderLayout());
 
-        textArea.setFont(new Font("Verdana", Font.PLAIN, 20));
+        textArea.setFont(font);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
 
@@ -36,15 +39,24 @@ public class NotepadFrame {
         fileMenu.add(saveMenuItem);
         fileMenu.addSeparator();
         fileMenu.add(exitMenuItem);
+        fileMenu.setFont(font);
+
+        infoMenutItem.setFont(font);
         menuBar.add(fileMenu);
         menuBar.add(infoMenutItem);
+        menuBar.setFont(font);
 
         NotepadListener notepadListener = new NotepadListener(this);
 
         newMenuItem.addActionListener(notepadListener);
+        newMenuItem.setFont(font);
         openMenuItem.addActionListener(notepadListener);
+        openMenuItem.setFont(font);
         saveMenuItem.addActionListener(notepadListener);
+        saveMenuItem.setFont(font);
         exitMenuItem.addActionListener(notepadListener);
+        exitMenuItem.setFont(font);
+
         infoMenutItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(frame, "Non ci sono info");
@@ -69,6 +81,7 @@ public class NotepadFrame {
         exitMenuItem = new JMenuItem("Exit");
         fileChooser = new JFileChooser();
         infoMenutItem = new JMenuItem("Info");
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
     }
 
     public JFrame getFrame(){

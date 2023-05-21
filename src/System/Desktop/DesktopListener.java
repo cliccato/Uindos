@@ -12,14 +12,15 @@ import app.indovina_immagini.src.GestioneIndovinaImmagineGUI;
 import utils.UindosPath;
 
 public class DesktopListener{
-    String name;
+    private String name;
+    private String username;
 
-    public DesktopListener(String name) {
+    public DesktopListener(String name, String username) {
         this.name = name;
         
         switch (name) {
             case "brouser":
-                new BrowserApp();
+                new BrowserApp(username);
                 break;
             case "cartella giochi":
                 JFileChooser fileChooser = new JFileChooser();
@@ -31,16 +32,16 @@ public class DesktopListener{
                     
                     switch (games_names) {
                         case "Hanged":
-                            new Hanged();
+                            new Hanged(username);
                             break;
                         case "Indovina immagini":
-                            new GestioneIndovinaImmagineGUI();
+                            new GestioneIndovinaImmagineGUI(username);
                             break;
                         case "Rock paper scissors":
-                            new RockPaperScissor();
+                            new RockPaperScissor(username);
                             break;
                         case "Tris":
-                            new TrisFrame();
+                            new TrisFrame(username);
                             break;
                     }
                 }

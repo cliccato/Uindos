@@ -1,6 +1,7 @@
 package app.Paint;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -13,6 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import System.Desktop.DesktopFrame;
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosDirectoryName;
 import utils.UindosPath;
@@ -25,12 +27,15 @@ public class PaintApp {
     private String name;
     private BufferedImage image;
     private boolean isImageSaved;
+    private Font font;
 
-    public PaintApp() {
+    public PaintApp(String username) {
         frame = new JFrame("Peint");
         frame.setSize(1280,720);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(new ImageIcon(UindosPath.PAINT_LOGO_PATH).getImage());
+
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 
         isImageSaved = false;
         canvas = new JPanel() {
@@ -64,18 +69,25 @@ public class PaintApp {
 
         JButton colorBtn = new JButton("Select Color");
         colorBtn.addActionListener(e -> selectColor());
-
+        colorBtn.setFont(font);
         JButton clearBtn = new JButton("Clear");
         clearBtn.addActionListener(e -> clearCanvas());
+        clearBtn.setFont(font);
 
         JButton saveBtn = new JButton("Save");
         saveBtn.addActionListener(e -> saveCanvas());
+        saveBtn.setFont(font);
 
         JButton openBtn = new JButton("Open");
         openBtn.addActionListener(e -> checkAndOpenImage());
+        openBtn.setFont(font);
+
         JButton newBtn = new JButton("Nuovo Disegno");
         newBtn.addActionListener(e -> checkAndCreateNewCanvas());
+        newBtn.setFont(font);
+
         JPanel controlsPanel = new JPanel();
+        controlsPanel.setFont(font);
 
         controlsPanel.setBackground(Color.BLACK);
         controlsPanel.add(openBtn);

@@ -2,6 +2,8 @@ package app.indovina_immagini.src;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import utils.GestoreCartelle;
+
 public class ListenerClassificaCategoriaImmagini implements ActionListener {
 
     private GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI;        // gestione indovina immagine gui
@@ -39,6 +41,6 @@ public class ListenerClassificaCategoriaImmagini implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         gestioneIndovinaImmagineGUI.getLblStato().setText("");
-        new ClassificaCategoriaImmaginiGUI(gestioneIndovinaImmagineGUI.getFrmPrincipale(), ottieniClassificaCategoriaImmagini(e.getActionCommand()), e.getActionCommand());
+        new ClassificaCategoriaImmaginiGUI(gestioneIndovinaImmagineGUI.getFrmPrincipale(), ottieniClassificaCategoriaImmagini(e.getActionCommand()), e.getActionCommand(), gestioneIndovinaImmagineGUI.getUsername());
     }
 }
