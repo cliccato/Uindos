@@ -1,48 +1,25 @@
 package System.app.Windows_settings;
-import System.Desktop.DesktopFrame;
-import utils.GestoreFrame;
 
+import System.Desktop.DesktopFrame;
 import utils.GestoreConfig;
+import utils.GestoreFrame;
 import utils.UindosDirectoryName;
 import utils.UindosPath;
+import utils.WindowsStyleComponents;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GraphicsEnvironment;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 
 public class ImpostazioniWindowsFrame {
-
     public static final Dimension FRAME_DIMENSION = new Dimension(1000, 500);
 
     private JFrame frame;
     private DesktopFrame desktopFrame;
     private JPanel pnlInfoUtente;
-    private JScrollPane scrollPane;
     private JLabel lblNomeUtente;
     private JLabel lblPasswordUtente;
     private JCheckBox checkBoxMostraPassword;
@@ -50,24 +27,27 @@ public class ImpostazioniWindowsFrame {
     private JLabel lblCambiaPassword, lblEliminaUtente;
     private String passwordUtente;
     private String nomeUtente;
-    private JButton btnCambiaCursore;
-    private JComboBox <String> fontComboBox;
+    private JComboBox<String> fontComboBox;
 
     public ImpostazioniWindowsFrame(String username, String password, DesktopFrame desktopFrame) {
         frame = new JFrame("Impostazioni");
-
         this.desktopFrame = desktopFrame;
+
         frame.setIconImage(new ImageIcon(UindosPath.IMPOSTAZIONI_LOGO_PATH).getImage());
         frame.setSize(FRAME_DIMENSION);
-        frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Creazione dei componenti 
-        JLabel lblTitolo = new JLabel("Impostazioni");
-        lblTitolo.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblTitolo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        pnlInfoUtente = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon imageIcon = new ImageIcon(UindosPath.BACKGROUND_SETTINGS_PATH);
+                Image image = imageIcon.getImage();
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
 
-        pnlInfoUtente = new JPanel(new GridLayout(7, 2));
+        pnlInfoUtente.setOpaque(false);
 
         passwordUtente = password;
         nomeUtente = username;
@@ -96,22 +76,16 @@ public class ImpostazioniWindowsFrame {
             }
         });
 
-
-        // btnEliminaUtente = new JButton("Elimina utente");
-
         lblCambiaPassword = new JLabel("<html><u>Cambia password</u></html>");
         lblCambiaPassword.setHorizontalAlignment(SwingConstants.LEFT);
         lblCambiaPassword.setForeground(Color.BLUE);
         lblCambiaPassword.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        ImpostazioniWindowsFrame myImpostazioniWindowsFrame = this;
 
-lblEliminaUtente = new JLabel("Elimina utente");
+        lblEliminaUtente = new JLabel("<html><u>Elimina utente</u></html>");
+        lblEliminaUtente.setHorizontalAlignment(SwingConstants.LEFT);
+        lblEliminaUtente.setForeground(Color.RED);
+        lblEliminaUtente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
-lblEliminaUtente.setHorizontalAlignment(SwingConstants.LEFT);
-lblEliminaUtente.setForeground(Color.RED);
-lblEliminaUtente.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-
-ListenerEliminaUtente listenerEliminaUtente = new ListenerEliminaUtente(this, lblEliminaUtente);
         if (username.equals("username") || username.equals("admin")) {
             lblEliminaUtente.setEnabled(false);
             lblCambiaPassword.setEnabled(false);
@@ -119,13 +93,15 @@ ListenerEliminaUtente listenerEliminaUtente = new ListenerEliminaUtente(this, lb
             lblCambiaPassword.addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent e) {
                     frame.dispose();
-                    new CambiaPasswordFrame(myImpostazioniWindowsFrame);
+                    new CambiaPasswordFrame(ImpostazioniWindowsFrame.this);
                 }
             });
-            // btnEliminaUtente.addActionListener(new ListenerEliminaUtente(this));
+            ListenerEliminaUtente listenerEliminaUtente = new ListenerEliminaUtente(this, lblEliminaUtente);
+            lblEliminaUtente.addMouseListener(listenerEliminaUtente);
         }
 
         btnCambiaSfondo = new JButton("Cambia sfondo");
+        WindowsStyleComponents.customizeButton(btnCambiaSfondo);
         btnCambiaSfondo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
@@ -140,9 +116,6 @@ ListenerEliminaUtente listenerEliminaUtente = new ListenerEliminaUtente(this, lb
                     Path pathRelative = pathBase.relativize(pathAbsolute);
                     String relativePath = pathRelative.toString();
 
-                    System.out.println(relativePath);
-                    // System.out.println(absolutePath);
-
                     GestoreConfig.changeConfig(username, GestoreConfig.BACKGROUND, relativePath);
                     GestoreFrame.chiudiTuttiFrame();
                     new DesktopFrame(username, password);
@@ -150,20 +123,12 @@ ListenerEliminaUtente listenerEliminaUtente = new ListenerEliminaUtente(this, lb
             }
         });
 
-        btnCambiaCursore = new JButton("Cambia cursore");
-        btnCambiaCursore.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFileChooser fileChooser = new JFileChooser();
-
-            }
-        });
-
-
-
-        fontComboBox = new JComboBox <> (getAvailableFontNames());
+        fontComboBox = new JComboBox<>(getAvailableFontNames());
+        WindowsStyleComponents.customizeComboBox(fontComboBox);
         fontComboBox.setRenderer(new FontComboBoxRenderer());
 
         JButton btnConfermaCambioFont = new JButton("Conferma");
+        WindowsStyleComponents.customizeButton(btnConfermaCambioFont);
         JPanel pnlCambioFont = new JPanel(new BorderLayout());
         pnlCambioFont.add(fontComboBox, BorderLayout.CENTER);
         pnlCambioFont.add(btnConfermaCambioFont, BorderLayout.EAST);
@@ -179,29 +144,58 @@ ListenerEliminaUtente listenerEliminaUtente = new ListenerEliminaUtente(this, lb
             }
         });
 
-        
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 5, 5, 5);
+        pnlInfoUtente.add(new JLabel("Nome utente ->"), gbc);
 
-lblEliminaUtente.addMouseListener(listenerEliminaUtente);
+        gbc.gridx = 1;
+        pnlInfoUtente.add(lblNomeUtente, gbc);
 
-       pnlInfoUtente.add(new JLabel("Nome utente ->"));
-pnlInfoUtente.add(lblNomeUtente);
-pnlInfoUtente.add(checkBoxMostraPassword);
-pnlInfoUtente.add(lblPasswordUtente);
-pnlInfoUtente.add(new JLabel());
-pnlInfoUtente.add(new JLabel());
-pnlInfoUtente.add(new JSeparator());
-pnlInfoUtente.add(new JSeparator());
-pnlInfoUtente.add(btnCambiaSfondo);
-pnlInfoUtente.add(pnlCambioFont);
-pnlInfoUtente.add(lblCambiaPassword);
-pnlInfoUtente.add(lblEliminaUtente);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        pnlInfoUtente.add(checkBoxMostraPassword, gbc);
 
+        gbc.gridx = 1;
+        pnlInfoUtente.add(lblPasswordUtente, gbc);
 
-        scrollPane = new JScrollPane(pnlInfoUtente);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        pnlInfoUtente.add(new JSeparator(), gbc);
 
-        frame.add(scrollPane, BorderLayout.CENTER);
-        frame.add(lblTitolo, BorderLayout.NORTH);
+        gbc.gridy = 3;
+        pnlInfoUtente.add(btnCambiaSfondo, gbc);
+
+        gbc.gridy = 4;
+        pnlInfoUtente.add(pnlCambioFont, gbc);
+
+        gbc.gridy = 5;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2;
+        pnlInfoUtente.add(lblCambiaPassword, gbc);
+
+        gbc.gridx = 1;
+        pnlInfoUtente.add(lblEliminaUtente, gbc);
+
+        // Crea un oggetto GridBagConstraints per posizionare pnlInfoUtente
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.weightx = 1.0; // Imposta il peso orizzontale per far espandere il componente
+        constraints.weighty = 1.0; // Imposta il peso verticale per far espandere il componente
+        constraints.fill = GridBagConstraints.BOTH; // Fai sì che il componente riempia l'area disponibile
+
+        // Aggiungi pnlInfoUtente al layout GridBagLayout con le impostazioni di GridBagConstraints
+        frame.getContentPane().setLayout(new GridBagLayout());
+        frame.getContentPane().add(pnlInfoUtente, constraints);
+
         GestoreFrame.aggiungiFrame(frame);
+
+        frame.setVisible(true);
     }
 
     private String[] getAvailableFontNames() {

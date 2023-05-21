@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import utils.GestoreFrame;
 import utils.UindosPath;
+import utils.WindowsStyleComponents;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -46,6 +47,8 @@ public class CalendarApp {
         monthComboBox = new JComboBox<>(new String[]{"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
                 "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"});
         yearComboBox = new JComboBox<>(getYearList());
+        WindowsStyleComponents.customizeComboBox(monthComboBox);
+        WindowsStyleComponents.customizeComboBox(yearComboBox);
 
         // Aggiunta dell'azione di cambio mese/anno
         ActionListener changeDateListener = e -> {

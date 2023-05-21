@@ -17,6 +17,7 @@ import utils.GestoreFrame;
 import utils.PlaceHolder;
 import utils.UindosFileName;
 import utils.UindosPath;
+import utils.WindowsStyleComponents;
 
 public class LoginFrame {
 
@@ -53,7 +54,6 @@ public class LoginFrame {
         pnlFormInput.setOpaque(false); // Set panel background to transparent
         // Creazione dei constraints per l'allineamento dei componenti
 
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -79,6 +79,7 @@ public class LoginFrame {
         pnlFormInput.add(txtPassword, constraints);
 
         btnShowPassword = new JButton("Show");
+        WindowsStyleComponents.customizeButton(btnShowPassword);
         btnShowPassword.addKeyListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.addActionListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.setPreferredSize(BUTTON_INPUT_SIZE);
@@ -88,6 +89,7 @@ public class LoginFrame {
         pnlFormInput.add(btnShowPassword, constraints);
 
         btnLogin = new JButton("Accedi");
+        WindowsStyleComponents.customizeButton(btnLogin);
         btnLogin.addKeyListener(new ListenerLogin(this));
         btnLogin.addActionListener(new ListenerLogin(this));
         btnLogin.setPreferredSize(BUTTON_INPUT_SIZE);

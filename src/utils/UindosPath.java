@@ -15,6 +15,7 @@ public class UindosPath {
     public static final String IMPOSTAZIONI_LOGO_PATH = "images/logo/impostazioni-logo.png";
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
     public static final String CALENDAR_LOGO_PATH = "images/logo/calendar-logo.png";
+    public static final String REGISTRATION_LOGO_PATH = "images/logo/registration-logo.png";
 
     /* folder */
     public static final String USER_FOLDER_PATH = "system69/Users/";
@@ -26,7 +27,8 @@ public class UindosPath {
     /* background */
 
     public static final String DEFAULT_USER_FOLDER_PATH = "Default_user_folder/";
-
+    public static final String BACKGROUND_REGISTRATION_PATH = "images/background/registration.png";
+    public static final String BACKGROUND_SETTINGS_PATH = "images/background/impostazioni.png";
     public static final String DEFAULT_BACKGROUND_FOLDER_PATH = DEFAULT_USER_FOLDER_PATH + "Foto/background/";
 
     /* files */
@@ -35,4 +37,5 @@ public class UindosPath {
 
     /* pointer */
     public static final String POINTER_PATH = "images/icon/mouse-pointer02.png";
+    public static final String ARROW_COMBOBOX_PATH = "images/icon/arrow.png";
 }
