@@ -6,7 +6,6 @@ import javax.swing.text.html.*;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.*;
-import java.io.ObjectInputFilter.Config;
 import java.net.URL;
 import java.util.ArrayList;
 

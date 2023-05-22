@@ -1,11 +1,14 @@
 package app.Paint;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +21,7 @@ import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosDirectoryName;
 import utils.UindosPath;
-    
+
 public class PaintApp {
     private JFrame frame;
     private JPanel canvas;
@@ -31,7 +34,7 @@ public class PaintApp {
 
     public PaintApp(String username) {
         frame = new JFrame("Peint - (Nuovo)");
-        frame.setSize(1280,720);
+        frame.setSize(1280, 720);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(new ImageIcon(UindosPath.PAINT_LOGO_PATH).getImage());
         frame.setResizable(false);
@@ -101,6 +104,23 @@ public class PaintApp {
         frame.getContentPane().add(controlsPanel, "South");
         frame.setVisible(true);
         GestoreFrame.aggiungiFrame(frame);
+
+        // Aggiungi le scorciatoie da tastiera
+        saveBtn.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK), "saveShortcut");
+        saveBtn.getActionMap().put("saveShortcut", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveCanvas();
+            }
+        });
+
+        openBtn.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK), "openShortcut");
+        openBtn.getActionMap().put("openShortcut", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                checkAndOpenImage();
+            }
+        });
     }
 
     private void draw(int x, int y) {
@@ -122,9 +142,11 @@ public class PaintApp {
         canvas.repaint();
 
     }
+
     private boolean isCanvasModified() {
         // Verifica se il canvas è stato modificato confrontando l'immagine corrente con un'immagine vuota
-        BufferedImage emptyImage = new BufferedImage(canvas.getWidth(), canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+        BufferedImage emptyImage = new BufferedImage(canvas.getWidth(), canvas.getHeight(),
+                BufferedImage.TYPE_INT_RGB);
         return !image.equals(emptyImage);
     }
 
@@ -147,9 +169,15 @@ public class PaintApp {
         if (name != null && !name.isEmpty()) { // Verifica se il nome del file è stato inserito
             try {
                 if (!isImageSaved) {
-                    ImageIO.write(image, "png", new File( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT + name + ".png")); // Salva l'immagine su disco come file PNG
-                } else {  
-                    ImageIO.write(image, "png", new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT + name)); // Salva l'immagine su disco come file PNG
+                    ImageIO.write(image, "png", new File(
+                            UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator
+                                    + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT
+                                    + name + ".png")); // Salva l'immagine su disco come file PNG
+                } else {
+                    ImageIO.write(image, "png",
+                            new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator
+                                    + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT
+                                    + name)); // Salva l'immagine su disco come file PNG
                 }
                 JOptionPane.showMessageDialog(frame, "Il pannello è stato salvato come immagine.");
                 frame.setTitle("Peint - " + name + ".png");
@@ -160,10 +188,12 @@ public class PaintApp {
             JOptionPane.showMessageDialog(frame, "Inserisci un nome!");
         }
     }
-    
+
     private void checkAndCreateNewCanvas() {
         if (isCanvasModified()) {
-            int option = JOptionPane.showConfirmDialog(frame, "Desideri salvare le modifiche prima di creare un nuovo disegno?", "Salva modifiche", JOptionPane.YES_NO_CANCEL_OPTION);
+            int option = JOptionPane.showConfirmDialog(frame,
+                    "Desideri salvare le modifiche prima di creare un nuovo disegno?", "Salva modifiche",
+                    JOptionPane.YES_NO_CANCEL_OPTION);
             if (option == JOptionPane.YES_OPTION) {
                 saveCanvas();
             } else if (option == JOptionPane.CANCEL_OPTION) {
@@ -179,9 +209,12 @@ public class PaintApp {
             currentColor = newColor;
         }
     }
+
     private void checkAndOpenImage() {
         if (isCanvasModified()) {
-            int option = JOptionPane.showConfirmDialog(frame, "Desideri salvare le modifiche prima di aprire un'immagine?", "Salva modifiche", JOptionPane.YES_NO_CANCEL_OPTION);
+            int option = JOptionPane.showConfirmDialog(frame,
+                    "Desideri salvare le modifiche prima di aprire un'immagine?", "Salva modifiche",
+                    JOptionPane.YES_NO_CANCEL_OPTION);
             if (option == JOptionPane.YES_OPTION) {
                 saveCanvas();
             } else if (option == JOptionPane.CANCEL_OPTION) {
@@ -193,7 +226,9 @@ public class PaintApp {
 
     private void openImage() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT)); // Imposta la directory di lavoro come cartella iniziale
+        fileChooser.setCurrentDirectory(new File(
+                UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator
+                        + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT)); // Imposta la directory di lavoro come cartella iniziale
         int result = fileChooser.showOpenDialog(frame);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
@@ -209,32 +244,34 @@ public class PaintApp {
                     canvas.revalidate();
                     canvas.repaint();
                 } else {
-                    JOptionPane.showMessageDialog(frame, "Errore durante l'apertura dell'immagine.", "Errore", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Errore durante l'apertura dell'immagine.", "Errore",
+                            JOptionPane.ERROR_MESSAGE);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-                JOptionPane.showMessageDialog(frame, "Errore durante l'apertura dell'immagine.", "Errore", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "Errore durante l'apertura dell'immagine.", "Errore",
+                        JOptionPane.ERROR_MESSAGE);
             }
         }
     }
 
-    public JFrame getFrame(){
+    public JFrame getFrame() {
         return frame;
     }
 
-    public BufferedImage getImage(){
+    public BufferedImage getImage() {
         return image;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public void setImage(BufferedImage image){
+    public void setImage(BufferedImage image) {
         this.image = image;
     }
 
-    public JPanel getCanvas(){
+    public JPanel getCanvas() {
         return canvas;
     }
 }
