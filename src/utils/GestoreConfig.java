@@ -19,7 +19,7 @@ public class GestoreConfig {
     public static Config loadConfig(String username) {
         Config config = new Config();
 
-        try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + "/" + UindosFileName.CONFIG_FILE_NAME);
+        try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + File.separator + UindosFileName.CONFIG_FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
             line = bufferedReader.readLine();
@@ -40,7 +40,7 @@ public class GestoreConfig {
     }
 
     public static void changeConfig(String username, int lineConfig, String newConfig) {
-        String filePath = UindosPath.USER_FOLDER_PATH + username + "/" + UindosFileName.CONFIG_FILE_NAME;
+        String filePath = UindosPath.USER_FOLDER_PATH + username + File.separator + UindosFileName.CONFIG_FILE_NAME;
         try {
             // Create a temporary file for writing the modified content
             File tempFile = File.createTempFile("temp", null);

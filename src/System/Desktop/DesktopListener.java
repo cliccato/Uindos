@@ -24,7 +24,7 @@ public class DesktopListener{
                 break;
             case "cartella giochi":
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/" + UindosPath.GAMES_PATH)); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + File.separator + UindosPath.GAMES_PATH)); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
