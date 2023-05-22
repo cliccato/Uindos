@@ -50,24 +50,28 @@ public class NotepadFrame {
 
         NotepadListener notepadListener = new NotepadListener(this);
 
-        newMenuItem.addActionListener(notepadListener);
-        newMenuItem.setFont(font);
-        openMenuItem.addActionListener(notepadListener);
-        openMenuItem.setFont(font);
-        saveMenuItem.addActionListener(notepadListener);
-        saveMenuItem.setFont(font);
-        exitMenuItem.addActionListener(notepadListener);
-        exitMenuItem.setFont(font);
+    newMenuItem.addActionListener(notepadListener);
+    newMenuItem.setFont(font);
+    openMenuItem.addActionListener(notepadListener);
+    openMenuItem.setFont(font);
+    saveMenuItem.addActionListener(notepadListener);
+    saveMenuItem.setFont(font);
+    exitMenuItem.addActionListener(notepadListener);
+    exitMenuItem.setFont(font);
 
-        infoMenutItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Non ci sono info");
-            }
-        });
+    infoMenutItem.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            JOptionPane.showMessageDialog(frame, "Non ci sono info");
+        }
+    });
 
-        frame.setJMenuBar(menuBar);
-        frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
+    frame.setJMenuBar(menuBar);
+    frame.getContentPane().add(new JScrollPane(textArea), BorderLayout.CENTER);
 
+    // Aggiungi gli shortcut
+        int shortcutMask = Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx();
+        saveMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, shortcutMask));
+        openMenuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, shortcutMask));
         frame.setVisible(true);
         GestoreFrame.aggiungiFrame(frame);
     }

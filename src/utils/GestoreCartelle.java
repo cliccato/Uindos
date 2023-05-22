@@ -19,12 +19,10 @@ public class GestoreCartelle {
         return directory.delete();
     }
     public static void copyFolder(Path source, Path destination) throws IOException {
-        // Create the destination folder if it doesn't exist
         if (!Files.exists(destination)) {
             Files.createDirectories(destination);
         }
 
-        // Copy all files and sub-folders recursively
         Files.walk(source)
                 .forEach(sourcePath -> {
                     try {
