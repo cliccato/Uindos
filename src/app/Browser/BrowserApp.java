@@ -6,7 +6,6 @@ import javax.swing.text.html.*;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.*;
-import java.io.ObjectInputFilter.Config;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -18,7 +17,7 @@ public class BrowserApp extends JFrame implements HyperlinkListener {
   private JButton buttonBack = new JButton("<"), buttonForward = new JButton(">");
   private JTextField locationTextField = new JTextField(35);
   private JEditorPane displayEditorPane = new JEditorPane();
-  private ArrayList pageList = new ArrayList();
+  private ArrayList<String> pageList = new ArrayList<>();
   private Font font;
 
   public BrowserApp(String username) {
