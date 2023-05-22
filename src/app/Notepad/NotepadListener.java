@@ -43,7 +43,7 @@ public class NotepadListener implements ActionListener{
                 if (!name.equals(".txt")) { // Verifica se il nome del file è stato inserito
                     try {
                         FileWriter fw;
-                        fw = new FileWriter( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO +  name);
+                        fw = new FileWriter( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO +  name);
                         fw.write(NF.getTextArea().getText()); // Salva 
                         isFileSaved = true;
                         fw.close();
@@ -61,7 +61,7 @@ public class NotepadListener implements ActionListener{
 
             NF.getTextArea().setText("");
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO)); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO)); // Imposta la directory di lavoro come cartella iniziale
                 int result = fileChooser.showOpenDialog(NF.getFrame());
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
