@@ -80,7 +80,7 @@ public class ListenerEliminaUtente implements MouseListener {
 
             // Verifica la password
             if (password == null) {
-                
+
             } else if (verificaPassword(password)) {
                 String path = UindosPath.USER_FOLDER_PATH + impostazioniWindowsFrame.getNomeUtente() + File.separator;
                 File directory = new File(path);
@@ -120,10 +120,8 @@ public class ListenerEliminaUtente implements MouseListener {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-    }
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-    }
+    public void mouseReleased(MouseEvent e) {}
 }

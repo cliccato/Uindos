@@ -114,7 +114,6 @@ public class RegistrationFrame extends JFrame {
         buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         buttonPanel.setOpaque(false);
 
-
         cancelButton = new JButton("Annulla");
         cancelButton.setFont(font);
         WindowsStyleComponents.customizeButton(cancelButton);
@@ -167,24 +166,24 @@ public class RegistrationFrame extends JFrame {
         GestoreFrame.aggiungiFrame(this);
     }
 
-    public void clearInput(){
+    public void clearInput() {
         passwordField.setText("");
         confirmPasswordField.setText("");
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return usernameTextField.getText();
     }
 
-    public JPasswordField getPassword(){
+    public JPasswordField getPassword() {
         return passwordField;
     }
 
-    public JPasswordField getConfirmPassword(){
+    public JPasswordField getConfirmPassword() {
         return confirmPasswordField;
     }
 
-    public JButton getRegisterButton(){
+    public JButton getRegisterButton() {
         return registerButton;
     }
 }

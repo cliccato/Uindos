@@ -5,7 +5,6 @@ import System.Registration.RegistrationFrame;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -55,7 +54,7 @@ public class LoginFrame {
         config = GestoreConfig.loadDefaultConfig();
 
         pnlFormInput = new JPanel(new GridBagLayout());
-        pnlFormInput.setOpaque(false); 
+        pnlFormInput.setOpaque(false);
         // Creazione dei constraints per l'allineamento dei componenti
 
         GridBagConstraints constraints = new GridBagConstraints();

@@ -11,7 +11,7 @@ public class GestoreCartelle {
         if (directory.isDirectory()) {
             File[] files = directory.listFiles();
             if (files != null) {
-                for (File file : files) {
+                for (File file: files) {
                     rimuoviCartella(file);
                 }
             }
@@ -24,13 +24,13 @@ public class GestoreCartelle {
         }
 
         Files.walk(source)
-                .forEach(sourcePath -> {
-                    try {
-                        Path destinationPath = destination.resolve(source.relativize(sourcePath));
-                        Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-                    } catch (IOException e) {
-                        System.err.println("Error occurred while copying: " + e.getMessage());
-                    }
-                });
+            .forEach(sourcePath -> {
+                try {
+                    Path destinationPath = destination.resolve(source.relativize(sourcePath));
+                    Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+                } catch (IOException e) {
+                    System.err.println("Error occurred while copying: " + e.getMessage());
+                }
+            });
     }
 }

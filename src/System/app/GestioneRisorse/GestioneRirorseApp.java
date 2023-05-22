@@ -27,7 +27,7 @@ public class GestioneRirorseApp {
     private void createElements() {
         mainFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         mainFrame.setSize(400, 300);
-        
+
         processTextArea = new JTextArea();
         processTextArea.setEditable(false);
         processTextArea.setFont(font);
@@ -39,10 +39,10 @@ public class GestioneRirorseApp {
     }
 
     private void updateProcessList() {
-        List<JFrame> allFrames = GestoreFrame.getAllFrames();
+        List <JFrame> allFrames = GestoreFrame.getAllFrames();
         StringBuilder sb = new StringBuilder();
 
-        for (Frame frame : allFrames) {
+        for (Frame frame: allFrames) {
             sb.append(frame.getTitle()).append("\n");
         }
 
