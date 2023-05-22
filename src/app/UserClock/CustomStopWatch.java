@@ -12,6 +12,9 @@
 package app.UserClock;
 
 import javax.swing.*;
+
+import utils.WindowsStyleComponents;
+
 import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -50,6 +53,11 @@ public class CustomStopWatch extends JPanel {
         txtParziali.setEditable(false);
         txtParziali.setLineWrap(true);
         txtParziali.setWrapStyleWord(true);
+
+        WindowsStyleComponents.customizeButton(btnAvvia);
+        WindowsStyleComponents.customizeButton(btnParziale);
+        WindowsStyleComponents.customizeButton(btnPausa);
+        WindowsStyleComponents.customizeButton(btnReset);
 
         btnAvvia.addActionListener(e -> avviaTempo());
         btnPausa.addActionListener(e -> pausaTempo());

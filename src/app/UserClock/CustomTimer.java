@@ -9,6 +9,9 @@
 package app.UserClock;
 import java.awt.*;
 import javax.swing.*;
+
+import utils.WindowsStyleComponents;
+
 import java.text.DecimalFormat;
 public class CustomTimer extends JPanel {
 
@@ -32,6 +35,9 @@ public class CustomTimer extends JPanel {
         btnAvvia.setFont(font);
         btnPausa = new JButton("Pausa");
         btnPausa.setFont(font);
+
+        WindowsStyleComponents.customizeButton(btnAvvia);
+        WindowsStyleComponents.customizeButton(btnPausa);
 
         btnAvvia.addActionListener(e -> avviaTempo());
         btnPausa.addActionListener(e -> pausaTempo());
