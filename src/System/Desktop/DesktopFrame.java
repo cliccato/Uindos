@@ -193,7 +193,6 @@ public class DesktopFrame {
         new ClockThread(this);
 
         try {
-            System.out.println(config.getBackground()); 
             img = ImageIO.read(new File(config.getBackground()));
         } catch (IOException e) {
             e.printStackTrace();

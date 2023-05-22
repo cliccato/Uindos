@@ -120,7 +120,6 @@ public class ListenerRegistration implements ActionListener,KeyListener {
 
     private void addUserToCSV(){
         try {
-            System.out.println(username + password);
             // Creo un FileWriter per scrivere nel file
             FileWriter fw = new FileWriter(new File(UindosPath.USERS_FILE_PATH), true);
             fw.write("\n" + username + ListenerLogin.FIELD_DELIMITATOR + password);
@@ -132,10 +131,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
 
     private void createDirectory(){
         try  {
-            File dir = new File(UindosPath.USER_FOLDER_PATH + username);
-
             GestoreCartelle.copyFolder(Paths.get(UindosPath.DEFAULT_USER_FOLDER_PATH), Paths.get(UindosPath.USER_FOLDER_PATH + username + "/"));
-            System.out.println(dir.getPath());
 
             } catch(IOException e) {
                 System.out.println(e.getMessage());
@@ -184,11 +180,9 @@ public class ListenerRegistration implements ActionListener,KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
     }
     
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
     }
 }

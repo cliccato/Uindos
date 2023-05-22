@@ -239,7 +239,6 @@ public class PaintApp {
                     isImageSaved = true;
                     name = selectedFile.getName();
                     frame.setTitle("Peint - " + name);
-                    System.out.println(selectedFile.getName());
                     canvas.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
                     canvas.revalidate();
                     canvas.repaint();

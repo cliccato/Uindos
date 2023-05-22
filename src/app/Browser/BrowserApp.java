@@ -142,7 +142,6 @@ public class BrowserApp extends JFrame implements HyperlinkListener {
       locationTextField.setText(newUrl.toString());
       updateBttns();
     } catch (Exception e) {
-      //System.out.println("Unable to load page");
     }
   }
 

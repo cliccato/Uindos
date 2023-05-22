@@ -26,7 +26,7 @@ import utils.UindosPath;
 
 public class ListenerLogin implements ActionListener, KeyListener {
     private LoginFrame loginFrame;
-    public static final String FIELD_DELIMITATOR = "|"; // da spostare
+    public static final String FIELD_DELIMITATOR = "|"; 
 
     public ListenerLogin(LoginFrame loginFrame) {
         this.loginFrame = loginFrame;
@@ -80,11 +80,9 @@ public class ListenerLogin implements ActionListener, KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
     }
 }
