@@ -41,7 +41,7 @@ public class CambiaPasswordFrame extends JFrame {
 
         setIconImage(new ImageIcon(UindosPath.IMPOSTAZIONI_LOGO_PATH).getImage());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(600, 450);
+        setSize(1000, 600);
         setLayout(new BorderLayout());
 
         inputPanel = new JPanel(new GridBagLayout()) {
@@ -65,13 +65,19 @@ public class CambiaPasswordFrame extends JFrame {
 
         // Creazione delle label per i campi di input
         JLabel lblOldPassword = new JLabel("Vecchia Password:");
+        lblOldPassword.setFont(impostazioniWindowsFrame.getFont());
         JLabel lblNewPassword = new JLabel("Nuova Password:");
+        lblNewPassword.setFont(impostazioniWindowsFrame.getFont());
         JLabel lblConfirmPassword = new JLabel("Conferma Password:");
+        lblConfirmPassword.setFont(impostazioniWindowsFrame.getFont());
 
         // Creazione dei campi di input
         txtOldPassword = new JPasswordField(20);
+        txtOldPassword.setFont(impostazioniWindowsFrame.getFont());
         txtNewPassword = new JPasswordField(20);
+        txtNewPassword.setFont(impostazioniWindowsFrame.getFont());
         txtConfirmPassword = new JPasswordField(20);
+        txtConfirmPassword.setFont(impostazioniWindowsFrame.getFont());
 
         // Aggiunta dei componenti al pannello di input
         inputPanel.add(lblOldPassword, gbc);
@@ -79,6 +85,8 @@ public class CambiaPasswordFrame extends JFrame {
         inputPanel.add(txtOldPassword, gbc);
         gbc.gridx = 2;
         btnMostraNascondiOldPassword = new JButton("Mostra Password");
+        btnMostraNascondiOldPassword.setFont(impostazioniWindowsFrame.getFont());
+
         inputPanel.add(btnMostraNascondiOldPassword, gbc);
 
         gbc.gridx = 0;
@@ -88,6 +96,7 @@ public class CambiaPasswordFrame extends JFrame {
         inputPanel.add(txtNewPassword, gbc);
         gbc.gridx = 2;
         btnMostraNascondiNewPassword = new JButton("Mostra Password");
+        btnMostraNascondiNewPassword.setFont(impostazioniWindowsFrame.getFont());
         inputPanel.add(btnMostraNascondiNewPassword, gbc);
 
         gbc.gridx = 0;
@@ -97,21 +106,24 @@ public class CambiaPasswordFrame extends JFrame {
         inputPanel.add(txtConfirmPassword, gbc);
         gbc.gridx = 2;
         btnMostraNascondiConfirmPassword = new JButton("Mostra Password");
+        btnMostraNascondiConfirmPassword.setFont(impostazioniWindowsFrame.getFont());
         inputPanel.add(btnMostraNascondiConfirmPassword, gbc);
 
         // Creazione dei bottoni
         btnAnnulla = new JButton("Annulla");
+        btnAnnulla.setFont(impostazioniWindowsFrame.getFont());
         btnConferma = new JButton("Conferma");
+        btnConferma.setFont(impostazioniWindowsFrame.getFont());
         JPanel buttonPanel = new JPanel(new GridBagLayout());
         buttonPanel.setOpaque(false);
         GridBagConstraints buttonGBC = new GridBagConstraints();
         buttonGBC.gridx = 0;
         buttonGBC.gridy = 0;
         buttonGBC.insets = new Insets(10, 30, 0, 5); // Modifica dell'inset per spostare i bottoni leggermente a destra
-        buttonPanel.add(btnConferma, buttonGBC);
+        buttonPanel.add(btnAnnulla, buttonGBC);
         buttonGBC.gridx = 1;
         buttonGBC.insets = new Insets(10, 5, 0, 0); // Modifica dell'inset per spostare i bottoni leggermente a destra
-        buttonPanel.add(btnAnnulla, buttonGBC);
+        buttonPanel.add(btnConferma, buttonGBC);
         gbc.gridx = 1;
         gbc.gridy = 3;
         gbc.gridwidth = 2;
@@ -133,6 +145,7 @@ public class CambiaPasswordFrame extends JFrame {
         btnAnnulla.addKeyListener(new ListenerCambiaPassword(this, impostazioniWindowsFrame));
 
         lblRequisitiPassword = new JLabel("<html><font color='red'>Requisiti della password:</font><br>- Deve contenere almeno 8 caratteri<br>- Deve contenere almeno una lettera minuscola<br>- Deve contenere almeno una lettera maiuscola<br>- Deve contenere almeno un numero<br>- Deve contenere almeno un carattere speciale</html>");
+        lblRequisitiPassword.setFont(impostazioniWindowsFrame.getFont());
         lblRequisitiPassword.setHorizontalAlignment(SwingConstants.LEFT);
         gbc.gridx = 0;
         gbc.gridy = 4;
