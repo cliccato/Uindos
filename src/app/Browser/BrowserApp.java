@@ -17,7 +17,7 @@ public class BrowserApp extends JFrame implements HyperlinkListener {
   private JButton buttonBack = new JButton("<"), buttonForward = new JButton(">");
   private JTextField locationTextField = new JTextField(35);
   private JEditorPane displayEditorPane = new JEditorPane();
-  private ArrayList pageList = new ArrayList();
+  private ArrayList<String> pageList = new ArrayList<>();
   private Font font;
 
   public BrowserApp(String username) {

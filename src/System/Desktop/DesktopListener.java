@@ -9,14 +9,11 @@ import app.Hanged.Hanged;
 import app.Rock_paper_scissors.RockPaperScissor;
 import app.Tris.TrisFrame;
 import app.indovina_immagini.src.GestioneIndovinaImmagineGUI;
+
 import utils.UindosPath;
 
 public class DesktopListener{
-    private String name;
-    private String username;
-
     public DesktopListener(String name, String username) {
-        this.name = name;
         
         switch (name) {
             case "brouser":
