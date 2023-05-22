@@ -16,11 +16,9 @@ import utils.UindosPath;
 public class NotepadListener implements ActionListener{
     private NotepadFrame NF;
     private boolean isFileSaved;
-    private String name;
 
     public NotepadListener(NotepadFrame NF) {
         this.NF = NF;
-        name = "";
         isFileSaved = false;
     }
 
@@ -30,25 +28,27 @@ public class NotepadListener implements ActionListener{
             case "New":
                 NF.getTextArea().setText("");
                 NF.getFrame().setTitle("Notepad - (Nuovo)");
-                name = "";
+                NF.setName("");
                 isFileSaved = false;
                 break;
             case "Save":
 
-                if(!isFileSaved) {
-                    name = JOptionPane.showInputDialog("Inserisci nome file:");
+                String title = NF.getFrame().getTitle();
+                if(!isFileSaved && title.equals("Notepad - (Nuovo)")) {
+                    String name = JOptionPane.showInputDialog("Inserisci nome file:");
                     name+= ".txt";
+                    NF.setName(name);
                 }
         
-                if (!name.equals(".txt")) { // Verifica se il nome del file è stato inserito
+                if (!NF.getName().equals(".txt")) { // Verifica se il nome del file è stato inserito
                     try {
                         FileWriter fw;
-                        fw = new FileWriter( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO +  name);
+                        fw = new FileWriter( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO +  NF.getName());
                         fw.write(NF.getTextArea().getText()); // Salva 
                         isFileSaved = true;
                         fw.close();
                         JOptionPane.showMessageDialog(NF.getFrame(), "Il file è stato salvato correttamente");
-                        NF.getFrame().setTitle("Notepad - " + name);
+                        NF.getFrame().setTitle("Notepad - " + NF.getName());
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
@@ -68,7 +68,7 @@ public class NotepadListener implements ActionListener{
 
                     if (selectedFile != null) { 
                         NF.getFrame().setTitle("Notepad - " + selectedFile.getName()); 
-                        name = selectedFile.getName();
+                        NF.setName(selectedFile.getName());
                         try {	
                             String line;
                             FileReader f=new FileReader(selectedFile);

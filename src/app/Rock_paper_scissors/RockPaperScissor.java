@@ -13,11 +13,12 @@ import utils.GestoreFrame;
 import utils.UindosPath;
 
 import java.awt.*;
+import java.io.File;
 
 public class RockPaperScissor {
-    public static final String IMG_ROCK_PATH = "src/app/Rock_paper_scissors/img/rock.jpeg";
-    public static final String IMG_PAPER_PATH = "src/app/Rock_paper_scissors/img/paper.jpeg";
-    public static final String IMG_SCISSOR_PATH = "src/app/Rock_paper_scissors/img/scissor.jpeg";
+    public static final String IMG_ROCK_PATH = "src/app/Rock_paper_scissors/img/rock.jpeg".replace("/", File.separator);
+    public static final String IMG_PAPER_PATH = "src/app/Rock_paper_scissors/img/paper.jpeg".replace("/", File.separator);
+    public static final String IMG_SCISSOR_PATH = "src/app/Rock_paper_scissors/img/scissor.jpeg".replace("/", File.separator);
     public static final int N_MOVES = 3;
     public static final int N_PLAYERS = 2;
     public static final String[] MOVES = {

@@ -34,6 +34,7 @@ public class PaintApp {
         frame.setSize(1280,720);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(new ImageIcon(UindosPath.PAINT_LOGO_PATH).getImage());
+        frame.setResizable(false);
 
         font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 
@@ -138,7 +139,8 @@ public class PaintApp {
     }
 
     private void saveCanvas() {
-        if (!isImageSaved) {
+        String title = frame.getTitle();
+        if (!isImageSaved && title.equals("Peint - (Nuovo)")) {
             name = JOptionPane.showInputDialog("Inserisci nome file:");
         }
 
@@ -150,7 +152,7 @@ public class PaintApp {
                     ImageIO.write(image, "png", new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT + name)); // Salva l'immagine su disco come file PNG
                 }
                 JOptionPane.showMessageDialog(frame, "Il pannello è stato salvato come immagine.");
-                frame.setTitle("Peint - " + name);
+                frame.setTitle("Peint - " + name + ".png");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -214,5 +216,25 @@ public class PaintApp {
                 JOptionPane.showMessageDialog(frame, "Errore durante l'apertura dell'immagine.", "Errore", JOptionPane.ERROR_MESSAGE);
             }
         }
+    }
+
+    public JFrame getFrame(){
+        return frame;
+    }
+
+    public BufferedImage getImage(){
+        return image;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setImage(BufferedImage image){
+        this.image = image;
+    }
+
+    public JPanel getCanvas(){
+        return canvas;
     }
 }

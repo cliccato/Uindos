@@ -20,7 +20,7 @@ public class ImpostazioniWindowsFrame {
     private JFrame frame;
     private DesktopFrame desktopFrame;
     private JPanel pnlInfoUtente;
-    private JLabel lblNomeUtente;
+    private JLabel lblUsername;
     private JLabel lblPasswordUtente;
     private JCheckBox checkBoxMostraPassword;
     private JButton btnCambiaSfondo;
@@ -28,10 +28,13 @@ public class ImpostazioniWindowsFrame {
     private String passwordUtente;
     private String nomeUtente;
     private JComboBox<String> fontComboBox;
+    private Font font;
 
     public ImpostazioniWindowsFrame(String username, String password, DesktopFrame desktopFrame) {
         frame = new JFrame("Impostazioni");
         this.desktopFrame = desktopFrame;
+
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 
         frame.setIconImage(new ImageIcon(UindosPath.IMPOSTAZIONI_LOGO_PATH).getImage());
         frame.setSize(FRAME_DIMENSION);
@@ -57,10 +60,13 @@ public class ImpostazioniWindowsFrame {
             pass[i] = '*';
         }
 
-        lblNomeUtente = new JLabel(username);
+        lblUsername = new JLabel(username);
+        lblUsername.setFont(font);
         lblPasswordUtente = new JLabel(new String(pass));
+        lblPasswordUtente.setFont(font);
 
         checkBoxMostraPassword = new JCheckBox("Mostra password");
+        checkBoxMostraPassword.setFont(font);
         checkBoxMostraPassword.setOpaque(false);
         checkBoxMostraPassword.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -78,10 +84,12 @@ public class ImpostazioniWindowsFrame {
         });
 
         lblCambiaPassword = new JLabel("<html><u>Cambia password</u></html>");
+        lblCambiaPassword.setFont(font);
         lblCambiaPassword.setHorizontalAlignment(SwingConstants.LEFT);
         lblCambiaPassword.setForeground(Color.BLUE);
 
         lblEliminaUtente = new JLabel("<html><u>Elimina utente</u></html>");
+        lblEliminaUtente.setFont(font);
         lblEliminaUtente.setHorizontalAlignment(SwingConstants.RIGHT);
         lblEliminaUtente.setForeground(Color.RED);
 
@@ -106,11 +114,12 @@ public class ImpostazioniWindowsFrame {
         }
 
         btnCambiaSfondo = new JButton("Cambia sfondo");
+        btnCambiaSfondo.setFont(font);
         WindowsStyleComponents.customizeButton(btnCambiaSfondo);
         btnCambiaSfondo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO)); // Set the working directory as the initial folder
+                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FOTO)); // Set the working directory as the initial folder
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
@@ -133,7 +142,9 @@ public class ImpostazioniWindowsFrame {
         fontComboBox.setRenderer(new FontComboBoxRenderer());
 
         JButton btnConfermaCambioFont = new JButton("Conferma");
+        btnConfermaCambioFont.setFont(font);
         WindowsStyleComponents.customizeButton(btnConfermaCambioFont);
+
         JPanel pnlCambioFont = new JPanel(new BorderLayout());
         pnlCambioFont.add(fontComboBox, BorderLayout.CENTER);
         pnlCambioFont.add(btnConfermaCambioFont, BorderLayout.EAST);
@@ -154,10 +165,17 @@ public class ImpostazioniWindowsFrame {
         gbc.gridy = 0;
         gbc.anchor = GridBagConstraints.WEST;
         gbc.insets = new Insets(5, 5, 5, 5);
-        pnlInfoUtente.add(new JLabel("Nome utente ->"), gbc);
+
+        JLabel lblNomeUtente = new JLabel("Nome utente: ");
+        lblNomeUtente.setFont(font);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        pnlInfoUtente.add(lblNomeUtente, gbc);
 
         gbc.gridx = 1;
-        pnlInfoUtente.add(lblNomeUtente, gbc);
+        gbc.gridy = 0;
+        pnlInfoUtente.add(lblUsername, gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 1;
@@ -241,5 +259,9 @@ public class ImpostazioniWindowsFrame {
 
     public void chiudiFrame() {
         frame.dispose();
+    }
+
+    public Font getFont() {
+        return font;
     }
 }

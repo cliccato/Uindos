@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
-import java.text.BreakIterator;
 import java.util.StringTokenizer;
 
 
@@ -20,7 +19,7 @@ public class GestoreConfig {
     public static Config loadConfig(String username) {
         Config config = new Config();
 
-        try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + "/" + UindosFileName.CONFIG_FILE_NAME);
+        try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + File.separator + UindosFileName.CONFIG_FILE_NAME);
             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
             line = bufferedReader.readLine();
@@ -41,7 +40,7 @@ public class GestoreConfig {
     }
 
     public static void changeConfig(String username, int lineConfig, String newConfig) {
-        String filePath = UindosPath.USER_FOLDER_PATH + username + "/" + UindosFileName.CONFIG_FILE_NAME;
+        String filePath = UindosPath.USER_FOLDER_PATH + username + File.separator + UindosFileName.CONFIG_FILE_NAME;
         try {
             // Create a temporary file for writing the modified content
             File tempFile = File.createTempFile("temp", null);
@@ -88,5 +87,28 @@ public class GestoreConfig {
             default:
                 return null;
         }
+    }
+
+    public static Config loadDefaultConfig() {
+        Config config = new Config();
+
+        try (FileReader fileReader = new FileReader(UindosPath.DEFAULT_USER_FOLDER_PATH + UindosFileName.CONFIG_FILE_NAME);
+            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String line;
+            line = bufferedReader.readLine();
+            config.setBackground(line);
+
+            line = bufferedReader.readLine();
+            StringTokenizer tokenizer = new StringTokenizer(line, ";");
+            String fontName = tokenizer.nextToken();
+            int fontStyle = Integer.parseInt(tokenizer.nextToken());
+            int fontSize = Integer.parseInt(tokenizer.nextToken());
+
+            config.setFont(new Font(fontName, fontStyle, fontSize));
+        } catch (IOException e) {
+            System.err.println("Error occurred while reading the file: " + e.getMessage());
+        }
+
+        return config;
     }
 }

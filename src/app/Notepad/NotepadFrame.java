@@ -20,11 +20,13 @@ public class NotepadFrame {
     private JFileChooser fileChooser;
     private Font font;
     private String username;
+    private String name;
 
     public NotepadFrame(String username) {
         this.username = username;
         createElements();
 
+        name = "";
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(HEIGHT, WIDTH);
         frame.setIconImage(new ImageIcon(UindosPath.NOTEPAD_LOGO_PATH).getImage());
@@ -94,5 +96,13 @@ public class NotepadFrame {
 
     public JTextArea getTextArea(){
         return textArea;
+    }
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
     }
 }
