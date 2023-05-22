@@ -2,6 +2,7 @@ package app.indovina_immagini.src;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class ListenerConfermaSceltaCategoriaImmagini implements ActionListener {
 
@@ -21,7 +22,7 @@ public class ListenerConfermaSceltaCategoriaImmagini implements ActionListener {
         } else {
             gestioneIndovinaImmagineGUI.getFrmPrincipale().setVisible(false);
             gestioneIndovinaImmagineGUI.setCategoriaScelta(e.getActionCommand());
-            new IndovinaImmagineGUI(gestioneIndovinaImmagineGUI, "src/app/indovina_immagini/nomi_immagini/" + gestioneIndovinaImmagineGUI.getCategoriaScelta() + ".txt");
+            new IndovinaImmagineGUI(gestioneIndovinaImmagineGUI, "src/app/indovina_immagini/nomi_immagini/".replace("/", File.separator) + gestioneIndovinaImmagineGUI.getCategoriaScelta() + ".txt");
         }
     }
 }

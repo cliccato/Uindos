@@ -7,6 +7,7 @@ import utils.UindosPath;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.Vector;
 
 public class GestioneIndovinaImmagineGUI {
@@ -57,7 +58,7 @@ public class GestioneIndovinaImmagineGUI {
         classifica = new Vector<>();
 
         // creazione label
-        lblImgIniziale = new JLabel(new ImageIcon("src/app/indovina_immagini/images/schermata_iniziale.jpg"));
+        lblImgIniziale = new JLabel(new ImageIcon("src/app/indovina_immagini/images/schermata_iniziale.jpg".replace("/", File.separator)));
         lblStato = new JLabel("");
         lblUtente = new JLabel("Nessun account registrato");
         lblStato.setForeground(Color.WHITE);

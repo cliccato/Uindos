@@ -65,13 +65,13 @@ public class Hanged {
         menuPartita.add(voceParoleDifficili);
         //creazione delle immagini per l'impiccato
         images = new ImageIcon[tentativi];
-        images[0] = new ImageIcon("src/app/Hanged/images/1 tentativo sbagliato.png");
-        images[1] = new ImageIcon("src/app/Hanged/images/2 tentativo sbagliato.png");
-        images[2] = new ImageIcon("src/app/Hanged/images/3 tentativo sbagliato.png");
-        images[3] = new ImageIcon("src/app/Hanged/images/4 tentativo sbagliato.png");
-        images[4] = new ImageIcon("src/app/Hanged/images/5 tentativo sbagliato.png");
-        images[5] = new ImageIcon("src/app/Hanged/images/6 tentativo sbagliato.png");
-        images[6] = new ImageIcon("src/app/Hanged/images/7 tentativo sbagliato.png");
+        images[0] = new ImageIcon("src/app/Hanged/images/1 tentativo sbagliato.png".replace("/", File.separator));
+        images[1] = new ImageIcon("src/app/Hanged/images/2 tentativo sbagliato.png".replace("/", File.separator));
+        images[2] = new ImageIcon("src/app/Hanged/images/3 tentativo sbagliato.png".replace("/", File.separator));
+        images[3] = new ImageIcon("src/app/Hanged/images/4 tentativo sbagliato.png".replace("/", File.separator));
+        images[4] = new ImageIcon("src/app/Hanged/images/5 tentativo sbagliato.png".replace("/", File.separator));
+        images[5] = new ImageIcon("src/app/Hanged/images/6 tentativo sbagliato.png".replace("/", File.separator));
+        images[6] = new ImageIcon("src/app/Hanged/images/7 tentativo sbagliato.png".replace("/", File.separator));
         //creazione del font
         //creazione dei pannelli
         pnlParole = new JPanel();
@@ -84,7 +84,7 @@ public class Hanged {
         lblInformazioniParolaNascosta = new JLabel();
         lblParolaUtente = new JLabel("Parola utente: ");
         lblIndovinato = new JLabel();
-        lblImmagine = new JLabel(new ImageIcon("src/app/Hanged/images/inizio.png"));
+        lblImmagine = new JLabel(new ImageIcon("src/app/Hanged/images/inizio.png".replace("/", File.separator)));
         cslParolaUtente = new JTextField("");
         //creazione del bottone conferma
         btnConferma = new JButton("CONFERMA");

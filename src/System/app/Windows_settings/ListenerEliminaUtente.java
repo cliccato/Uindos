@@ -82,7 +82,7 @@ public class ListenerEliminaUtente implements MouseListener {
             if (password == null) {
                 
             } else if (verificaPassword(password)) {
-                String path = UindosPath.USER_FOLDER_PATH + impostazioniWindowsFrame.getNomeUtente() + "/";
+                String path = UindosPath.USER_FOLDER_PATH + impostazioniWindowsFrame.getNomeUtente() + File.separator;
                 File directory = new File(path);
 
                 if (directory.exists()) {

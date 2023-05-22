@@ -37,6 +37,6 @@ public class UindosPath {
     public static final String USERS_FILE_PATH = "system69/config/SAM_IL_POMPIERE.conf".replace("/", File.separator);
 
     /* pointer */
-    public static final String POINTER_PATH = "images/icon/mouse-pointer02.png".replace("/", File.separator);
+    public static final String POINTER_PATH = "images/icon/mouse-pointer01.png".replace("/", File.separator);
     public static final String ARROW_COMBOBOX_PATH = "images/icon/arrow.png".replace("/", File.separator);
 }

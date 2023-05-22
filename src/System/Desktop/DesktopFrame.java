@@ -218,7 +218,7 @@ public class DesktopFrame {
             for (String s : v) {
                 String name = s.split(";")[0];
                 String logoPath = s.split(";")[1];
-                JButton b = new JButton(new ImageIcon(logoPath));
+                JButton b = new JButton(new ImageIcon(logoPath.replace("/", File.separator)));
                 b.setText(name);
                 b.setOpaque(false);
                 b.setContentAreaFilled(false);
@@ -295,7 +295,7 @@ public class DesktopFrame {
             for (String s : v) {
                 String name = s.split(";")[0];
                 String logoPath = s.split(";")[1];
-                JButton b = new JButton(new ImageIcon(logoPath));
+                JButton b = new JButton(new ImageIcon(logoPath.replace("/", File.separator)));
                 b.setPreferredSize(new Dimension(40, 30));
                 b.setMaximumSize(new Dimension(40, 30));
                 b.setMinimumSize(new Dimension(40, 30));
