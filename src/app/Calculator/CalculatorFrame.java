@@ -13,7 +13,7 @@ public class CalculatorFrame {
   private JPanel panel;
   private JTextField display;
   private JButton[] buttons;
-  private String[] labels = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "+", "-", "*", "/", "=", "C" };
+  private String[] labels = { "9", "8", "7", "6", "5", "4", "3", "2", "1", "0", "+", "-", "*", "/", "=", "C" };
   private Font font;
 
   public CalculatorFrame(String username) {
@@ -27,6 +27,7 @@ public class CalculatorFrame {
     for (int i = 0; i < labels.length; i++) {
       buttons[i] = new JButton(labels[i]);
       buttons[i].setFont(font);
+      buttons[i].setBackground(Color.WHITE);
       panel.add(buttons[i]);
     }
 
