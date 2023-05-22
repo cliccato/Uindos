@@ -18,6 +18,7 @@ import javax.swing.*;
 import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
+import utils.WindowsStyleComponents;
 
 import java.awt.*;
 
@@ -79,6 +80,7 @@ public class ClockFrame {
         btnWorldClock = createSidebarButton("World Clock");
         btnWorldClock.setFont(font);
 
+        
         sidebarPanel.add(btnTimer);
         sidebarPanel.add(btnStopwatch);
         sidebarPanel.add(btnWorldClock);
