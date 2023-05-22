@@ -1,6 +1,7 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 
 import java.awt.*;
@@ -30,7 +31,7 @@ public class RegistrazioneUtenteGUI {
     private JButton btnConferma;                // button per confermare la registrazione
     private JButton btnIndietro;                // button per tornare all home
     private JButton btnNuovaRegistrazione;      // button per nuova registrazione
-
+    private Font font;
     // costruttore
     public RegistrazioneUtenteGUI(GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI){
 
@@ -48,9 +49,10 @@ public class RegistrazioneUtenteGUI {
         btnIndietro = new JButton("INDIETRO");
         btnNuovaRegistrazione = new JButton("NUOVO");
         //aggiunta font e ActionListener ai bottoni
-        btnConferma.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        btnIndietro.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        btnNuovaRegistrazione.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
+        font = (Font) GestoreConfig.getConfig(gestioneIndovinaImmagineGUI.getUsername(), GestoreConfig.FONT);
+        btnConferma.setFont( font);
+        btnIndietro.setFont( font);
+        btnNuovaRegistrazione.setFont( font);
         btnConferma.addActionListener(new ListenerConfermaNuovaRegistrazione(gestioneIndovinaImmagineGUI, this));
         btnIndietro.addActionListener((ActionEvent e) -> {
             gestioneIndovinaImmagineGUI.getFrmPrincipale().setVisible(true);
@@ -86,21 +88,21 @@ public class RegistrazioneUtenteGUI {
         cslAnnoNascitaUtente = new JTextField("");
         cslSessoUtente = new JTextField("");
         //aggiunta del font a label e caselle di testo
-        lblStato.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblNomeUtente.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblNomeReale.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblPassword.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblGiornoNascitaUtente.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblMeseNascitaUtente.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblAnnoNascitaUtente.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblSessoUtente.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        cslNomeUtente.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        cslNomeReale.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        cslPassword.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        cslGiornoNascitaUtente.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        cslMeseNascitaUtente.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        cslAnnoNascitaUtente.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        cslSessoUtente.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
+        lblStato.setFont( font);
+        lblNomeUtente.setFont( font);
+        lblNomeReale.setFont( font);
+        lblPassword.setFont( font);
+        lblGiornoNascitaUtente.setFont( font);
+        lblMeseNascitaUtente.setFont( font);
+        lblAnnoNascitaUtente.setFont( font);
+        lblSessoUtente.setFont( font);
+        cslNomeUtente.setFont( font);
+        cslNomeReale.setFont( font);
+        cslPassword.setFont( font);
+        cslGiornoNascitaUtente.setFont( font);
+        cslMeseNascitaUtente.setFont( font);
+        cslAnnoNascitaUtente.setFont( font);
+        cslSessoUtente.setFont( font);
         //aggiunta label e caselle di testo al pannello
         pnlRegistrazioneUtente.add(lblNomeUtente);
         pnlRegistrazioneUtente.add(cslNomeUtente);

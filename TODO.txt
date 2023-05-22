@@ -1,38 +1,53 @@
 scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
-- aggiustare notepad (completato)
-- file di testo per ogni utente (completato)
 
-Applicazioni da fare
-	- tris (completato)
-	- impiccato (completato) 
-	- gioco immagini (completato)
-	- macchina virtuale (completato)
-	- carta sasso forbice con gui (completato)
-	- timer, cronometro e orari delle varie parti del mondo (completato)
-	- modifica password utente (completato)
-	- creazione utente e controlli (completato)	
-	
-- loghi applicazione (completato)
-- login (completato) 
-- fare configurazione utenti (completato)
-- fare cartella giochi nel desktop (completato) 
-- creare spazi di lavoro separati per gli utenti (completato)
-- fare appbar automatica (completato)
-- browser (completato)
-- login verticale(completato)
+#TODO
+	- [ ] Fondamentali
+		- [ ] sistemare logout con virtualBox (califano)
+		- [ ] sistemare calcolatrice (califano)
+		- [x] selezionatore font 
+		
+		- [x] migliorare la grafica generale (nelle impostazioni bisogna ingrandire i componenti)
+		- [x] aggiustare notepad  
+		- [x] vedere perchè quando si aprono le impostazioni l'immagine non appare
+		- [x] sistemare il clock
+		- [x] file di testo per ogni utente  
+		- [x] loghi applicazione  
+		- [x] login   
+		- [x] fare configurazione utenti  
+		- [x] creare spazi di lavoro separati per gli utenti  
+		- [x] creazione utente e controlli  	
+		- [x] selezionatore di sfondo immagine  
+		- [x] centrare le nuove applicazioni aperte  
+		- [x] sistemare terminale  
+		- [x] file configurazione utente  
+		- [x] file path  
+		- [x] gestori  
+		- [ ] mettere font in tutte le app (Fasu)
+		- [x] sistemare cartelle vuote default user (mezza)
+		- [ ] sistemare bottoni (mezza)
 
+	- [ ] Media importanza
+		- [x] browser  
+		- [x] tris  
+		- [x] fare cartella giochi nel desktop   
+		- [x] fare appbar automatica  
+		- [x] login verticale 
+		- [x] impiccato   
+		- [x] gioco immagini  
+		- [x] macchina virtuale  
+		- [x] carta sasso forbice con gui  
+		- [x] timer, cronometro e orari delle varie parti del mondo  
+		- [x] modifica password utente  
+		- [ ] icona utente  
+		- [x] app calendario
+		- [ ] applicazione soundboard
+		- [x] cartella di default  
+		- [x] sistemare size paint per far si che le immagini salvate possono essere usate come sfondo
+		- [ ] Presentazione grafica iniziale (califano)
+		- [x] Cambiare colore in rosso dell'elimina utente e chidere la password quando si preme
 
-Cose da sistemare/fare:
-	- selezionatore di sfondo immagine (da sistemare)
-	- mettere full screen (da fare)
-	- centrare le nuove applicazioni aperte (completato)
-	- selezionatore di sfondo immagine (da sistemare)
-	- vedere cosa succede ora con virtualBox (da fixare)
-	- drag and drop desktop (fixare quando si clicca Windows)
-	- mettere possibilità di cambiare font (da fare)
-	-fix controllo che l'utente esista gia
-	-controllo passwrod nella cancellazione utente (completato)
-	-cancellazione utente nel file utente (completata)
-	-icona utente
-	-sistemare timer cronometro
-	
+	- [ ] Perfezionamenti finali
+		- [ ] mettere 1920 x 1080 o comunque una resoluzione piu grande
+		- [ ] far si che quando si schiaccia l'orologio apra a lato un calendario
+		
+		- [x] mettere anche il giorno nell'orario

@@ -1,21 +1,28 @@
 package System.app.Windows_settings;
+
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Graphics;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.SwingConstants;
 
 import utils.GestoreFrame;
+import utils.UindosPath;
+import utils.WindowsStyleComponents;
 
 public class CambiaPasswordFrame extends JFrame {
 
     private JPanel inputPanel;
-    private JPanel buttonPanel;
     private JButton btnAnnulla;
     private JButton btnConferma;
     private JPasswordField txtOldPassword;
@@ -26,19 +33,35 @@ public class CambiaPasswordFrame extends JFrame {
     private JButton btnMostraNascondiOldPassword;
     private JButton btnMostraNascondiNewPassword;
     private JButton btnMostraNascondiConfirmPassword;
-  
+
     public CambiaPasswordFrame(ImpostazioniWindowsFrame impostazioniWindowsFrame) {
-        super("Cambia Password");
+        super("Cambia password");
 
         passwordUtente = impostazioniWindowsFrame.getPasswordUtente();
 
+        setIconImage(new ImageIcon(UindosPath.IMPOSTAZIONI_LOGO_PATH).getImage());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(800, 800);
+        setSize(600, 450);
         setLayout(new BorderLayout());
 
-        // Creazione del pannello per i campi di input
-        inputPanel = new JPanel(new GridLayout(4, 3, 10, 10));
+        inputPanel = new JPanel(new GridBagLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                ImageIcon imageIcon = new ImageIcon(UindosPath.BACKGROUND_SETTINGS_PATH);
+                Image image = imageIcon.getImage();
+                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            }
+        };
+
+        inputPanel.setOpaque(false);
         inputPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        gbc.insets = new Insets(5, 0, 5, 5);
 
         // Creazione delle label per i campi di input
         JLabel lblOldPassword = new JLabel("Vecchia Password:");
@@ -46,49 +69,80 @@ public class CambiaPasswordFrame extends JFrame {
         JLabel lblConfirmPassword = new JLabel("Conferma Password:");
 
         // Creazione dei campi di input
-        txtOldPassword = new JPasswordField();
-        txtNewPassword = new JPasswordField();
-        txtConfirmPassword = new JPasswordField();
+        txtOldPassword = new JPasswordField(20);
+        txtNewPassword = new JPasswordField(20);
+        txtConfirmPassword = new JPasswordField(20);
 
         // Aggiunta dei componenti al pannello di input
-        inputPanel.add(lblOldPassword);
-        inputPanel.add(txtOldPassword);
+        inputPanel.add(lblOldPassword, gbc);
+        gbc.gridx = 1;
+        inputPanel.add(txtOldPassword, gbc);
+        gbc.gridx = 2;
         btnMostraNascondiOldPassword = new JButton("Mostra Password");
-        btnMostraNascondiOldPassword.addActionListener(new ListenerMostraNascondiPassword(txtOldPassword, btnMostraNascondiOldPassword));
-        inputPanel.add(btnMostraNascondiOldPassword);
+        inputPanel.add(btnMostraNascondiOldPassword, gbc);
 
-        inputPanel.add(lblNewPassword);
-        inputPanel.add(txtNewPassword);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        inputPanel.add(lblNewPassword, gbc);
+        gbc.gridx = 1;
+        inputPanel.add(txtNewPassword, gbc);
+        gbc.gridx = 2;
         btnMostraNascondiNewPassword = new JButton("Mostra Password");
-        btnMostraNascondiNewPassword.addActionListener(new ListenerMostraNascondiPassword(txtNewPassword, btnMostraNascondiNewPassword));
-        inputPanel.add(btnMostraNascondiNewPassword);
+        inputPanel.add(btnMostraNascondiNewPassword, gbc);
 
-        inputPanel.add(lblConfirmPassword);
-        inputPanel.add(txtConfirmPassword);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        inputPanel.add(lblConfirmPassword, gbc);
+        gbc.gridx = 1;
+        inputPanel.add(txtConfirmPassword, gbc);
+        gbc.gridx = 2;
         btnMostraNascondiConfirmPassword = new JButton("Mostra Password");
-        btnMostraNascondiConfirmPassword.addActionListener(new ListenerMostraNascondiPassword(txtConfirmPassword, btnMostraNascondiConfirmPassword));
-        inputPanel.add(btnMostraNascondiConfirmPassword);
-
-        // Creazione del pannello per i bottoni
-        buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 10));
+        inputPanel.add(btnMostraNascondiConfirmPassword, gbc);
 
         // Creazione dei bottoni
         btnAnnulla = new JButton("Annulla");
-        btnAnnulla.addActionListener(new ListenerCambiaPassword(this, impostazioniWindowsFrame));
-        btnAnnulla.addKeyListener(new ListenerCambiaPassword(this, impostazioniWindowsFrame));
         btnConferma = new JButton("Conferma");
+        JPanel buttonPanel = new JPanel(new GridBagLayout());
+        buttonPanel.setOpaque(false);
+        GridBagConstraints buttonGBC = new GridBagConstraints();
+        buttonGBC.gridx = 0;
+        buttonGBC.gridy = 0;
+        buttonGBC.insets = new Insets(10, 30, 0, 5); // Modifica dell'inset per spostare i bottoni leggermente a destra
+        buttonPanel.add(btnConferma, buttonGBC);
+        buttonGBC.gridx = 1;
+        buttonGBC.insets = new Insets(10, 5, 0, 0); // Modifica dell'inset per spostare i bottoni leggermente a destra
+        buttonPanel.add(btnAnnulla, buttonGBC);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        gbc.gridwidth = 2;
+        inputPanel.add(buttonPanel, gbc);
+
+        WindowsStyleComponents.customizeButton(btnAnnulla);
+        WindowsStyleComponents.customizeButton(btnConferma);
+        WindowsStyleComponents.customizeButton(btnMostraNascondiOldPassword);
+        WindowsStyleComponents.customizeButton(btnMostraNascondiNewPassword);
+        WindowsStyleComponents.customizeButton(btnMostraNascondiConfirmPassword);
+
+        // Aggiunta Listener
+        btnMostraNascondiOldPassword.addActionListener(new ListenerMostraNascondiPassword(txtOldPassword, btnMostraNascondiOldPassword));
+        btnMostraNascondiNewPassword.addActionListener(new ListenerMostraNascondiPassword(txtNewPassword, btnMostraNascondiNewPassword));
+        btnMostraNascondiConfirmPassword.addActionListener(new ListenerMostraNascondiPassword(txtConfirmPassword, btnMostraNascondiConfirmPassword));
         btnConferma.addActionListener(new ListenerCambiaPassword(this, impostazioniWindowsFrame));
         btnConferma.addKeyListener(new ListenerCambiaPassword(this, impostazioniWindowsFrame));
+        btnAnnulla.addActionListener(new ListenerCambiaPassword(this, impostazioniWindowsFrame));
+        btnAnnulla.addKeyListener(new ListenerCambiaPassword(this, impostazioniWindowsFrame));
 
-        // Aggiunta dei bottoni al pannello dei bottoni
-        buttonPanel.add(btnAnnulla);
-        buttonPanel.add(btnConferma);
         lblRequisitiPassword = new JLabel("<html><font color='red'>Requisiti della password:</font><br>- Deve contenere almeno 8 caratteri<br>- Deve contenere almeno una lettera minuscola<br>- Deve contenere almeno una lettera maiuscola<br>- Deve contenere almeno un numero<br>- Deve contenere almeno un carattere speciale</html>");
-        inputPanel.add(lblRequisitiPassword);
-        // Aggiunta dei pannelli al frame
+        lblRequisitiPassword.setHorizontalAlignment(SwingConstants.LEFT);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.gridwidth = 3;
+        gbc.anchor = GridBagConstraints.SOUTHWEST;
+        gbc.insets = new Insets(10, 0, 0, 0);
+        inputPanel.add(lblRequisitiPassword, gbc);
+
+        // Aggiunta del pannello di input al frame
         add(inputPanel, BorderLayout.CENTER);
-        add(buttonPanel, BorderLayout.SOUTH);
 
         setVisible(true);
         GestoreFrame.aggiungiFrame(this);
@@ -104,7 +158,7 @@ public class CambiaPasswordFrame extends JFrame {
         return btnAnnulla;
     }
 
-    public JButton getBntConferma() {
+    public JButton getBtnConferma() {
         return btnConferma;
     }
 

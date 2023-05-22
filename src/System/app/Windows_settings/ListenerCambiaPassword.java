@@ -13,6 +13,7 @@ import java.util.StringTokenizer;
 import javax.swing.JOptionPane;
 
 import System.Login.ListenerLogin;
+import utils.UindosPath;
 
 public class ListenerCambiaPassword implements ActionListener, KeyListener {
 
@@ -80,7 +81,7 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
 
     private void updateCSV() {
         try {
-            File inputFile = new File(ListenerLogin.USERS_FILE_PATH);
+            File inputFile = new File(UindosPath.USERS_FILE_PATH);
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
             String line;
@@ -99,14 +100,14 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
                     password
                 }));
                 lineCount++;
-                if (lineCount < getFileLineCount(ListenerLogin.USERS_FILE_PATH)) {
+                if (lineCount < getFileLineCount(UindosPath.USERS_FILE_PATH)) {
                     // Aggiungi una nuova riga solo se non è l'ultima riga del file
                     updatedContent.append("\n");
                 }
             }
             reader.close();
 
-            FileWriter writer = new FileWriter(ListenerLogin.USERS_FILE_PATH);
+            FileWriter writer = new FileWriter(UindosPath.USERS_FILE_PATH);
             writer.write(updatedContent.toString());
             writer.close();
 
@@ -127,7 +128,7 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == cambiaPasswordFrame.getBntConferma()) {
+        if (e.getSource() == cambiaPasswordFrame.getBtnConferma()) {
             if (isPasswordOK()) {
                 impostazioniWindowsFrame.setPasswordUtente(cambiaPasswordFrame.getNewPassword());
                 if (impostazioniWindowsFrame.getCheckBoxMostraPassword().isSelected()) {
@@ -155,7 +156,7 @@ public class ListenerCambiaPassword implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getSource() == cambiaPasswordFrame.getBntConferma() && e.getKeyCode() == KeyEvent.VK_ENTER) {
+        if (e.getSource() == cambiaPasswordFrame.getBtnConferma() && e.getKeyCode() == KeyEvent.VK_ENTER) {
             if (isPasswordOK()) {
                 impostazioniWindowsFrame.setPasswordUtente(cambiaPasswordFrame.getNewPassword());
                 if (impostazioniWindowsFrame.getCheckBoxMostraPassword().isSelected()) {

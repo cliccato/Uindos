@@ -1,7 +1,6 @@
 package System.Desktop;
 
 import javax.swing.*;
-import System.Desktop.DesktopListener;
 import System.Login.LoginFrame;
 import System.app.Clock.ClockThread;
 import System.app.Windows_settings.ImpostazioniWindowsFrame;
@@ -9,7 +8,10 @@ import app.Calculator.CalculatorFrame;
 import app.Notepad.NotepadFrame;
 import app.Terminal.TerminalFrame;
 import app.UserClock.ClockFrame;
+import utils.Config;
+import utils.GestoreConfig;
 import utils.GestoreFrame;
+import utils.UindosPath;
 import System.app.AppBar.AppBarListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,30 +31,24 @@ public class DesktopFrame {
     public static final int APP_HEIGHT = 16;
     public static final int APP_WIDTH = 16;
 
-    public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png";
-    public static final String APP_LIST_PATH = "src/applist.csv";
-    public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
-    public static final String DEFAULT_BACKGROUND_PATH = "images/background/background01.png";
-    public static final String GAMES_PATH = "system69/games";
-
-    private ClockThread clock;
     private static String username;
     private String password;
     private Dimension frameDimension, appBarDimension;
     private JFrame frame;
-    private JPanel imagePanel, southPanel, appBarPanel;
+    private JPanel imagePanel, southPanel, appBarPanel, dateClockPanel;
     private JPopupMenu appMenu;
-    private JMenu systemMenu, utilsMenu;
+    private JMenu systemMenu, utilsMenu, user;
     private JMenuItem itemLogOut, itemExit, itemSettings;
     private JButton homeButton;
-    private JLabel lblClock;
+    private JLabel lblClock, lblDate;
     private BufferedImage img;
     private Point initialLocation;
-    private JMenu user;
+    private Config config;
 
     public DesktopFrame(String username, String password) {// implementare desktop con aree di file distinte per ogni utente
         DesktopFrame.username = username;
         this.password = password;
+        config = GestoreConfig.loadConfig(username);
         createElements();
         createApp();
         setAppBar();
@@ -61,7 +57,7 @@ public class DesktopFrame {
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setIconImage(new ImageIcon(WINDOWS_LOGO_PATH).getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH).getImage());
 
         imagePanel.setLayout(new GridLayout(3, 5, 1, 1));
 
@@ -73,7 +69,7 @@ public class DesktopFrame {
         southPanel.setLayout(new BorderLayout());
         southPanel.setBackground(new Color(0, 0, 0));
 
-        appBarPanel.setLayout(new GridLayout());
+        appBarPanel.setLayout(new FlowLayout());
         appBarPanel.setSize(appBarDimension);
         appBarPanel.setBackground(new Color(0, 0, 0));
         appBarPanel.setOpaque(true);
@@ -89,35 +85,53 @@ public class DesktopFrame {
 
         lblClock.setFont(new Font("Arial", Font.PLAIN, 20));
         lblClock.setForeground(Color.WHITE);
+        lblClock.setPreferredSize(new Dimension(10, 10));
+        lblClock.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDate.setFont(new Font("Arial", Font.PLAIN, 20));
+        lblDate.setForeground(Color.WHITE);
+        lblDate.setPreferredSize(new Dimension(10, 10));
+        lblDate.setHorizontalAlignment(SwingConstants.CENTER);
+
+        dateClockPanel.setPreferredSize(new Dimension(115, 30));
+        dateClockPanel.setBackground(Color.BLACK);
+        dateClockPanel.add(lblClock);
+        dateClockPanel.add(lblDate);
 
         southPanel.add(homeButton, BorderLayout.WEST);
         southPanel.add(appBarPanel, BorderLayout.CENTER);
-        southPanel.add(lblClock, BorderLayout.EAST);
+        southPanel.add(dateClockPanel, BorderLayout.EAST);
 
         frame.add(imagePanel, BorderLayout.CENTER);
         frame.add(southPanel, BorderLayout.SOUTH);
 
         frame.setLocationRelativeTo(null);
-
         frame.setVisible(true);
     }
 
     private void createElements() {
         frame = new JFrame("Uindos");
-        homeButton = new JButton(new ImageIcon(WINDOWS_LOGO_PATH));
+        homeButton = new JButton(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH));
         appBarPanel = new JPanel();
         southPanel = new JPanel();
+        dateClockPanel = new JPanel(new GridLayout(2, 1));
         frameDimension = new Dimension(WIDTH, HEIGHT);
         appBarDimension = new Dimension(APP_HEIGHT, WIDTH - APP_WIDTH);
         lblClock = new JLabel("");
+        lblClock.setFont(config.getFont());
+        lblDate = new JLabel("");
+        lblDate.setFont(config.getFont());
         appMenu = new JPopupMenu();
+        appMenu.setFont(config.getFont());
         systemMenu = new JMenu("System");
+        systemMenu.setFont(config.getFont());
         utilsMenu = new JMenu("Utils");
+        utilsMenu.setFont(config.getFont());
 
-        clock = new ClockThread(this);
+        new ClockThread(this);
 
         try {
-            img = ImageIO.read(new File(DEFAULT_BACKGROUND_PATH));
+            System.out.println(config.getBackground()); 
+            img = ImageIO.read(new File(config.getBackground()));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -133,39 +147,41 @@ public class DesktopFrame {
     public void createApp() {
         systemMenu.add(new JMenuItem(new AbstractAction("Terminal") {
             public void actionPerformed(ActionEvent e) {
-                new TerminalFrame();
+                new TerminalFrame(username);
             }
-        }));
+        })).setFont(config.getFont());;
 
         systemMenu.add(new JMenuItem(new AbstractAction("Notepad") {
             public void actionPerformed(ActionEvent e) {
-                new NotepadFrame();
+                new NotepadFrame(username);
             }
-        }));
+        })).setFont(config.getFont());;
 
         utilsMenu.add(new JMenuItem(new AbstractAction("Calculator") {
             public void actionPerformed(ActionEvent e) {
-                new CalculatorFrame();
+                new CalculatorFrame(username);
             }
-        }));
+        })).setFont(config.getFont());;
         utilsMenu.add(new JMenuItem(new AbstractAction("Clock") {
             public void actionPerformed(ActionEvent e) {
-                new ClockFrame();
+                new ClockFrame(username);
             }
-        }));
-
+        })).setFont(config.getFont());;
+        
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
                 GestoreFrame.chiudiTuttiFrame();
                 new LoginFrame();
             }
         });
+        itemLogOut.setFont(config.getFont());
 
         itemExit = new JMenuItem(new AbstractAction("Power off") {
             public void actionPerformed(ActionEvent e) {
                 System.exit(1);
             }
         });
+        itemExit.setFont(config.getFont());
 
         DesktopFrame myDesktopFrame = this;
         itemSettings = new JMenuItem(new AbstractAction("Settings") {
@@ -173,8 +189,10 @@ public class DesktopFrame {
                 new ImpostazioniWindowsFrame(username, password, myDesktopFrame);
             }
         });
+        itemSettings.setFont(config.getFont());
 
         user = new JMenu(DesktopFrame.getUsername());
+        user.setFont(config.getFont());
         user.add(itemSettings);
         user.add(new JSeparator());
         user.add(itemLogOut);
@@ -186,7 +204,7 @@ public class DesktopFrame {
     }
 
     public void setDesktop() {
-        File file = new File(DESKTOP_LIST_PATH);
+        File file = new File(UindosPath.DESKTOP_LIST_PATH);
         Scanner scanner;
 
         try {
@@ -205,7 +223,8 @@ public class DesktopFrame {
                 b.setOpaque(false);
                 b.setContentAreaFilled(false);
                 b.setBorderPainted(false);
-
+                b.setFont(config.getFont());
+                
                 b.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
                         initialLocation = e.getPoint();
@@ -240,7 +259,7 @@ public class DesktopFrame {
                     @Override
                     public void mouseClicked(MouseEvent e){
                         if(e.getClickCount()==2){
-                            new DesktopListener(name);
+                            new DesktopListener(name, username);
                         }
                     }
                 });
@@ -262,7 +281,7 @@ public class DesktopFrame {
     }
 
     public void setAppBar() {
-        File file = new File(APP_LIST_PATH);
+        File file = new File(UindosPath.APP_LIST_PATH);
         Scanner scanner;
 
         try {
@@ -276,15 +295,16 @@ public class DesktopFrame {
             for (String s : v) {
                 String name = s.split(";")[0];
                 String logoPath = s.split(";")[1];
-                JButton b = new JButton(new ImageIcon(logoPath));
-                b.setOpaque(false);
-                b.setContentAreaFilled(false);
-                b.setBorderPainted(false);
-                b.addActionListener(new AppBarListener(name));
+                JButton b = new SquareButton(new ImageIcon(logoPath));
+                b.setPreferredSize(new Dimension(40, 30));
+                b.setMaximumSize(new Dimension(40, 30));
+                b.setMinimumSize(new Dimension(40, 30));
+                b.setAlignmentY(Component.CENTER_ALIGNMENT);
+                b.addActionListener(new AppBarListener(name, username));
                 appBarPanel.add(b);
             }
         } catch (FileNotFoundException e) {
-            ; //TMCH
+            // TMCH
         }
     }
 
@@ -300,11 +320,11 @@ public class DesktopFrame {
         return lblClock;
     }
 
+    public JLabel getLblDate(){
+        return lblDate;
+    }
+
     public JPanel getImagePanel(){
         return imagePanel;
     }
-    
-    // public void disableVisibility() {
-    //     frame.setVisible(false);
-    // }
 }

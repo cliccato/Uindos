@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.StringTokenizer;
 
 import javax.swing.JOptionPane;
@@ -17,6 +18,8 @@ import javax.swing.JOptionPane;
 import System.Desktop.DesktopFrame;
 import System.Login.ListenerLogin;
 import System.Login.LoginFrame;
+import utils.GestoreCartelle;
+import utils.UindosPath;
 
 public class ListenerRegistration implements ActionListener,KeyListener {
 
@@ -31,12 +34,11 @@ public class ListenerRegistration implements ActionListener,KeyListener {
     }
     
     private boolean isUserAlreadyPresent(){
-        try (BufferedReader fIN = new BufferedReader(new FileReader(new File(ListenerLogin.USERS_FILE_PATH)))) {
+        try (BufferedReader fIN = new BufferedReader(new FileReader(new File(UindosPath.USERS_FILE_PATH)))) {
             String fileLine;
             while ((fileLine = fIN.readLine()) != null) {
                 StringTokenizer stringTokenizer = new StringTokenizer(fileLine, ListenerLogin.FIELD_DELIMITATOR);
                 String usernameFile = stringTokenizer.nextToken();
-                String passwordFile = stringTokenizer.nextToken();
                 if (usernameFile.equals(username)) {
                     return true;
                 }
@@ -120,7 +122,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         try {
             System.out.println(username + password);
             // Creo un FileWriter per scrivere nel file
-            FileWriter fw = new FileWriter(new File(ListenerLogin.USERS_FILE_PATH), true);
+            FileWriter fw = new FileWriter(new File(UindosPath.USERS_FILE_PATH), true);
             fw.write("\n" + username + ListenerLogin.FIELD_DELIMITATOR + password);
             fw.close();
         } catch (Exception e) {
@@ -129,15 +131,17 @@ public class ListenerRegistration implements ActionListener,KeyListener {
     }
 
     private void createDirectory(){
-        File dir = new File("src/System/Users/" + username);
-        File dirFileTxt = new File(dir.getAbsolutePath() + "/file di testo");
-        File dirImgPaint = new File(dir.getAbsolutePath() + "/immagini paint");
-        System.out.println(dir.getPath());
-        if (!dir.exists()) {
-            dir.mkdir();
-            dirFileTxt.mkdir();
-            dirImgPaint.mkdir();
-        }
+        try  {
+            File dir = new File(UindosPath.USER_FOLDER_PATH + username);
+
+            GestoreCartelle.copyFolder(Paths.get(UindosPath.DEFAULT_USER_FOLDER_PATH), Paths.get(UindosPath.USER_FOLDER_PATH + username + "/"));
+            System.out.println(dir.getPath());
+
+            } catch(IOException e) {
+                System.out.println(e.getMessage());
+            } catch(Exception e) {
+                System.out.println(e.getMessage());
+            }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package app.indovina_immagini.src;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 
 import java.awt.*;
@@ -18,11 +19,16 @@ public class AccediUtenteGUI {
     private JTextField cslPassword;         // casella password
     private JButton btnConferma;            // bottone di conferma
     private JButton btnIndietro;            // bottone per ritornare alla home
+    private String username;
+    private Font font;
 
     // costruttore
-    public AccediUtenteGUI(GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI){
+    public AccediUtenteGUI(GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI, String username){
 
         this.gestioneIndovinaImmagineGUI = gestioneIndovinaImmagineGUI;
+
+        font = (Font) GestoreConfig.getConfig(username,GestoreConfig.FONT);
+
 
         //creazione finestra
         frmAccediUtente = new JFrame("Accedi");
@@ -34,8 +40,7 @@ public class AccediUtenteGUI {
         btnConferma = new JButton("CONFERMA");
         btnIndietro = new JButton("INDIETRO");
         //aggiunta font e ActionListener ai bottoni
-        btnConferma.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        btnIndietro.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
+      
         btnConferma.addActionListener(new ListenerConfermaAccedi(gestioneIndovinaImmagineGUI, this));
         btnIndietro.addActionListener((ActionEvent e) -> {
             gestioneIndovinaImmagineGUI.getFrmPrincipale().setVisible(true);
@@ -51,12 +56,15 @@ public class AccediUtenteGUI {
         cslNomeUtente = new JTextField("");
         cslPassword = new JTextField("");
 
+        lblStato.setFont(font);
+lblNomeUtente.setFont(font);
+lblPassword.setFont(font);
+cslNomeUtente.setFont(font);
+cslPassword.setFont(font);
+btnConferma.setFont(font);
+btnIndietro.setFont(font);
         //aggiunta del font a label e caselle di testo
-        lblStato.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblNomeUtente.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        lblPassword.setFont(GestioneIndovinaImmagineGUI.fntLblMenuItem);
-        cslNomeUtente.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
-        cslPassword.setFont(GestioneIndovinaImmagineGUI.fntBtnCslTesto);
+      
         //aggiunta label e caselle di testo al pannello
         pnlAccediUtente.add(lblNomeUtente);
         pnlAccediUtente.add(cslNomeUtente);

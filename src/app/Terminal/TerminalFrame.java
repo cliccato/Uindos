@@ -14,22 +14,26 @@ package app.Terminal;
 
 import javax.swing.*;
 
+import System.Desktop.DesktopFrame;
+import utils.GestoreConfig;
 import utils.GestoreFrame;
-
+import utils.UindosPath;
 import java.awt.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class TerminalFrame {
-    private static final String LOGO_PATH = "images/logo/terminal-logo.png";
     private static final int HEIGHT = 800;
     private static final int WIDTH = 800;
-    private Path path = Paths.get(".").toAbsolutePath().normalize();
+    private Path path = Paths.get(".").resolve(UindosPath.USER_FOLDER_PATH).resolve(DesktopFrame.getUsername()).toAbsolutePath().normalize();
     private JFrame frame;
     private JTextArea taOutput;
     private JTextField txtInputField;
+    private Font font;
+    private String username;
 
-    public TerminalFrame() {
+    public TerminalFrame(String username) {
+        this.username = username;
         createElements();
         setLookAndFeel();
         setFrameProperties();
@@ -40,8 +44,11 @@ public class TerminalFrame {
 
     private void createElements() {
         frame = new JFrame("Terminal");
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
         taOutput = new JTextArea();
+        taOutput.setFont(font);
         txtInputField = new JTextField();
+        txtInputField.setFont(font);
     }
 
     private void setLookAndFeel() {
@@ -54,7 +61,7 @@ public class TerminalFrame {
 
     private void setFrameProperties() {
         frame.setSize(HEIGHT, WIDTH);
-        frame.setIconImage(new ImageIcon(LOGO_PATH).getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.TERMINAL_LOGO_PATH).getImage());
         frame.setLayout(new BorderLayout());
         frame.getContentPane().setBackground(Color.BLACK);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

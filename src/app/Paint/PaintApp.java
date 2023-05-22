@@ -1,6 +1,7 @@
 package app.Paint;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
@@ -13,10 +14,12 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import System.Desktop.DesktopFrame;
+import utils.GestoreConfig;
 import utils.GestoreFrame;
+import utils.UindosDirectoryName;
+import utils.UindosPath;
     
 public class PaintApp {
-    private static final String LOGO_PATH = "images/logo/paint-logo.png";
     private JFrame frame;
     private JPanel canvas;
     private Color currentColor = Color.white;
@@ -24,13 +27,15 @@ public class PaintApp {
     private String name;
     private BufferedImage image;
     private boolean isImageSaved;
-    private boolean isCanvasModified = false;
+    private Font font;
 
-    public PaintApp() {
-        frame = new JFrame("Peint");
-        frame.setSize(800, 600);
+    public PaintApp(String username) {
+        frame = new JFrame("Peint - (Nuovo)");
+        frame.setSize(1280,720);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setIconImage(new ImageIcon(LOGO_PATH).getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.PAINT_LOGO_PATH).getImage());
+
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 
         isImageSaved = false;
         canvas = new JPanel() {
@@ -64,18 +69,25 @@ public class PaintApp {
 
         JButton colorBtn = new JButton("Select Color");
         colorBtn.addActionListener(e -> selectColor());
-
+        colorBtn.setFont(font);
         JButton clearBtn = new JButton("Clear");
         clearBtn.addActionListener(e -> clearCanvas());
+        clearBtn.setFont(font);
 
         JButton saveBtn = new JButton("Save");
         saveBtn.addActionListener(e -> saveCanvas());
+        saveBtn.setFont(font);
 
         JButton openBtn = new JButton("Open");
         openBtn.addActionListener(e -> checkAndOpenImage());
+        openBtn.setFont(font);
+
         JButton newBtn = new JButton("Nuovo Disegno");
         newBtn.addActionListener(e -> checkAndCreateNewCanvas());
+        newBtn.setFont(font);
+
         JPanel controlsPanel = new JPanel();
+        controlsPanel.setFont(font);
 
         controlsPanel.setBackground(Color.BLACK);
         controlsPanel.add(openBtn);
@@ -98,7 +110,6 @@ public class PaintApp {
 
         canvas.repaint();
 
-        isCanvasModified = true;
     }
 
     private void clearCanvas() {
@@ -109,7 +120,6 @@ public class PaintApp {
 
         canvas.repaint();
 
-        isCanvasModified = false;
     }
     private boolean isCanvasModified() {
         // Verifica se il canvas è stato modificato confrontando l'immagine corrente con un'immagine vuota
@@ -118,12 +128,7 @@ public class PaintApp {
     }
 
     private void createNewCanvas() {
-        // if (isCanvasModified()) {
-        //     int option = JOptionPane.showConfirmDialog(frame, "Desideri salvare le modifiche prima di creare un nuovo disegno?", "Salva modifiche", JOptionPane.YES_NO_OPTION);
-        //     if (option == JOptionPane.YES_OPTION) {
-        //         saveCanvas();
-        //     }
-        // }
+        frame.setTitle("Peint - (Nuovo)");
         int width = canvas.getWidth();
         int height = canvas.getHeight();
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -140,16 +145,18 @@ public class PaintApp {
         if (name != null && !name.isEmpty()) { // Verifica se il nome del file è stato inserito
             try {
                 if (!isImageSaved) {
-                    ImageIO.write(image, "png", new File("src/System/Users/" + DesktopFrame.getUsername() + "/immagini paint/" + name + ".png")); // Salva l'immagine su disco come file PNG
-                } else {
-                    ImageIO.write(image, "png", new File("src/System/Users/" + DesktopFrame.getUsername() + "/immagini paint/" + name)); // Salva l'immagine su disco come file PNG
+                    ImageIO.write(image, "png", new File( UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT + name + ".png")); // Salva l'immagine su disco come file PNG
+                } else {  
+                    ImageIO.write(image, "png", new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT + name)); // Salva l'immagine su disco come file PNG
                 }
                 JOptionPane.showMessageDialog(frame, "Il pannello è stato salvato come immagine.");
+                frame.setTitle("Peint - " + name);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            JOptionPane.showMessageDialog(frame, "Inserisci un nome!");
         }
-        isCanvasModified = false;
     }
     
     private void checkAndCreateNewCanvas() {
@@ -158,7 +165,6 @@ public class PaintApp {
             if (option == JOptionPane.YES_OPTION) {
                 saveCanvas();
             } else if (option == JOptionPane.CANCEL_OPTION) {
-                isCanvasModified = false;
                 return;
             }
         }
@@ -185,7 +191,7 @@ public class PaintApp {
 
     private void openImage() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir") + "/src/System/Users/" + DesktopFrame.getUsername() + "/immagini paint")); // Imposta la directory di lavoro come cartella iniziale
+        fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + "/" + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT)); // Imposta la directory di lavoro come cartella iniziale
         int result = fileChooser.showOpenDialog(frame);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
@@ -195,6 +201,7 @@ public class PaintApp {
                     image = newImage;
                     isImageSaved = true;
                     name = selectedFile.getName();
+                    frame.setTitle("Peint - " + name);
                     System.out.println(selectedFile.getName());
                     canvas.setPreferredSize(new Dimension(image.getWidth(), image.getHeight()));
                     canvas.revalidate();

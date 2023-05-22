@@ -1,7 +1,9 @@
 package app.Tris;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 import java.awt.*;
 import java.util.Random;
@@ -24,16 +26,15 @@ public class TrisFrame{
     private static final String[] LETTERE_TRIS = {"X","O"};
     public static final int NUM_BOTTONI_TRIS = 9;
     private static final int NUM_BOTTONI_TRIS_RIGA_COLONNA = 3;
-    private static final String TRIS_LOGO_PATH = "images/logo/tris-logo.png";
-    private final Font fntBtn;
+    private final Font font;
 
-    public TrisFrame(){
+    public TrisFrame(String username){
 
         frmTris = new JFrame("Tris");
         frmTris.setLayout(new BorderLayout());
-        frmTris.setIconImage(new ImageIcon(TRIS_LOGO_PATH).getImage());
+        frmTris.setIconImage(new ImageIcon(UindosPath.TRIS_LOGO_PATH).getImage());
 
-        fntBtn = new Font("Serif", Font.BOLD, 40);
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 
         vittoriaX = false;
         vittoriaO = false;
@@ -60,7 +61,7 @@ public class TrisFrame{
             for (int j = 0; j < NUM_BOTTONI_TRIS_RIGA_COLONNA; j++) {
                 btnTris[i][j] = new JButton("");
                 btnTris[i][j].addActionListener(new TrisListener(this));
-                btnTris[i][j].setFont(fntBtn);
+                btnTris[i][j].setFont(font.deriveFont(40f));
                 pnlBtnTris.add(btnTris[i][j]);
             }
         }

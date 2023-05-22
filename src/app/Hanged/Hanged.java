@@ -1,7 +1,9 @@
 package app.Hanged;
 import javax.swing.*;
 
+import utils.GestoreConfig;
 import utils.GestoreFrame;
+import utils.UindosPath;
 
 import java.awt.*;
 import java.io.File;
@@ -9,7 +11,6 @@ import java.util.Vector;
 
 public class Hanged {
 
-    private static final String HANGED_LOGO_PATH = "images/logo/hanged-logo.png";
     public static final int NUM_TENTATIVI = 7;
     private JFrame frmImpiccato;
     private JMenuBar menuImpiccato;
@@ -27,19 +28,19 @@ public class Hanged {
     private JTextField cslParolaUtente;
     private ImageIcon[] images;
     private JButton btnConferma;
-    private Font fnt;
     private File file;
     private String parolaEstratta;
     private int tentativi = 7;
     private Vector<Character> lettereGiaDette;
     private Vector<String> paroleGiaDette;
     private boolean isGiocoFinito = false;
+    private Font font;
 
-    public Hanged(){
+    public Hanged(String username){
 
         //creazione finestra per il gioco dell'impiccato
         frmImpiccato = new JFrame("Impiccato");
-        frmImpiccato.setIconImage((new ImageIcon(HANGED_LOGO_PATH)).getImage());
+        frmImpiccato.setIconImage((new ImageIcon(UindosPath.HANGED_LOGO_PATH)).getImage());
         Container c = frmImpiccato.getContentPane();
         c.setLayout(new BorderLayout());
         //creazione menu
@@ -55,6 +56,9 @@ public class Hanged {
         voceParoleSemplici.addActionListener(new ListenerChooseDifficult(this));
         voceParoleNormali.addActionListener(new ListenerChooseDifficult(this));
         voceParoleDifficili.addActionListener(new ListenerChooseDifficult(this));
+
+        font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
+
         menuImpiccato.add(menuPartita);
         menuPartita.add(voceParoleSemplici);
         menuPartita.add(voceParoleNormali);
@@ -69,7 +73,6 @@ public class Hanged {
         images[5] = new ImageIcon("src/app/Hanged/images/6 tentativo sbagliato.png");
         images[6] = new ImageIcon("src/app/Hanged/images/7 tentativo sbagliato.png");
         //creazione del font
-        fnt = new Font("Serif", Font.BOLD, 22);
         //creazione dei pannelli
         pnlParole = new JPanel();
         pnlIndovinato = new JLabel();
@@ -87,16 +90,16 @@ public class Hanged {
         btnConferma = new JButton("CONFERMA");
         btnConferma.addActionListener(new ListenerHanged(this));
         //aggiunta del font ai vari componenti del frame
-        cslParolaUtente.setFont(fnt);
-        lblInformazioniParolaNascosta.setFont(fnt);
-        lblParolaNascosta.setFont(fnt);
-        lblParolaUtente.setFont(fnt);
-        lblIndovinato.setFont(fnt);
-        btnConferma.setFont(fnt);
-        menuPartita.setFont(fnt);
-        voceParoleSemplici.setFont(fnt);
-        voceParoleNormali.setFont(fnt);
-        voceParoleDifficili.setFont(fnt);
+        cslParolaUtente.setFont(font);
+        lblInformazioniParolaNascosta.setFont(font);
+        lblParolaNascosta.setFont(font);
+        lblParolaUtente.setFont(font);
+        lblIndovinato.setFont(font);
+        btnConferma.setFont(font);
+        menuPartita.setFont(font);
+        voceParoleSemplici.setFont(font);
+        voceParoleNormali.setFont(font);
+        voceParoleDifficili.setFont(font);
         //aggiunta dei componenti ai pannelli
         pnlParole.add(lblInformazioniParolaNascosta);
         pnlParole.add(lblParolaNascosta);

@@ -4,9 +4,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.text.html.*;
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.*;
+import java.io.ObjectInputFilter.Config;
 import java.net.URL;
 import java.util.ArrayList;
+
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.UindosPath;
 
@@ -15,14 +19,22 @@ public class BrowserApp extends JFrame implements HyperlinkListener {
   private JTextField locationTextField = new JTextField(35);
   private JEditorPane displayEditorPane = new JEditorPane();
   private ArrayList pageList = new ArrayList();
+  private Font font;
 
-  public BrowserApp() {
+  public BrowserApp(String username) {
     setTitle("Brouser");
     setSize(640, 480);
     setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     setVisible(true);
     setIconImage(new ImageIcon(UindosPath.BROWSER_LOGO_PATH).getImage());
     JPanel bttnPanel = new JPanel();
+
+    font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
+
+    locationTextField.setFont(font);
+    displayEditorPane.setFont(font);
+    buttonBack.setFont(font);
+    buttonForward.setFont(font);
 
     buttonBack.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
@@ -50,6 +62,7 @@ public class BrowserApp extends JFrame implements HyperlinkListener {
 
     bttnPanel.add(locationTextField);
     JButton bttnGo = new JButton("GO");
+    bttnGo.setFont(font);
     bttnGo.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         actionGo();

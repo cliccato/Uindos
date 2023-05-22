@@ -4,9 +4,9 @@ import System.Registration.RegistrationFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -15,7 +15,9 @@ import java.io.IOException;
 
 import utils.GestoreFrame;
 import utils.PlaceHolder;
-import utils.PlaceHolder.*;
+import utils.UindosFileName;
+import utils.UindosPath;
+import utils.WindowsStyleComponents;
 
 public class LoginFrame {
 
@@ -44,14 +46,13 @@ public class LoginFrame {
         frame = new JFrame("Login");
         frame.setSize(new Dimension(DesktopFrame.WIDTH, DesktopFrame.HEIGHT));
         frame.setResizable(false);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new BorderLayout());
-        frame.setIconImage(new ImageIcon(DesktopFrame.WINDOWS_LOGO_PATH).getImage());
+        frame.setIconImage(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH).getImage());
 
         pnlFormInput = new JPanel(new GridBagLayout());
         pnlFormInput.setOpaque(false); // Set panel background to transparent
         // Creazione dei constraints per l'allineamento dei componenti
-
 
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(10, 10, 10, 10);
@@ -61,6 +62,7 @@ public class LoginFrame {
         constraints.weighty = 1.0;
 
         txtUsername = new JTextField();
+        txtUsername.setFont(new Font("Apple Casual", 0, 15));
         txtUsername.setPreferredSize(TXT_INPUT_SIZE);
         txtUsername.setHorizontalAlignment(JTextField.CENTER);
         constraints.gridx = 0;
@@ -77,6 +79,7 @@ public class LoginFrame {
         pnlFormInput.add(txtPassword, constraints);
 
         btnShowPassword = new JButton("Show");
+        WindowsStyleComponents.customizeButton(btnShowPassword);
         btnShowPassword.addKeyListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.addActionListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.setPreferredSize(BUTTON_INPUT_SIZE);
@@ -86,6 +89,7 @@ public class LoginFrame {
         pnlFormInput.add(btnShowPassword, constraints);
 
         btnLogin = new JButton("Accedi");
+        WindowsStyleComponents.customizeButton(btnLogin);
         btnLogin.addKeyListener(new ListenerLogin(this));
         btnLogin.addActionListener(new ListenerLogin(this));
         btnLogin.setPreferredSize(BUTTON_INPUT_SIZE);
@@ -120,45 +124,6 @@ public class LoginFrame {
         frame.add(pnlFormInput, BorderLayout.CENTER);
     }
 
-    // private void addplaceHolder() {
-    //     // Aggiungi placeholder al campo di testo txtUsername
-    //     txtUsername.setText("username");
-    //     txtUsername.addFocusListener(new FocusListener() {
-    //         @Override
-    //         public void focusGained(FocusEvent e) {
-    //             if (txtUsername.getText().equals("username")) {
-    //                 txtUsername.setText("");
-    //             }
-    //         }
-
-    //         @Override
-    //         public void focusLost(FocusEvent e) {
-    //             if (txtUsername.getText().isEmpty()) {
-    //                 txtUsername.setText("username");
-    //             }
-    //         }
-    //     });
-    //     // Aggiungi placeholder al campo di testo txtPassword
-    //     txtPassword.setForeground(Color.GRAY);
-    //     txtPassword.setText("password");
-    //     txtPassword.addFocusListener(new FocusListener() {
-    //         @Override
-    //         public void focusGained(FocusEvent e) {
-    //             if (new String(txtPassword.getPassword()).equals("password")) {
-    //                 txtPassword.setText("");
-    //                 txtPassword.setForeground(Color.BLACK);
-    //             }
-    //         }
-    //         @Override
-    //         public void focusLost(FocusEvent e) {
-    //             if (new String(txtPassword.getPassword()).isEmpty()) {
-    //                 txtPassword.setForeground(Color.GRAY);
-    //                 txtPassword.setText("password");
-    //             }
-    //         }
-    //     });
-    // }
-
     private void setFrame() {
         frame.setFocusTraversalKeysEnabled(false);
         frame.setLocationRelativeTo(null);
@@ -167,7 +132,7 @@ public class LoginFrame {
 
     private void setBackground() {
         try {
-            img = ImageIO.read(new File(DesktopFrame.DEFAULT_BACKGROUND_PATH));
+            img = ImageIO.read(new File(UindosPath.DEFAULT_BACKGROUND_FOLDER_PATH + UindosFileName.DEFAULT_BACKGROUND_FILE_NAME));
         } catch (IOException e) {
             e.printStackTrace();
         }

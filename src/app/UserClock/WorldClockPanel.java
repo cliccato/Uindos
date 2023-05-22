@@ -34,7 +34,7 @@ public class WorldClockPanel extends JPanel {
      * Crea il layout del pannello e aggiunge le componenti per l'ora corrente e le città.
      * Avvia un timer per aggiornare l'orario delle città ogni secondo.
      */
-    public WorldClockPanel() {
+    public WorldClockPanel(Font font) {
         cityNames = new ArrayList <> ();
         timeZones = new ArrayList <> ();
         clockLabels = new ArrayList <> ();
@@ -57,7 +57,7 @@ public class WorldClockPanel extends JPanel {
         JPanel currentTimePanel = new JPanel();
         currentTimePanel.setLayout(new BorderLayout());
         JLabel currentTimeLabel = new JLabel();
-        currentTimeLabel.setFont(new Font("Arial", Font.BOLD, 48));
+        currentTimeLabel.setFont(font.deriveFont(48f));
         currentTimePanel.add(currentTimeLabel, BorderLayout.CENTER);
         add(currentTimePanel, BorderLayout.NORTH);
 
@@ -69,7 +69,7 @@ public class WorldClockPanel extends JPanel {
         for (String city: cityNames) {
             JLabel clockLabel = new JLabel(city + ": ");
             clockLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-            clockLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+            clockLabel.setFont(font.deriveFont(24f));
             clockLabels.add(clockLabel);
             cityPanel.add(clockLabel);
         }

@@ -41,7 +41,7 @@ public class ListenerSideBar implements ActionListener {
 
         switch (choosedOption) {
             case "Timer":
-                CustomTimer timer = new CustomTimer();
+                CustomTimer timer = new CustomTimer(clockFrame.getFont());
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weightx = 1.0;
@@ -50,7 +50,7 @@ public class ListenerSideBar implements ActionListener {
                 clockFrame.getPnlContent().add(timer, gbc); // Aggiungi il timer al pannello dei contenuti con le restrizioni di centratura
                 break;
             case "Stopwatch":
-                CustomStopWatch stopWatch = new CustomStopWatch();
+                CustomStopWatch stopWatch = new CustomStopWatch(clockFrame.getFont());
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weightx = 1.0;
@@ -59,7 +59,7 @@ public class ListenerSideBar implements ActionListener {
                 clockFrame.getPnlContent().add(stopWatch, gbc); // Aggiungi il cronometro al pannello dei contenuti con le restrizioni di centratura
                 break;
             case "World Clock":
-                WorldClockPanel worldClockPanel = new WorldClockPanel();
+                WorldClockPanel worldClockPanel = new WorldClockPanel(clockFrame.getFont());
                 gbc.gridx = 0;
                 gbc.gridy = 0;
                 gbc.weightx = 1.0;
