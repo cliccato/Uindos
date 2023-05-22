@@ -67,7 +67,6 @@ public class AppBarListener implements ActionListener {
                     String fileName = selectedFile.getName();
                     String extension = getExtension(fileName);
                     System.out.println(extension);
-                    System.out.println("ciao");
                     if (!extension.equals(".txt") && !extension.equals(".png")) { 
                         JOptionPane.showMessageDialog(null, "Impossibile aprire questo file.", "Errore", JOptionPane.ERROR_MESSAGE);   
                     } else {
