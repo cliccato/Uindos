@@ -2,9 +2,9 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 
 #TODO
 	- [ ] Fondamentali
-		- [ ] sistemare logout con virtualBox
-		- [ ] sistemare calcolatrice
-		- [ ] selezionatore font (da finire)
+		- [ ] sistemare logout con virtualBox (califano)
+		- [ ] sistemare calcolatrice (califano)
+		- [x] selezionatore font 
 		
 		- [x] migliorare la grafica generale (nelle impostazioni bisogna ingrandire i componenti)
 		- [x] aggiustare notepad  
@@ -22,7 +22,9 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [x] file configurazione utente  
 		- [x] file path  
 		- [x] gestori  
-		- [ ] mettere font in tutte le app
+		- [ ] mettere font in tutte le app (Fasu)
+		- [ ] sistemare cartelle vuote default user (mezza)
+		- [ ] sistemare bottoni (mezza)
 
 	- [ ] Media importanza
 		- [x] browser  
@@ -36,13 +38,12 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [x] carta sasso forbice con gui  
 		- [x] timer, cronometro e orari delle varie parti del mondo  
 		- [x] modifica password utente  
-		- [ ] drag and drop desktop fixare quando si clicca Windows
 		- [ ] icona utente  
 		- [x] app calendario
 		- [ ] applicazione soundboard
 		- [x] cartella di default  
 		- [x] sistemare size paint per far si che le immagini salvate possono essere usate come sfondo
-		- [ ] Presentazione grafica iniziale
+		- [ ] Presentazione grafica iniziale (califano)
 		- [x] Cambiare colore in rosso dell'elimina utente e chidere la password quando si preme
 
 	- [ ] Perfezionamenti finali
