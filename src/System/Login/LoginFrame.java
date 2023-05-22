@@ -13,6 +13,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+import utils.Config;
+import utils.GestoreConfig;
 import utils.GestoreFrame;
 import utils.PlaceHolder;
 import utils.UindosFileName;
@@ -34,7 +36,7 @@ public class LoginFrame {
     private JButton btnLogin;
     private JButton btnShowPassword;
     private JLabel lblRegistration;
-    private Font font;
+    private Config config;
 
     public LoginFrame() {
         createComponents();
@@ -51,7 +53,8 @@ public class LoginFrame {
         frame.setLayout(new BorderLayout());
         frame.setIconImage(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH).getImage());
 
-        // font = 
+        config = GestoreConfig.loadDefaultConfig();
+
         pnlFormInput = new JPanel(new GridBagLayout());
         pnlFormInput.setOpaque(false); // Set panel background to transparent
         // Creazione dei constraints per l'allineamento dei componenti
@@ -64,7 +67,7 @@ public class LoginFrame {
         constraints.weighty = 1.0;
 
         txtUsername = new JTextField();
-        txtUsername.setFont(new Font("Apple Casual", 0, 15));
+        txtUsername.setFont(config.getFont());
         txtUsername.setPreferredSize(TXT_INPUT_SIZE);
         txtUsername.setHorizontalAlignment(JTextField.CENTER);
         constraints.gridx = 0;
@@ -73,6 +76,7 @@ public class LoginFrame {
         PlaceHolder.addPlaceHolder(txtUsername, "username");
 
         txtPassword = new JPasswordField();
+        txtPassword.setFont(config.getFont());
         txtPassword.setPreferredSize(TXT_INPUT_SIZE);
         txtPassword.setHorizontalAlignment(JTextField.CENTER);
         PlaceHolder.addPlaceHolder(txtPassword, "password");
@@ -81,6 +85,7 @@ public class LoginFrame {
         pnlFormInput.add(txtPassword, constraints);
 
         btnShowPassword = new JButton("Show");
+        btnShowPassword.setFont(config.getFont());
         WindowsStyleComponents.customizeButton(btnShowPassword);
         btnShowPassword.addKeyListener(new ListenerShowPassword(btnShowPassword, txtPassword));
         btnShowPassword.addActionListener(new ListenerShowPassword(btnShowPassword, txtPassword));
@@ -91,6 +96,7 @@ public class LoginFrame {
         pnlFormInput.add(btnShowPassword, constraints);
 
         btnLogin = new JButton("Accedi");
+        btnLogin.setFont(config.getFont());
         WindowsStyleComponents.customizeButton(btnLogin);
         btnLogin.addKeyListener(new ListenerLogin(this));
         btnLogin.addActionListener(new ListenerLogin(this));
@@ -101,6 +107,7 @@ public class LoginFrame {
         pnlFormInput.add(btnLogin, constraints);
 
         JLabel lbl = new JLabel("Non hai un account?");
+        lbl.setFont(config.getFont());
         lbl.setHorizontalAlignment(SwingConstants.CENTER);
         lbl.setPreferredSize(LABEL_NEW_ACCOUNT_SIZE);
         constraints.gridx = 0;
@@ -110,6 +117,7 @@ public class LoginFrame {
 
         LoginFrame myLoginFrame = this;
         lblRegistration = new JLabel("<html><u>Registrati</u></html>");
+        lblRegistration.setFont(config.getFont());
         lblRegistration.setHorizontalAlignment(SwingConstants.CENTER);
         lblRegistration.setForeground(Color.BLUE);
         lblRegistration.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -134,7 +142,7 @@ public class LoginFrame {
 
     private void setBackground() {
         try {
-            img = ImageIO.read(new File(UindosPath.DEFAULT_BACKGROUND_FOLDER_PATH + UindosFileName.DEFAULT_BACKGROUND_FILE_NAME));
+            img = ImageIO.read(new File(config.getBackground()));
         } catch (IOException e) {
             e.printStackTrace();
         }
