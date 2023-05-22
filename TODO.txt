@@ -4,6 +4,8 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 	- [ ] Fondamentali
 		
 		- [ ] sistemare calcolatrice
+		- [ ] modificare font login (fasu)
+		
 		- [x] selezionatore font 
 		
 		- [x] migliorare la grafica generale (nelle impostazioni bisogna ingrandire i componenti)
@@ -25,6 +27,7 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [x] mettere font in tutte le app
 		- [x] sistemare cartelle vuote default user
 		- [x] sistemare bottoni
+		- [ ] mettere 1920 x 1080 o comunque una resoluzione piu grande e di conseguenza anche il paint lo deve fare
 
 	- [ ] Media importanza
 		- [x] browser  
@@ -41,13 +44,12 @@ scrivete bene il cazzo di codice https://www.oracle.com/java/technologies/javase
 		- [ ] icona utente  
 		- [x] app calendario
 		- [ ] applicazione soundboard
-		- [x] cartella di default  
+	- [x] cartella di default  
 		- [x] sistemare size paint per far si che le immagini salvate possono essere usate come sfondo
-		- [ ] Presentazione grafica iniziale
+		- [ ] Presentazione grafica iniziale e finale
 		- [x] Cambiare colore in rosso dell'elimina utente e chidere la password quando si preme
 
-	- [ ] Perfezionamenti finali
-		- [ ] mettere 1920 x 1080 o comunque una resoluzione piu grande
+	- [ ] Perfezionamenti 
 		- [ ] far si che quando si schiaccia l'orologio apra a lato un calendario
 		
 		- [x] mettere anche il giorno nell'orario
