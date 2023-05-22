@@ -63,6 +63,69 @@ public class DesktopFrame {
 
         setDesktop();
 
+          Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+            private boolean wPressed = false;
+            private boolean ePressed = false;
+
+            @Override
+            public void eventDispatched(AWTEvent event) {
+                if (event instanceof KeyEvent) {
+                    KeyEvent keyEvent = (KeyEvent) event;
+                    if (keyEvent.getID() == KeyEvent.KEY_PRESSED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_W) {
+                            wPressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_E && wPressed) {
+                            ePressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_N && wPressed && ePressed) {
+                            showChineseAlert();
+                        }
+                    } else if (keyEvent.getID() == KeyEvent.KEY_RELEASED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_W) {
+                            wPressed = false;
+                            ePressed = false;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_E) {
+                            ePressed = false;
+                        }
+                    }
+                }
+            }
+
+            private void showChineseAlert() {
+                JOptionPane.showMessageDialog(frame, "我打败你一半", "Alert", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }, AWTEvent.KEY_EVENT_MASK);
+
+
+          Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+            private boolean hPressed = false;
+            private boolean uPressed = false;
+
+            @Override
+            public void eventDispatched(AWTEvent event) {
+                if (event instanceof KeyEvent) {
+                    KeyEvent keyEvent = (KeyEvent) event;
+                    if (keyEvent.getID() == KeyEvent.KEY_PRESSED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_H) {
+                            hPressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_U && hPressed) {
+                            uPressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_B && hPressed && uPressed) {
+                            GestoreConfig.changeConfig(username, GestoreConfig.BACKGROUND, UindosPath.EASTER_EGG_BACKGROUND_PATH);
+                            GestoreFrame.chiudiTuttiFrame();
+                            new DesktopFrame(username, password);
+                        }
+                    } else if (keyEvent.getID() == KeyEvent.KEY_RELEASED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_H) {
+                            hPressed = false;
+                            uPressed = false;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_U) {
+                            uPressed = false;
+                        }
+                    }
+                }
+            }
+
+        }, AWTEvent.KEY_EVENT_MASK);
         appMenu.setOpaque(true);
         appMenu.setBackground(Color.WHITE);
 

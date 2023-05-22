@@ -31,6 +31,7 @@ public class UindosPath {
     public static final String BACKGROUND_REGISTRATION_PATH = "images/background/registration.png".replace("/", File.separator);
     public static final String BACKGROUND_SETTINGS_PATH = "images/background/settings.png".replace("/", File.separator);
     public static final String DEFAULT_BACKGROUND_FOLDER_PATH = DEFAULT_USER_FOLDER_PATH + "Foto/background/".replace("/", File.separator);
+    public static final String EASTER_EGG_BACKGROUND_PATH = DEFAULT_BACKGROUND_FOLDER_PATH + "mezzaHub.png";
 
     /* files */
     public static final String GAMES_PATH = "system69/games".replace("/", File.separator);
