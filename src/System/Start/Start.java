@@ -35,15 +35,17 @@ public class Start {
                 super.paintComponent(g);
                 g.setColor(Color.BLACK);
                 g.fillRect(0, 0, getWidth(), getHeight());
+                String text = "Uindos";
+                int textWidth = g.getFontMetrics().stringWidth(text);
                 Image logo = new ImageIcon(UindosPath.WINDOWS_LOGO_PATH).getImage();
-                int x = (getWidth()/2) - (logo.getWidth(null)*2);
+                int x = (getWidth()/2) - (logo.getWidth(null)*2) + (textWidth);
                 int y = (getHeight()/2) - (logo.getHeight(null)*2);
                 g.drawImage(logo, x, y, logo.getWidth(null)*2, logo.getHeight(null)*2, null);
                 
                 g.setFont(new Font("Comic Sans MS", Font.BOLD, 24));
                 g.setColor(Color.WHITE);
-                String text = "Uindos";
-                int textWidth = g.getFontMetrics().stringWidth(text);
+                
+                
                 int textX = getWidth()/2 - textWidth;
                 int textY = y - 20;
                 g.drawString(text, textX, textY);
