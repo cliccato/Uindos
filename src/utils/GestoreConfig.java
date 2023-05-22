@@ -88,4 +88,27 @@ public class GestoreConfig {
                 return null;
         }
     }
+
+    public static Config loadDefaultConfig() {
+        Config config = new Config();
+
+        try (FileReader fileReader = new FileReader(UindosPath.DEFAULT_USER_FOLDER_PATH + UindosFileName.CONFIG_FILE_NAME);
+            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String line;
+            line = bufferedReader.readLine();
+            config.setBackground(line);
+
+            line = bufferedReader.readLine();
+            StringTokenizer tokenizer = new StringTokenizer(line, ";");
+            String fontName = tokenizer.nextToken();
+            int fontStyle = Integer.parseInt(tokenizer.nextToken());
+            int fontSize = Integer.parseInt(tokenizer.nextToken());
+
+            config.setFont(new Font(fontName, fontStyle, fontSize));
+        } catch (IOException e) {
+            System.err.println("Error occurred while reading the file: " + e.getMessage());
+        }
+
+        return config;
+    }
 }
