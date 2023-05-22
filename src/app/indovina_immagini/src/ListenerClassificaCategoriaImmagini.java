@@ -2,8 +2,6 @@ package app.indovina_immagini.src;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import utils.GestoreCartelle;
-
 public class ListenerClassificaCategoriaImmagini implements ActionListener {
 
     private GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI;        // gestione indovina immagine gui

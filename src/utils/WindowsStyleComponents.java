@@ -3,8 +3,6 @@ package utils;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Insets;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
@@ -23,12 +21,12 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 
 public class WindowsStyleComponents {
     public static void customizeButton(JButton button) {
-        
+
         button.setBackground(Color.GRAY);
         button.setForeground(Color.WHITE);
-        
+
         button.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        
+
         // Aggiungi un listener per gestire gli eventi di cambio stato del bottone
         button.addChangeListener(new ChangeListener() {
             @Override
@@ -40,7 +38,7 @@ public class WindowsStyleComponents {
                     // Il mouse non è sopra il bottone
                     button.setBorder(BorderFactory.createLineBorder(Color.GRAY));
                 }
-                
+
                 if (button.getModel().isPressed()) {
                     // Il bottone è stato premuto
                     button.setBackground(Color.DARK_GRAY);
@@ -50,7 +48,7 @@ public class WindowsStyleComponents {
                 }
             }
         });
-        
+
         // Rimuovi l'icona premuta predefinita (effetto azzurrino)
         button.setPressedIcon(null);
         button.setContentAreaFilled(false);
@@ -65,7 +63,7 @@ public class WindowsStyleComponents {
                 // Il bottone ha il focus
                 button.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY.darker()));
             }
-            
+
             @Override
             public void focusLost(FocusEvent e) {
                 // Il bottone ha perso il focus
@@ -75,26 +73,26 @@ public class WindowsStyleComponents {
         });
     }
 
-    public static void customizeComboBox(JComboBox<String> comboBox) {
+    public static void customizeComboBox(JComboBox < String > comboBox) {
         // Personalizza la JComboBox con lo stile di Windows
-    
+
         // Imposta il colore di sfondo e del testo della JComboBox
         comboBox.setBackground(Color.WHITE);
         comboBox.setForeground(Color.BLACK);
-    
+
         // Imposta il bordo della JComboBox
         Border border = BorderFactory.createLineBorder(Color.GRAY);
         comboBox.setBorder(border);
-    
+
         // Imposta l'aspetto del cursore quando il mouse è sopra la JComboBox
         comboBox.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-    
+
         // Personalizza il rendering degli elementi nella JComboBox
         comboBox.setRenderer(new DefaultListCellRenderer() {
             @Override
-            public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            public Component getListCellRendererComponent(JList < ? > list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
                 super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-    
+
                 // Imposta il colore di sfondo e del testo degli elementi
                 if (isSelected) {
                     setBackground(Color.DARK_GRAY);
@@ -103,11 +101,11 @@ public class WindowsStyleComponents {
                     setBackground(Color.WHITE);
                     setForeground(Color.BLACK);
                 }
-    
+
                 return this;
             }
         });
-    
+
         // Personalizza l'aspetto della JComboBox
         comboBox.setUI(new BasicComboBoxUI() {
             @Override
@@ -121,7 +119,7 @@ public class WindowsStyleComponents {
                 return arrowButton;
             }
         });
-    
+
         // Aggiungi un listener per gestire gli eventi di focus sulla JComboBox
         comboBox.addFocusListener(new FocusAdapter() {
             @Override
@@ -129,14 +127,14 @@ public class WindowsStyleComponents {
                 // La JComboBox ha ottenuto il focus
                 comboBox.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
             }
-    
+
             @Override
             public void focusLost(FocusEvent e) {
                 // La JComboBox ha perso il focus
                 comboBox.setBorder(border);
             }
         });
-    
+
         // Aggiungi un listener per gestire gli eventi del mouse sulla JComboBox
         comboBox.addMouseListener(new MouseAdapter() {
             @Override
@@ -144,7 +142,7 @@ public class WindowsStyleComponents {
                 // Il mouse è sopra la JComboBox
                 comboBox.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
             }
-    
+
             @Override
             public void mouseExited(MouseEvent e) {
                 // Il mouse ha lasciato la JComboBox

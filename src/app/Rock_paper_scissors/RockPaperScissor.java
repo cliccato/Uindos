@@ -154,7 +154,7 @@ public class RockPaperScissor {
 
         frame.setIconImage(img.getImage());
         frame.pack();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // TODO uncomment when implemented in the project
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); 
         frame.setVisible(true);
     }
 

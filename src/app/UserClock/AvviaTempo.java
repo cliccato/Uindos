@@ -42,12 +42,10 @@ public class AvviaTempo implements ActionListener {
                 if (!thread.isAlive()) {
                     thread = new Thread(new ContaSecondi(timer));
                     thread.start();
-                    System.out.println("Tempo");
                 }
                 break;
             case "Stop":
                 timer.stop();
-                System.out.println("Stop");
                 break;
         }
     }

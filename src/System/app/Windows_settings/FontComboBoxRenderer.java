@@ -6,16 +6,15 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-
-public class FontComboBoxRenderer extends JLabel implements ListCellRenderer<String> {
+public class FontComboBoxRenderer extends JLabel implements ListCellRenderer <String> {
     public FontComboBoxRenderer() {
         setOpaque(true);
         setHorizontalAlignment(LEFT);
         setVerticalAlignment(CENTER);
     }
 
-    public Component getListCellRendererComponent(JList<? extends String> list, String value, int index,
-            boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList < ? extends String > list, String value, int index,
+        boolean isSelected, boolean cellHasFocus) {
         setText(value);
         setFont(new Font(value, Font.PLAIN, 12)); // Imposta il tuo stile e dimensione del font desiderati
 
@@ -29,5 +28,4 @@ public class FontComboBoxRenderer extends JLabel implements ListCellRenderer<Str
 
         return this;
     }
-
 }

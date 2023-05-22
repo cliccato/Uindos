@@ -178,6 +178,7 @@ public class GestioneIndovinaImmagineGUI {
             frame.add(btnIndietro, BorderLayout.WEST);
             frame.add(scrollPane, BorderLayout.CENTER);
             frame.setSize(600, 600);
+            frame.setLocationRelativeTo(null);
             frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             frame.setVisible(true);
             frmPrincipale.setVisible(false);

@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.StringTokenizer;
 
-
 public class GestoreConfig {
     public static final int BACKGROUND = 1;
     public static final int FONT = 2;
@@ -19,8 +18,7 @@ public class GestoreConfig {
     public static Config loadConfig(String username) {
         Config config = new Config();
 
-        try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + File.separator + UindosFileName.CONFIG_FILE_NAME);
-            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        try (FileReader fileReader = new FileReader(UindosPath.USER_FOLDER_PATH + username + File.separator + UindosFileName.CONFIG_FILE_NAME); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
             line = bufferedReader.readLine();
             config.setBackground(line);
@@ -42,35 +40,29 @@ public class GestoreConfig {
     public static void changeConfig(String username, int lineConfig, String newConfig) {
         String filePath = UindosPath.USER_FOLDER_PATH + username + File.separator + UindosFileName.CONFIG_FILE_NAME;
         try {
-            // Create a temporary file for writing the modified content
             File tempFile = File.createTempFile("temp", null);
             Path tempPath = tempFile.toPath();
 
-            // Read the original file and write the modified content to the temporary file
-            try (BufferedReader reader = Files.newBufferedReader(Path.of(filePath));
-                BufferedWriter writer = Files.newBufferedWriter(tempPath)) {
+            try (BufferedReader reader = Files.newBufferedReader(Path.of(filePath)); BufferedWriter writer = Files.newBufferedWriter(tempPath)) {
 
                 String line;
                 int lineNumber = 1;
-                                while ((line = reader.readLine()) != null) {
-                if (lineNumber == lineConfig) {
-                    writer.write(newConfig);
-                } else {
-                    writer.write(line);
+                while ((line = reader.readLine()) != null) {
+                    if (lineNumber == lineConfig) {
+                        writer.write(newConfig);
+                    } else {
+                        writer.write(line);
+                    }
+
+                    if (reader.ready()) {
+                        writer.newLine();
+                    }
+
+                    lineNumber++;
                 }
-
-                if (reader.ready()) {
-                    writer.newLine();
-                }
-
-                lineNumber++;
-            }
             }
 
-            // Replace the original file with the temporary file
             Files.move(tempPath, Path.of(filePath), StandardCopyOption.REPLACE_EXISTING);
-
-            System.out.println("Line replaced successfully!");
 
         } catch (IOException e) {
             System.err.println("Error occurred while replacing the line: " + e.getMessage());
@@ -79,21 +71,20 @@ public class GestoreConfig {
 
     public static Object getConfig(String username, int lineConfig) {
         Config config = loadConfig(username);
-        switch(lineConfig) {
-            case BACKGROUND:
-                return config.getBackground();
-            case FONT:
-                return config.getFont();
-            default:
-                return null;
+        switch (lineConfig) {
+        case BACKGROUND:
+            return config.getBackground();
+        case FONT:
+            return config.getFont();
+        default:
+            return null;
         }
     }
 
     public static Config loadDefaultConfig() {
         Config config = new Config();
 
-        try (FileReader fileReader = new FileReader(UindosPath.DEFAULT_USER_FOLDER_PATH + UindosFileName.CONFIG_FILE_NAME);
-            BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        try (FileReader fileReader = new FileReader(UindosPath.DEFAULT_USER_FOLDER_PATH + UindosFileName.CONFIG_FILE_NAME); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
             line = bufferedReader.readLine();
             config.setBackground(line);

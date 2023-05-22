@@ -45,6 +45,6 @@ public class PlaceHolder {
                     txtField.setText(placeHolder);
                 }
             }
-        }); 
+        });
     }
 }

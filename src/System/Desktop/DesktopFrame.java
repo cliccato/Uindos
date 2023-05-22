@@ -1,3 +1,9 @@
+/**
+ * Frame desktop progetto di fine anno informatica
+ * 
+ * @author Giorgio Justin Fasullo, Mezzanzanica Niccolo', Mattia Califano
+ * 22-05-2023
+ */
 package System.Desktop;
 
 import javax.swing.*;
@@ -45,7 +51,7 @@ public class DesktopFrame {
     private Point initialLocation;
     private Config config;
 
-    public DesktopFrame(String username, String password) {// implementare desktop con aree di file distinte per ogni utente
+    public DesktopFrame(String username, String password) { // implementare desktop con aree di file distinte per ogni utente
         DesktopFrame.username = username;
         this.password = password;
         config = GestoreConfig.loadConfig(username);
@@ -63,6 +69,68 @@ public class DesktopFrame {
 
         setDesktop();
 
+        Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+            private boolean wPressed = false;
+            private boolean ePressed = false;
+
+            @Override
+            public void eventDispatched(AWTEvent event) {
+                if (event instanceof KeyEvent) {
+                    KeyEvent keyEvent = (KeyEvent) event;
+                    if (keyEvent.getID() == KeyEvent.KEY_PRESSED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_W) {
+                            wPressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_E && wPressed) {
+                            ePressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_N && wPressed && ePressed) {
+                            showChineseAlert();
+                        }
+                    } else if (keyEvent.getID() == KeyEvent.KEY_RELEASED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_W) {
+                            wPressed = false;
+                            ePressed = false;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_E) {
+                            ePressed = false;
+                        }
+                    }
+                }
+            }
+
+            private void showChineseAlert() {
+                JOptionPane.showMessageDialog(frame, "我打败你一半", "Alert", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }, AWTEvent.KEY_EVENT_MASK);
+
+        Toolkit.getDefaultToolkit().addAWTEventListener(new AWTEventListener() {
+            private boolean hPressed = false;
+            private boolean uPressed = false;
+
+            @Override
+            public void eventDispatched(AWTEvent event) {
+                if (event instanceof KeyEvent) {
+                    KeyEvent keyEvent = (KeyEvent) event;
+                    if (keyEvent.getID() == KeyEvent.KEY_PRESSED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_H) {
+                            hPressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_U && hPressed) {
+                            uPressed = true;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_B && hPressed && uPressed) {
+                            GestoreConfig.changeConfig(username, GestoreConfig.BACKGROUND, UindosPath.EASTER_EGG_BACKGROUND_PATH);
+                            GestoreFrame.chiudiTuttiFrame();
+                            new DesktopFrame(username, password);
+                        }
+                    } else if (keyEvent.getID() == KeyEvent.KEY_RELEASED) {
+                        if (keyEvent.getKeyCode() == KeyEvent.VK_H) {
+                            hPressed = false;
+                            uPressed = false;
+                        } else if (keyEvent.getKeyCode() == KeyEvent.VK_U) {
+                            uPressed = false;
+                        }
+                    }
+                }
+            }
+
+        }, AWTEvent.KEY_EVENT_MASK);
         appMenu.setOpaque(true);
         appMenu.setBackground(Color.WHITE);
 
@@ -130,7 +198,6 @@ public class DesktopFrame {
         new ClockThread(this);
 
         try {
-            System.out.println(config.getBackground()); 
             img = ImageIO.read(new File(config.getBackground()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -167,7 +234,7 @@ public class DesktopFrame {
                 new ClockFrame(username);
             }
         })).setFont(config.getFont());;
-        
+
         itemLogOut = new JMenuItem(new AbstractAction("Logout") {
             public void actionPerformed(ActionEvent e) {
                 GestoreFrame.chiudiTuttiFrame();
@@ -208,14 +275,14 @@ public class DesktopFrame {
         Scanner scanner;
 
         try {
-            Vector<String> v = new Vector<>();
+            Vector < String > v = new Vector < > ();
             scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 v.add(scanner.nextLine());
             }
             scanner.close();
 
-            for (String s : v) {
+            for (String s: v) {
                 String name = s.split(";")[0];
                 String logoPath = s.split(";")[1];
                 JButton b = new JButton(new ImageIcon(logoPath.replace("/", File.separator)));
@@ -224,7 +291,7 @@ public class DesktopFrame {
                 b.setContentAreaFilled(false);
                 b.setBorderPainted(false);
                 b.setFont(config.getFont());
-                
+
                 b.addMouseListener(new MouseAdapter() {
                     public void mousePressed(MouseEvent e) {
                         initialLocation = e.getPoint();
@@ -237,7 +304,7 @@ public class DesktopFrame {
                         int dy = e.getY() - initialLocation.y;
                         int newX = b.getX() + dx;
                         int newY = b.getY() + dy;
-    
+
                         if (newX < 0) {
                             newX = 0;
                         }
@@ -250,15 +317,15 @@ public class DesktopFrame {
                         if (newY + b.getHeight() > frame.getHeight()) {
                             newY = frame.getHeight() - b.getHeight();
                         }
-                        
+
                         b.setLocation(newX, newY);
                     }
                 });
 
-                b.addMouseListener(new MouseAdapter(){
+                b.addMouseListener(new MouseAdapter() {
                     @Override
-                    public void mouseClicked(MouseEvent e){
-                        if(e.getClickCount()==2){
+                    public void mouseClicked(MouseEvent e) {
+                        if (e.getClickCount() == 2) {
                             new DesktopListener(name, username);
                         }
                     }
@@ -267,7 +334,7 @@ public class DesktopFrame {
                 imagePanel.add(b);
             }
 
-            for (int i = 0; i < 15-v.size(); i++) {
+            for (int i = 0; i < 15 - v.size(); i++) {
                 JButton b = new JButton("");
                 b.setOpaque(false);
                 b.setContentAreaFilled(false);
@@ -277,7 +344,7 @@ public class DesktopFrame {
         } catch (FileNotFoundException e) {
             ; //TMCH
         }
-        GestoreFrame.aggiungiFrame(frame);  
+        GestoreFrame.aggiungiFrame(frame);
     }
 
     public void setAppBar() {
@@ -285,14 +352,14 @@ public class DesktopFrame {
         Scanner scanner;
 
         try {
-            Vector<String> v = new Vector<>();
+            Vector < String > v = new Vector < > ();
             scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 v.add(scanner.nextLine());
             }
             scanner.close();
 
-            for (String s : v) {
+            for (String s: v) {
                 String name = s.split(";")[0];
                 String logoPath = s.split(";")[1];
                 JButton b = new JButton(new ImageIcon(logoPath.replace("/", File.separator)));
@@ -311,7 +378,7 @@ public class DesktopFrame {
         }
     }
 
-    public void setPassword(String password){
+    public void setPassword(String password) {
         this.password = password;
     }
 
@@ -323,11 +390,11 @@ public class DesktopFrame {
         return lblClock;
     }
 
-    public JLabel getLblDate(){
+    public JLabel getLblDate() {
         return lblDate;
     }
 
-    public JPanel getImagePanel(){
+    public JPanel getImagePanel() {
         return imagePanel;
     }
 }

@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 
 public class RegistrazioneUtenteGUI {
 
-    private GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI;        // gui
     private JFrame frmRegistrazioneUtente;      // frm registrazione utente
     private JPanel pnlRegistrazioneUtente;      // panel per la registrazione
     private JPanel pnlSud;                      // pnl sud
@@ -34,8 +33,6 @@ public class RegistrazioneUtenteGUI {
     private Font font;
     // costruttore
     public RegistrazioneUtenteGUI(GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI){
-
-        this.gestioneIndovinaImmagineGUI = gestioneIndovinaImmagineGUI;
 
         //creazione finestra
         frmRegistrazioneUtente = new JFrame("Registrazione utente");

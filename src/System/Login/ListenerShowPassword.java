@@ -5,7 +5,7 @@
  * performed on a button. When the button is clicked, it toggles the visibility
  * of the password characters in a JPasswordField.
  * 
- * @author Giorgio Justin Fasullo
+ * @author Giorgio Justin Fasullo, MEzzanzica Niccolo', Mattia Califano
  * @version 1.0
  */
 
@@ -74,12 +74,8 @@ public class ListenerShowPassword implements ActionListener, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-    }
+    public void keyReleased(KeyEvent e) {}
 }

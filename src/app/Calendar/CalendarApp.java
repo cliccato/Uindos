@@ -30,11 +30,11 @@ public class CalendarApp {
         font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 
         GestoreFrame.aggiungiFrame(frame);
-        // Creazione del modello immutabile della tabella
+
         tableModel = new ImmutableTableModel(new Object[]{"Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"}, 0);
 
     
-    // Creazione della tabella
+
     calendarTable = new JTable(tableModel);
     calendarTable.setRowHeight(40);
     calendarTable.getTableHeader().setReorderingAllowed(false);
@@ -44,12 +44,12 @@ public class CalendarApp {
         calendarTable.setDefaultRenderer(Object.class, new UneditableTableCellRenderer());
         calendarTable.setFont(font);
 
-        // Impostazione delle dimensioni delle colonne
+
         for (int i = 0; i < 7; i++) {
             calendarTable.getColumnModel().getColumn(i).setPreferredWidth(150);
         }
 
-        // Creazione dei componenti per selezionare il mese e l'anno
+
         monthComboBox = new JComboBox<>(new String[]{"Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno",
                 "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"});
         yearComboBox = new JComboBox<>(getYearList());
@@ -58,7 +58,7 @@ public class CalendarApp {
 
         monthComboBox.setFont(font);
         yearComboBox.setFont(font);
-        // Aggiunta dell'azione di cambio mese/anno
+
         ActionListener changeDateListener = e -> {
             int selectedMonthIndex = monthComboBox.getSelectedIndex();
             int selectedYear = Integer.parseInt(yearComboBox.getSelectedItem().toString());
@@ -80,7 +80,7 @@ public class CalendarApp {
         calendarPanel.add(new JScrollPane(calendarTable), BorderLayout.CENTER);
 
         // Impostazione della dimensione del pannello del calendario
-        calendarPanel.setPreferredSize(new Dimension(800, 300)); // Imposta la dimensione desiderata
+        calendarPanel.setPreferredSize(new Dimension(800, 300));
 
         // Aggiunta del pannello al frame
         frame.add(calendarPanel);
@@ -98,7 +98,7 @@ public class CalendarApp {
     }
 
     private void updateCalendar(YearMonth yearMonth) {
-        tableModel.setRowCount(0); // Rimuove tutte le righe esistenti
+        tableModel.setRowCount(0);
 
         int year = yearMonth.getYear();
         int month = yearMonth.getMonthValue();
@@ -131,7 +131,7 @@ public class CalendarApp {
 
     private String[] getYearList() {
         int currentYear = Year.now().getValue();
-        int startYear = 1000; // Anno di inizio desiderato (es. Medioevo)
+        int startYear = 1000;
         int numYears = currentYear - startYear + 1;
         String[] years = new String[numYears];
         for (int i = 0; i < numYears; i++) {

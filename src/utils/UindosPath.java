@@ -18,6 +18,7 @@ public class UindosPath {
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png".replace("/", File.separator);
     public static final String CALENDAR_LOGO_PATH = "images/logo/calendar-logo.png".replace("/", File.separator);
     public static final String REGISTRATION_LOGO_PATH = "images/logo/registration-logo.png".replace("/", File.separator);
+    public static final String CONTROLPANEL_LOGO_PATH = "images/logo/controlpanel-logo.png".replace("/", File.separator);
 
     /* folder */
     public static final String USER_FOLDER_PATH = "system69/Users/".replace("/", File.separator);
@@ -30,7 +31,8 @@ public class UindosPath {
     public static final String DEFAULT_USER_FOLDER_PATH = "Default_user_folder/".replace("/", File.separator);
     public static final String BACKGROUND_REGISTRATION_PATH = "images/background/registration.png".replace("/", File.separator);
     public static final String BACKGROUND_SETTINGS_PATH = "images/background/settings.png".replace("/", File.separator);
-    public static final String DEFAULT_BACKGROUND_FOLDER_PATH = DEFAULT_USER_FOLDER_PATH + "Foto/background/".replace("/", File.separator);
+    public static final String DEFAULT_BACKGROUND_FOLDER_PATH = DEFAULT_USER_FOLDER_PATH + "Foto/Background/".replace("/", File.separator);
+    public static final String EASTER_EGG_BACKGROUND_PATH = DEFAULT_BACKGROUND_FOLDER_PATH + "mezzaHub.png";
 
     /* files */
     public static final String GAMES_PATH = "system69/games".replace("/", File.separator);

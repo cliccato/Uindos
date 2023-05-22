@@ -27,7 +27,7 @@ public class ImpostazioniWindowsFrame {
     private JLabel lblCambiaPassword, lblEliminaUtente;
     private String passwordUtente;
     private String nomeUtente;
-    private JComboBox<String> fontComboBox;
+    private JComboBox <String> fontComboBox;
     private Font font;
 
     public ImpostazioniWindowsFrame(String username, String password, DesktopFrame desktopFrame) {
@@ -109,7 +109,7 @@ public class ImpostazioniWindowsFrame {
                 public void mouseExited(MouseEvent e) {
                     lblCambiaPassword.setForeground(Color.BLUE);
                 }
-            
+
             });
         }
 
@@ -119,7 +119,7 @@ public class ImpostazioniWindowsFrame {
         btnCambiaSfondo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FOTO)); // Set the working directory as the initial folder
+                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FOTO));
                 int result = fileChooser.showOpenDialog(null);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
@@ -137,7 +137,7 @@ public class ImpostazioniWindowsFrame {
             }
         });
 
-        fontComboBox = new JComboBox<>(getAvailableFontNames());
+        fontComboBox = new JComboBox < > (getAvailableFontNames());
         WindowsStyleComponents.customizeComboBox(fontComboBox);
         fontComboBox.setRenderer(new FontComboBoxRenderer());
 

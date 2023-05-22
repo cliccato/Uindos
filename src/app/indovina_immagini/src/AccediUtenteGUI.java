@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 
 public class AccediUtenteGUI {
 
-    private GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI;        // gestione indovina immagine gui
     private JFrame frmAccediUtente;         // frame accedi utente
     private JPanel pnlAccediUtente;         // pannello accedi utente
     private JLabel lblStato;                // label per dare informazioni all'utente
@@ -19,16 +18,12 @@ public class AccediUtenteGUI {
     private JTextField cslPassword;         // casella password
     private JButton btnConferma;            // bottone di conferma
     private JButton btnIndietro;            // bottone per ritornare alla home
-    private String username;
     private Font font;
 
     // costruttore
     public AccediUtenteGUI(GestioneIndovinaImmagineGUI gestioneIndovinaImmagineGUI, String username){
 
-        this.gestioneIndovinaImmagineGUI = gestioneIndovinaImmagineGUI;
-
         font = (Font) GestoreConfig.getConfig(username,GestoreConfig.FONT);
-
 
         //creazione finestra
         frmAccediUtente = new JFrame("Accedi");
@@ -57,12 +52,12 @@ public class AccediUtenteGUI {
         cslPassword = new JTextField("");
 
         lblStato.setFont(font);
-lblNomeUtente.setFont(font);
-lblPassword.setFont(font);
-cslNomeUtente.setFont(font);
-cslPassword.setFont(font);
-btnConferma.setFont(font);
-btnIndietro.setFont(font);
+        lblNomeUtente.setFont(font);
+        lblPassword.setFont(font);
+        cslNomeUtente.setFont(font);
+        cslPassword.setFont(font);
+        btnConferma.setFont(font);
+        btnIndietro.setFont(font);
         //aggiunta del font a label e caselle di testo
       
         //aggiunta label e caselle di testo al pannello

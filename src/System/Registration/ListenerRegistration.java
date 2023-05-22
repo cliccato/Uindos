@@ -21,19 +21,19 @@ import System.Login.LoginFrame;
 import utils.GestoreCartelle;
 import utils.UindosPath;
 
-public class ListenerRegistration implements ActionListener,KeyListener {
+public class ListenerRegistration implements ActionListener, KeyListener {
 
     private RegistrationFrame registrationFrame;
     private LoginFrame loginFrame;
     private String username;
     private String password;
 
-    public ListenerRegistration(RegistrationFrame registrationFrame, LoginFrame loginFrame){
+    public ListenerRegistration(RegistrationFrame registrationFrame, LoginFrame loginFrame) {
         this.registrationFrame = registrationFrame;
         this.loginFrame = loginFrame;
     }
-    
-    private boolean isUserAlreadyPresent(){
+
+    private boolean isUserAlreadyPresent() {
         try (BufferedReader fIN = new BufferedReader(new FileReader(new File(UindosPath.USERS_FILE_PATH)))) {
             String fileLine;
             while ((fileLine = fIN.readLine()) != null) {
@@ -77,13 +77,13 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         }
         return true;
     }
-    
-    private boolean authenticateUser(){
+
+    private boolean authenticateUser() {
 
         username = registrationFrame.getUsername();
-        password =  new String(registrationFrame.getPassword().getPassword());
+        password = new String(registrationFrame.getPassword().getPassword());
         String confirmPassword = new String(registrationFrame.getConfirmPassword().getPassword());
-        
+
         // Controllo che i campi non siano vuoti
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             JOptionPane.showMessageDialog(registrationFrame, "Compila tutti i campi", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -112,15 +112,12 @@ public class ListenerRegistration implements ActionListener,KeyListener {
             return false;
         }
 
-       
-
         JOptionPane.showMessageDialog(registrationFrame, "Registrazione effettuata!", "Registrazione", JOptionPane.INFORMATION_MESSAGE);
-        return true;        
+        return true;
     }
 
-    private void addUserToCSV(){
+    private void addUserToCSV() {
         try {
-            System.out.println(username + password);
             // Creo un FileWriter per scrivere nel file
             FileWriter fw = new FileWriter(new File(UindosPath.USERS_FILE_PATH), true);
             fw.write("\n" + username + ListenerLogin.FIELD_DELIMITATOR + password);
@@ -130,23 +127,20 @@ public class ListenerRegistration implements ActionListener,KeyListener {
         }
     }
 
-    private void createDirectory(){
-        try  {
-            File dir = new File(UindosPath.USER_FOLDER_PATH + username);
-
+    private void createDirectory() {
+        try {
             GestoreCartelle.copyFolder(Paths.get(UindosPath.DEFAULT_USER_FOLDER_PATH), Paths.get(UindosPath.USER_FOLDER_PATH + username + "/"));
-            System.out.println(dir.getPath());
 
-            } catch(IOException e) {
-                System.out.println(e.getMessage());
-            } catch(Exception e) {
-                System.out.println(e.getMessage());
-            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == registrationFrame.getRegisterButton()) {  
+        if (e.getSource() == registrationFrame.getRegisterButton()) {
             if (authenticateUser()) {
                 username = registrationFrame.getUsername();
                 password = new String(registrationFrame.getPassword().getPassword());
@@ -159,7 +153,7 @@ public class ListenerRegistration implements ActionListener,KeyListener {
                 registrationFrame.clearInput();
             }
         } else {
-            registrationFrame.dispose();     
+            registrationFrame.dispose();
         }
     }
 
@@ -176,19 +170,15 @@ public class ListenerRegistration implements ActionListener,KeyListener {
                 loginFrame.closeFrame();
             } else {
                 registrationFrame.clearInput();
-            }   
+            }
         } else {
-            registrationFrame.dispose();     
+            registrationFrame.dispose();
         }
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-    }
-    
+    public void keyTyped(KeyEvent e) {}
+
     @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-    }
+    public void keyReleased(KeyEvent e) {}
 }

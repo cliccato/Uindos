@@ -36,19 +36,19 @@ public class NotepadListener implements ActionListener{
                 if (!isFileSaved && title.equals("Notepad - (Nuovo)")) {
                     String name = JOptionPane.showInputDialog("Inserisci nome file:");
                     if (name == null || name.trim().isEmpty()) {
-                        // L'utente ha cliccato "Cancel" o ha inserito un nome vuoto
+
                         return;
                     }
                     name += ".txt";
                     NF.setName(name);
                 }
 
-                if (!NF.getName().equals(".txt")) { // Verifica se il nome del file è stato inserito
+                if (!NF.getName().equals(".txt")) {
                     try {
                         FileWriter fw = new FileWriter(
                                 UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator
                                         + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO + NF.getName());
-                        fw.write(NF.getTextArea().getText()); // Salva
+                        fw.write(NF.getTextArea().getText());
                         isFileSaved = true;
                         fw.close();
                         if (isFileSaved) {
@@ -66,7 +66,7 @@ public class NotepadListener implements ActionListener{
 
             NF.getTextArea().setText("");
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO)); // Imposta la directory di lavoro come cartella iniziale
+                fileChooser.setCurrentDirectory(new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator + UindosDirectoryName.DIRECTORY_FILE_DI_TESTO));
                 int result = fileChooser.showOpenDialog(NF.getFrame());
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();

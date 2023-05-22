@@ -1,14 +1,3 @@
-/**
-    The ListenerLogin class represents an ActionListener that handles the login process.
-    It checks the user's credentials by reading them from a configuration file and
-    authenticates the user if their credentials are valid.
-    If authentication is successful, it opens a DesktopFrame for the user.
-    If authentication fails, it alerts the user and clears the input fields.
-
-    @author Giorgio Justin Fasullo
-    @version 1.1
-*/
-
 package System.Login;
 
 import java.awt.event.ActionEvent;
@@ -26,7 +15,7 @@ import utils.UindosPath;
 
 public class ListenerLogin implements ActionListener, KeyListener {
     private LoginFrame loginFrame;
-    public static final String FIELD_DELIMITATOR = "|"; // da spostare
+    public static final String FIELD_DELIMITATOR = "|";
 
     public ListenerLogin(LoginFrame loginFrame) {
         this.loginFrame = loginFrame;
@@ -79,12 +68,8 @@ public class ListenerLogin implements ActionListener, KeyListener {
     }
 
     @Override
-    public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-    }
+    public void keyTyped(KeyEvent e) {}
 
     @Override
-    public void keyReleased(KeyEvent e) {
-        // TODO Auto-generated method stub
-    }
+    public void keyReleased(KeyEvent e) {}
 }
