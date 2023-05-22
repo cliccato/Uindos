@@ -69,7 +69,7 @@ public class PaintApp {
                 }
             }
         });
-        canvas.setBackground(Color.black); // Imposta lo sfondo su bianco
+        canvas.setBackground(Color.black);
 
         JButton colorBtn = new JButton("Select Color");
         colorBtn.addActionListener(e -> selectColor());
@@ -144,7 +144,7 @@ public class PaintApp {
     }
 
     private boolean isCanvasModified() {
-        // Verifica se il canvas è stato modificato confrontando l'immagine corrente con un'immagine vuota
+
         BufferedImage emptyImage = new BufferedImage(canvas.getWidth(), canvas.getHeight(),
                 BufferedImage.TYPE_INT_RGB);
         return !image.equals(emptyImage);
@@ -166,18 +166,18 @@ public class PaintApp {
             name = JOptionPane.showInputDialog("Inserisci nome file:");
         }
 
-        if (name != null && !name.isEmpty()) { // Verifica se il nome del file è stato inserito
+        if (name != null && !name.isEmpty()) {
             try {
                 if (!isImageSaved) {
                     ImageIO.write(image, "png", new File(
                             UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator
                                     + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT
-                                    + name + ".png")); // Salva l'immagine su disco come file PNG
+                                    + name + ".png"));
                 } else {
                     ImageIO.write(image, "png",
                             new File(UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator
                                     + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT
-                                    + name)); // Salva l'immagine su disco come file PNG
+                                    + name));
                 }
                 JOptionPane.showMessageDialog(frame, "Il pannello è stato salvato come immagine.");
                 frame.setTitle("Peint - " + name + ".png");
@@ -228,7 +228,7 @@ public class PaintApp {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File(
                 UindosPath.USER_FOLDER_PATH + DesktopFrame.getUsername() + File.separator
-                        + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT)); // Imposta la directory di lavoro come cartella iniziale
+                        + UindosDirectoryName.DIRECTORY_FOTO + UindosDirectoryName.DIRECTORY_IMMAGINI_PAINT));
         int result = fileChooser.showOpenDialog(frame);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
