@@ -32,5 +32,9 @@ public class GestoreFrame {
         Cursor cursor = tkit.createCustomCursor(img, point, "");
         frame.setCursor(cursor);
     }
+
+    public static List<JFrame> getAllFrames() {
+        return frameAperti;
+    }
 }
 

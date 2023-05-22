@@ -18,6 +18,7 @@ public class UindosPath {
     public static final String WINDOWS_LOGO_PATH = "images/logo/win-logo.png".replace("/", File.separator);
     public static final String CALENDAR_LOGO_PATH = "images/logo/calendar-logo.png".replace("/", File.separator);
     public static final String REGISTRATION_LOGO_PATH = "images/logo/registration-logo.png".replace("/", File.separator);
+    public static final String CONTROLPANEL_LOGO_PATH = "images/logo/controlpanel-logo.png".replace("/", File.separator);
 
     /* folder */
     public static final String USER_FOLDER_PATH = "system69/Users/".replace("/", File.separator);

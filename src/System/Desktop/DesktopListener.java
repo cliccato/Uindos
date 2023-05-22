@@ -9,6 +9,7 @@ import app.Hanged.Hanged;
 import app.Rock_paper_scissors.RockPaperScissor;
 import app.Tris.TrisFrame;
 import app.indovina_immagini.src.GestioneIndovinaImmagineGUI;
+import System.app.GestioneRisorse.GestioneRirorseApp;
 
 import utils.UindosPath;
 
@@ -18,6 +19,9 @@ public class DesktopListener{
         switch (name) {
             case "brouser":
                 new BrowserApp(username);
+                break;
+            case "gestione attivita":
+                new GestioneRirorseApp(username);
                 break;
             case "cartella giochi":
                 JFileChooser fileChooser = new JFileChooser();
