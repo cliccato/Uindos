@@ -34,6 +34,7 @@ public class PaintApp {
         frame.setSize(1280,720);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setIconImage(new ImageIcon(UindosPath.PAINT_LOGO_PATH).getImage());
+        frame.setResizable(false);
 
         font = (Font) GestoreConfig.getConfig(username, GestoreConfig.FONT);
 

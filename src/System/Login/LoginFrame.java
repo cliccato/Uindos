@@ -34,6 +34,7 @@ public class LoginFrame {
     private JButton btnLogin;
     private JButton btnShowPassword;
     private JLabel lblRegistration;
+    private Font font;
 
     public LoginFrame() {
         createComponents();
@@ -50,6 +51,7 @@ public class LoginFrame {
         frame.setLayout(new BorderLayout());
         frame.setIconImage(new ImageIcon(UindosPath.WINDOWS_LOGO_PATH).getImage());
 
+        // font = 
         pnlFormInput = new JPanel(new GridBagLayout());
         pnlFormInput.setOpaque(false); // Set panel background to transparent
         // Creazione dei constraints per l'allineamento dei componenti

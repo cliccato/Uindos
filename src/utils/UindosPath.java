@@ -25,7 +25,6 @@ public class UindosPath {
     public static final String DESKTOP_LIST_PATH = "src/desktoplist.csv";
 
     /* background */
-
     public static final String DEFAULT_USER_FOLDER_PATH = "Default_user_folder/";
     public static final String BACKGROUND_REGISTRATION_PATH = "images/background/registration.png";
     public static final String BACKGROUND_SETTINGS_PATH = "images/background/settings.png";
