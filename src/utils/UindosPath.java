@@ -39,4 +39,6 @@ public class UindosPath {
     /* pointer */
     public static final String POINTER_PATH = "images/icon/mouse-pointer01.png".replace("/", File.separator);
     public static final String ARROW_COMBOBOX_PATH = "images/icon/arrow.png".replace("/", File.separator);
+
+    public static final String WINDOWS_STARTUP_SOUND_PATH = "sounds/startup.wav".replace("/", File.separator);
 }
